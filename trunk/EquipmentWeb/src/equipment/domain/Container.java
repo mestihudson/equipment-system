@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "CONTAINER")
 public class Container {
@@ -20,6 +19,9 @@ public class Container {
 	
 	@Column(name="GROUP_CDE")
 	private String groupCode;
+	
+	@Column(name="CHK_DIGIT")
+	private Character checkDigit;
 	
 	@Column(name="STATE")
 	private Boolean state;
@@ -54,7 +56,15 @@ public class Container {
 		this.groupCode = groupCode;
 	}
 
-	public Boolean getState() {
+	public Character getCheckDigit() {
+    return checkDigit;
+  }
+
+  public void setCheckDigit(Character checkDigit) {
+    this.checkDigit = checkDigit;
+  }
+
+  public Boolean getState() {
 		return state;
 	}
 
