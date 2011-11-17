@@ -12,6 +12,7 @@ import javax.faces.model.SelectItem;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import equipment.dao.ContainerDao;
 import equipment.domain.Container;
@@ -105,6 +106,7 @@ public class MovementCaptureBean implements Serializable {
 		container.setIsoCode("20H1");
 		container.setGroupCode("20GP");
 		container.setState(true);
+		container.setCheckDigit('1');
 		container.setCreateDateTime(new Timestamp(System.currentTimeMillis()));
     container.setUpdateDateTime(new Timestamp(System.currentTimeMillis()));
 		containerDao.save(container);
