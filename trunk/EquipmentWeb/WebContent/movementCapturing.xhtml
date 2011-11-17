@@ -87,45 +87,6 @@
 				<h:outputLabel value="Load Port:"/>
 				<p:inputText value="#{movementCaptureBean.equipmentEvent.loadPort}"/>
 				
-				<h:outputLabel value="Carrier Id:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.carrierId}"/>
-				<h:outputLabel value="Rail Id:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.railId}"/>
-				
-				<h:outputLabel value="Chassis Number:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.chassisNumber}"/>
-				<h:outputLabel value="Chassis Condition:" />
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.chassisCondition}" disabled="true">
-					<f:selectItem  itemLabel="-" noSelectionOption="true"/> 
-					<f:selectItems value="#{movementCaptureBean.equipmentConditions}" var="_condition" itemLabel="#{_condition.description}" itemValue="#{_condition}"/>
-				</h:selectOneMenu>
-
-				<h:outputLabel value="Genset Number:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.gensetNumber}"/>
-				<h:outputLabel value="Genset Condition:" />
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.gensetCondition}" disabled="true">
-					<f:selectItem  itemLabel="-" noSelectionOption="true"/> 
-					<f:selectItems value="#{movementCaptureBean.equipmentConditions}" var="_condition" itemLabel="#{_condition.description}" itemValue="#{_condition}"/>
-				</h:selectOneMenu>
-			
-				<h:outputLabel value="Chassis Pool:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.chassisPool}"/>
-				<h:outputLabel value="Chassis Owner:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.chassisOwner}"/>
-				
-				<h:outputLabel value="Chassis Type Group Code:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.chassisTypeGroupCode}"/>
-				<h:outputLabel value="Chassis Operator:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.chassisOperator}"/>
-				
-				<h:outputLabel value="Repack to Date:" />
-				<h:panelGrid columns="2">
-					<p:inputMask mask="99/99/9999" size="10" />
-					<p:inputMask mask="99:99" size="5" />
-				</h:panelGrid>
-				<h:outputLabel value="Repack to Container Number:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.repackContainerNumber}"/>
-				
 				<h:outputLabel value="Remarks:"/>
 				<p:inputTextarea value="#{movementCaptureBean.equipmentEvent.remarks}"/>
 				
