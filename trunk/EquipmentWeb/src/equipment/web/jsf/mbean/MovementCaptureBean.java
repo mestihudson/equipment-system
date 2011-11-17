@@ -12,7 +12,6 @@ import javax.faces.model.SelectItem;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import equipment.dao.ContainerDao;
 import equipment.domain.Container;

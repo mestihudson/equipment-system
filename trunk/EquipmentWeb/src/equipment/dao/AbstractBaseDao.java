@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public abstract class AbstractBaseDao {
+abstract class AbstractBaseDao {
 
   protected abstract SessionFactory getSessionFactory();
 
