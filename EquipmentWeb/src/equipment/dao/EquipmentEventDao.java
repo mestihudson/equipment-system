@@ -2,19 +2,18 @@ package equipment.dao;
 
 import javax.annotation.Resource;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import equipment.domain.Container;
+import equipment.domain.EquipmentEvent;
 
-@Repository("containerDao")
-@Scope("singleton")
-public class ContainerDao extends AbstractBaseDao {
+@Repository("equipmentEventDao")
+public class EquipmentEventDao extends AbstractBaseDao {
 
   @Resource(name = "sessionFactory")
   public SessionFactory sessionFactory;
-
+  
   @Override
   public SessionFactory getSessionFactory() {
     return sessionFactory;
@@ -22,7 +21,11 @@ public class ContainerDao extends AbstractBaseDao {
 
   @Override
   public Class<?> getDomainClass() {
-    return Container.class;
+    return EquipmentEvent.class;
   }
 
+  protected Session getCurrentSesion() {
+    return getSessionFactory().getCurrentSession();
+  }
+  
 }

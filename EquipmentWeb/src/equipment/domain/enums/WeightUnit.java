@@ -2,7 +2,8 @@ package equipment.domain.enums;
 
 public enum WeightUnit {
 	KT,
-	KG;
+	KG,
+	LB;
 	
 	public String getCode() {
 		return this.name();
