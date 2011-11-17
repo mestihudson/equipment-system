@@ -1,98 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core">
-	<f:view contentType="text/html"> 
-	<h:head>
-		<title>Facelet Title</title>
-		<style></style>
-		<link type="text/css" rel="stylesheet"
-			href="#{request.contextPath}/css/jsfdefault.css" />
-	</h:head>
-	<h:body>
-		<h:form>
-		 	<p:growl id="growl" showDetail="true" showSummary="false"/>
-			<h:panelGrid columns="4" columnClasses="column1, column2, column3, column4">
-				<h:outputLabel value="Event Date:" />
-				<p:calendar value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}" pattern="MM/dd/yyyy hh:mm a"/>
-				<h:outputLabel value="Event Type:" />
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
-					<f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}" itemValue="#{_eventType}"/>
-				</h:selectOneMenu>
-				
-				<h:outputLabel value="Container Number:" />
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.containerNumber}">
-					<f:validateLength maximum="10"/>
-				</p:inputText>
-				<h:outputLabel value="Container Condition:" />
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.containerCondition}">
-					<f:selectItem itemLabel="-" noSelectionOption="true"/> 
-					<f:selectItems value="#{movementCaptureBean.equipmentConditions}" var="_condition" itemLabel="#{_condition.description}" itemValue="#{_condition}"/>
-				</h:selectOneMenu>
-				
-				<h:outputLabel value="Ladden/Empty:" />
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.loadEmptyIndicator}">
-					<f:selectItems value="#{movementCaptureBean.loadEmptyIndicators}" var="_loadEmptyIndicator" itemLabel="#{_loadEmptyIndicator.description}" itemValue="#{_loadEmptyIndicator}"/>
-				</h:selectOneMenu>
-				<h:outputLabel value="Hazard Indicator:"/>
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.hazardIndicator}">
-					<f:selectItem itemValue="#{true}" itemLabel="Yes"/>
-					<f:selectItem itemValue="#{false}" itemLabel="No"/>
-				</h:selectOneMenu>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<f:view contentType="text/html">
+  <h:head>
+    <title>Facelet Title</title>
+    <style></style>
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/jsfdefault.css" />
+  </h:head>
+  <h:body>
+    <h:form>
+      <p:growl id="growl" showDetail="true" showSummary="false" />
+      <h:panelGrid columns="4" columnClasses="column1, column2, column3, column4">
+        <h:outputLabel value="Event Date:" />
+        <p:calendar value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}" pattern="MM/dd/yyyy hh:mm a" />
+        <h:outputLabel value="Event Type:" />
+        <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
+          <f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+            itemValue="#{_eventType}" />
+        </h:selectOneMenu>
 
-				<h:outputLabel value="Current Location:" />
-				<p:autoComplete id="facilityCode" required="true" 
-					value="#{movementCaptureBean.equipmentEvent.facilityCode}"
-					completeMethod="#{movementCaptureBean.completeFacility}" />
-				<h:outputLabel for="nextLocation" value="Next Location:" />
-				<p:autoComplete id="nextLocation"
-					value="#{movementCaptureBean.equipmentEvent.nextLocation}"
-					completeMethod="#{movementCaptureBean.completeFacility}" />
-					
-				<h:outputLabel value="Document Reference:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.documentReference}"/>
-				<h:outputLabel value="Document Type:"/>
-				<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.documentType}">
-					<f:selectItem itemLabel="-" noSelectionOption="true"/> 
-					<f:selectItems value="#{movementCaptureBean.documentTypes}" var="_documentType" itemLabel="#{_documentType.description}" itemValue="#{_documentType}"/>
-				</h:selectOneMenu>
-				<h:outputLabel value="Seal Number:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.sealNumber}"/>
-				<h:outputLabel value="Seal Type:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.sealType}"/>
-				
-				<h:outputLabel value="Vsl/Voy/Dir:"/>
-				<h:panelGrid columns="3">
-					<p:inputText value="#{movementCaptureBean.equipmentEvent.vesselCode}" size="2"/>
-					<p:inputText value="#{movementCaptureBean.equipmentEvent.voyageNumber}" size="2"/>
-					<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.directionBound}">
-						<f:selectItem  itemLabel="-" noSelectionOption="true"/>
-						<f:selectItems value="#{movementCaptureBean.directions}" var="_direction" itemLabel="#{_direction.label}" itemValue="#{_direction}"/>
-					</h:selectOneMenu>
-				</h:panelGrid>
-				<h:outputLabel for="spinnerBasic" value="Gross Weight:" />
-				<h:panelGrid columns="2">
-					<p:spinner id="spinnerBasic" size="8" value="#{movementCaptureBean.equipmentEvent.grossWeight}" stepFactor="0.25"/>
-					<h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.grossWeightUnit}">
-						<f:selectItems value="#{movementCaptureBean.weightUnits}"/>
-					</h:selectOneMenu>
-				</h:panelGrid>
-				
-				<h:outputLabel value="Discharge Port:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.dischargePort}"/>
-				<h:outputLabel value="Load Port:"/>
-				<p:inputText value="#{movementCaptureBean.equipmentEvent.loadPort}"/>
-				
-				<h:outputLabel value="Remarks:"/>
-				<p:inputTextarea value="#{movementCaptureBean.equipmentEvent.remarks}"/>
-				
-			</h:panelGrid>
-			<p:commandButton value="Save" action="#{movementCaptureBean.save}" update="growl"/>
-		</h:form>
-	</h:body>
-	</f:view>
+        <h:outputLabel value="Container Number:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.containerNumber}">
+          <f:validateLength maximum="10" />
+        </p:inputText>
+        <h:outputLabel value="Container Condition:" />
+        <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.containerCondition}">
+          <f:selectItem itemLabel="-" noSelectionOption="true" />
+          <f:selectItems value="#{movementCaptureBean.equipmentConditions}" var="_condition" itemLabel="#{_condition.description}"
+            itemValue="#{_condition}" />
+        </h:selectOneMenu>
+
+        <h:outputLabel value="Ladden/Empty:" />
+        <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.loadEmptyIndicator}">
+          <f:selectItems value="#{movementCaptureBean.loadEmptyIndicators}" var="_loadEmptyIndicator"
+            itemLabel="#{_loadEmptyIndicator.description}" itemValue="#{_loadEmptyIndicator}" />
+        </h:selectOneMenu>
+        <h:outputLabel value="Hazard Indicator:" />
+        <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.hazardIndicator}">
+          <f:selectItem itemValue="#{true}" itemLabel="Yes" />
+          <f:selectItem itemValue="#{false}" itemLabel="No" />
+        </h:selectOneMenu>
+
+        <h:outputLabel value="Current Location:" />
+        <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.equipmentEvent.facilityCode}"
+          completeMethod="#{movementCaptureBean.completeFacility}" />
+        <h:outputLabel for="nextLocation" value="Next Location:" />
+        <p:autoComplete id="nextLocation" value="#{movementCaptureBean.equipmentEvent.nextLocation}"
+          completeMethod="#{movementCaptureBean.completeFacility}" />
+
+        <h:outputLabel value="Document Reference:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.documentReference}" />
+        <h:outputLabel value="Document Type:" />
+        <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.documentType}">
+          <f:selectItem itemLabel="-" noSelectionOption="true" />
+          <f:selectItems value="#{movementCaptureBean.documentTypes}" var="_documentType" itemLabel="#{_documentType.description}"
+            itemValue="#{_documentType}" />
+        </h:selectOneMenu>
+        <h:outputLabel value="Seal Number:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.sealNumber}" />
+        <h:outputLabel value="Seal Type:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.sealType}" />
+
+        <h:outputLabel value="Vsl/Voy/Dir:" />
+        <h:panelGrid columns="3">
+          <p:inputText value="#{movementCaptureBean.equipmentEvent.vesselCode}" size="2" />
+          <p:inputText value="#{movementCaptureBean.equipmentEvent.voyageNumber}" size="2" />
+          <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.directionBound}">
+            <f:selectItem itemLabel="-" noSelectionOption="true" />
+            <f:selectItems value="#{movementCaptureBean.directions}" var="_direction" itemLabel="#{_direction.label}"
+              itemValue="#{_direction}" />
+          </h:selectOneMenu>
+        </h:panelGrid>
+        <h:outputLabel for="spinnerBasic" value="Gross Weight:" />
+        <h:panelGrid columns="2">
+          <p:spinner id="spinnerBasic" size="8" value="#{movementCaptureBean.equipmentEvent.grossWeight}" stepFactor="0.25" />
+          <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.grossWeightUnit}">
+            <f:selectItems value="#{movementCaptureBean.weightUnits}" />
+          </h:selectOneMenu>
+        </h:panelGrid>
+
+        <h:outputLabel value="Discharge Port:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.dischargePort}" />
+        <h:outputLabel value="Load Port:" />
+        <p:inputText value="#{movementCaptureBean.equipmentEvent.loadPort}" />
+
+        <h:outputLabel value="Remarks:" />
+        <p:inputTextarea value="#{movementCaptureBean.equipmentEvent.remarks}" />
+
+      </h:panelGrid>
+      <p:commandButton value="Save" action="#{movementCaptureBean.save}" update="growl" />
+    </h:form>
+  </h:body>
+</f:view>
 </html>
