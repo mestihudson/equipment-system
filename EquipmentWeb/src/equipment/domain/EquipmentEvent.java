@@ -9,7 +9,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
@@ -21,8 +20,7 @@ import equipment.domain.enums.EventType;
 import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
 
-@Entity
-@Table(name = "EQP_EVENT_LOG")
+@Entity(name = "EQP_EVENT_LOG")
 public class EquipmentEvent {
 
 	@Id

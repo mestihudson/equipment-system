@@ -3,6 +3,9 @@ package equipment.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -11,7 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 abstract class AbstractBaseDao {
 
-  protected abstract SessionFactory getSessionFactory();
+  @Resource(name = "sessionFactory")
+  protected SessionFactory sessionFactory;
+
+  protected  SessionFactory getSessionFactory(){
+    return sessionFactory;
+  }
 
   public abstract Class<?> getDomainClass();
 
@@ -19,6 +27,10 @@ abstract class AbstractBaseDao {
     return getSessionFactory().getCurrentSession();
   }
 
+  public Criteria createCriteria() {
+    return getCurrentSession().createCriteria(getDomainClass());
+  }
+  
   public void save(Object o) {
     getCurrentSession().save(o);
   }
