@@ -6,9 +6,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import equipment.domain.enums.Territory;
 
 @Entity(name="EQP_SUPPLY_HIERARCHY")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class EquipmentSupplyHierarchy {
 
   @Id
