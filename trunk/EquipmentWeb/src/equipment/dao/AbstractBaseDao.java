@@ -52,4 +52,9 @@ abstract class AbstractBaseDao {
   public <T> T findById(Serializable o) {
     return (T) getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.idEq(o));
   }
+  
+  @SuppressWarnings("unchecked")
+  public <T> T load(Serializable o) {
+     return (T) getCurrentSession().load(getDomainClass(), o);
+  }
 }
