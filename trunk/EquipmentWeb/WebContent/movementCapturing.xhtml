@@ -1,14 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
-<f:view contentType="text/html">
-  <h:head>
-    <title>Facelet Title</title>
-    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/defaultStyle.css" />
-  </h:head>
-  <h:body>
+  <ui:define name="title">Movement Capturing</ui:define>
+  <ui:define name="content">
     <h:form id="Capturing">
       <p:messages id="growl" showDetail="true" showSummary="false" />
       <h:panelGrid columns="4" columnClasses="column1, column2, column1, column2">
@@ -131,6 +124,5 @@
       </h:panelGrid>
       <p:commandButton value="Save" action="#{movementCaptureBean.save}" update="growl" />
     </h:form>
-  </h:body>
-</f:view>
-</html>
+  </ui:define>
+</ui:composition>
