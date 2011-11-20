@@ -7,12 +7,26 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin: 0px;
 	padding: 0;
-	font-size: 12px;
 	color: #616161;
+	font-size:0.7em;
 }
 
 h1, h2, h3 {
 	margin-top: 0;
+}
+.ui-widget {
+	font-size:1em;
+}
+.column1 {
+	vertical-align: middle;
+}
+
+.column2 {
+	vertical-align: middle;
+}
+
+h:panelGrid {
+	vertical-align: middle;
 }
 
 h1 {

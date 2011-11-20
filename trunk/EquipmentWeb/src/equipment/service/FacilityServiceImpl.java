@@ -8,12 +8,12 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import equipment.dao.EquipmentSupplyHierarchyDao;
 
-@Component("facilityService")
+@Service("facilityService")
 @Scope("singleton")
 @Transactional
 public class FacilityServiceImpl implements FacilityService {
