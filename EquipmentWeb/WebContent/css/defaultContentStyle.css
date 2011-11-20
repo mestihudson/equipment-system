@@ -1,0 +1,33 @@
+
+body {
+	margin: 0px;
+	padding: 0;
+	color: #616161;
+	font-size:0.7em;
+}
+
+.ui-widget {
+	font-size:1em;
+}
+
+.column1 {
+	vertical-align: middle;
+	font-size:0.7em;
+}
+
+.column2 {
+	vertical-align: middle;
+}
+
+h:panelGrid {
+	vertical-align: middle;
+}
+
+.ui-selectonemenu {
+	vertical-align: middle;
+	font-weight: normal;
+}
+
+.ui-widget-header {
+	font-weight: normal;
+}

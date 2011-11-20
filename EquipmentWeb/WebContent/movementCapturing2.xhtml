@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="template.xhtml">
+  <ui:define name="title">Movement Capturing</ui:define>
+  <ui:define name="content">
+    <h:form id="Capturing">
+      <h:panelGrid columns="4" columnClasses="column1, column2, column1, column2">
+        <h:outputLabel value="Event Date:" />
+        <h:panelGroup>
+          <p:calendar value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}" pattern="MM/dd/yyyy HH:mm" />
+        </h:panelGroup>
+        <h:outputLabel value="Event Type:" />
+        <h:panelGroup>
+          <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
+            <f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+              itemValue="#{_eventType}" />
+          </p:selectOneMenu>
+        </h:panelGroup>
+      </h:panelGrid>
+    </h:form>
+  </ui:define>
+</ui:composition>
+</html>
