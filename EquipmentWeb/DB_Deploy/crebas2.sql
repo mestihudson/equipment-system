@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/11/16 21:51:53                          */
+/* Created on:     2011/11/19 22:39:48                          */
 /*==============================================================*/
 
 
@@ -46,7 +46,7 @@ create table EQP_EVENT_LOG
    EVENT_TYPE           char(2) not null,
    EVENT_DT_LOC         datetime  not null,
    CNTR_NUM             varchar(10) not null,
-   CNTR_CHK_DIGIT       varchar(1),
+   CNTR_CHK_DIGIT       tinyint,
    SEAL_NUM             varchar(12),
    SEAL_TYPE            char(2),
    CNTR_GRP_CDE         char(4),
@@ -78,7 +78,7 @@ create table EQP_EVENT_LOG
 /*==============================================================*/
 create table dbeqp.EQP_LATEST_INFO
 (
-   EQMT_NUM             char(10) not null,
+   EQMT_NUM             varchar(10) not null,
    EQMT_TYPE            CHAR(1) not null,
    EVENT_TYPE           char(2) not null,
    REC_UPD_DT           datetime,

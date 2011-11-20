@@ -1,37 +1,14 @@
 package equipment.service;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import equipment.domain.EquipmentEvent;
+import equipment.dao.EquipmentEventDao;
 
-@Component("equipmentEventService")
+@Service("equipmentEventService")
 @Scope("singleton")
-public class EquipmentEventServiceImpl implements EquipmentEventService {
+@Transactional
+public class EquipmentEventServiceImpl extends EquipmentEventDao implements EquipmentEventService {
 	
-	@Resource(name = "sessionFactory")
-	public SessionFactory sessionFactory;
-
-	@Override
-	public void save(EquipmentEvent equipmentEvent) {
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		session.save(equipmentEvent);
-		session.getTransaction().commit();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<EquipmentEvent> findAll() {
-		Session session = sessionFactory.openSession();
-		Criteria criteria = session.createCriteria(EquipmentEvent.class);
-		return criteria.list();
-	}
 }

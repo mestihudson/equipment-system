@@ -96,7 +96,7 @@ public class EquipmentEvent {
 	@Column(name = "GROSS_WT_UNIT")
 	private WeightUnit grossWeightUnit;
 
-	@Enumerated(value = EnumType.STRING)
+  @Enumerated(value = EnumType.ORDINAL)
 	@Column(name = "CNTR_COND")
 	private EquipmentCondition containerCondition;
 
