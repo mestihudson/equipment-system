@@ -3,16 +3,15 @@ body {
 	margin: 0px;
 	padding: 0;
 	color: #616161;
-	font-size:0.7em;
+	font-size:0.8em;
 }
 
 .ui-widget {
-	font-size:1em;
+	font-size:0.8em;
 }
 
 .column1 {
 	vertical-align: middle;
-	font-size:0.7em;
 }
 
 .column2 {
