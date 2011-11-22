@@ -1,14 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets"
-  xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xml:lang="en" lang="en">
-<f:view contentType="text/html">
-  <h:head>
-    <title>My Facelets Page</title>
-    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/defaultStyle.css" />
-  </h:head>
-  <h:body>
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <ui:define name="title">Movement Enquiry</ui:define>
+  <ui:define name="content">
     <h:form>
       <p:dataTable value="#{movementEnquiryBean.equipmentEvents}" var="event">
         <p:column>
@@ -25,16 +18,14 @@
         </p:column>
         <p:column>
           <f:facet name="header">Document No./Type</f:facet>
-          <h:outputText value="#{event.documentReference}" />&nbsp;
-					<h:outputText value="#{event.documentType}" />
+          <h:outputText value="#{event.documentReference}" /> 
+          <h:outputText value="#{event.documentType}" />
         </p:column>
         <p:column>
           <f:facet name="header">Update Date</f:facet>
           <h:outputText value="#{event.recordUpdateDateTime}" />
         </p:column>
       </p:dataTable>
-
-    </h:form>
-  </h:body>
-</f:view>
-</html>
+    </h:form> 
+  </ui:define>
+</ui:composition>

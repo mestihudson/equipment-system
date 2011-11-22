@@ -7,9 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
-import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -23,11 +21,12 @@ import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
 import equipment.service.EquipmentEventService;
 import equipment.service.FacilityService;
-import equipment.utils.StringUtil;
 
 @Component("movementCaptureBean")
 @Scope("request")
 public class MovementCaptureBean implements Serializable {
+
+  private static final long serialVersionUID = 1906335266687624174L;
 
   @Resource(name = "equipmentEventService")
   private EquipmentEventService equipmentEventService;
