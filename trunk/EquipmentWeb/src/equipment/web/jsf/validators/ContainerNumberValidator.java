@@ -11,9 +11,11 @@ public class ContainerNumberValidator extends AbstractInputValidator {
   @Override
   public void validate(FacesContext facesContext, UIComponent uiComponent, Object newValue) throws ValidatorException {
     String containerNumber = ((String) newValue).trim();
-    if (containerNumber.length() > 10) {
-      throw new ValidatorException(getErrorMessage(null, "Container Number too long"));
+    if (containerNumber.indexOf("-") >= 0) {
+      containerNumber = containerNumber.substring(0, containerNumber.indexOf("-"));
+    }
+    if (containerNumber.length() != 10) {
+      throw new ValidatorException(getErrorMessage("Invalid container number", "The length of container number must be 10"));
     }
   }
-
 }
