@@ -3,30 +3,23 @@
   <ui:define name="title">Movement Enquiry</ui:define>
   <ui:define name="content">
     <h:form>
-      <h:panelGrid>
-        <p:dataTable value="#{movementEnquiryBean.equipmentEvents}" var="event">
-          <p:column>
-            <f:facet name="header">Event Type</f:facet>
-            <h:outputText value="#{event.eventType.description}" />
-          </p:column>
-          <p:column>
-            <f:facet name="header">Facility</f:facet>
-            <h:outputText value="#{event.facilityCode}" />
-          </p:column>
-          <p:column>
-            <f:facet name="header">Activity Date</f:facet>
-            <h:outputText value="#{event.eventDateTimeLocal}" />
-          </p:column>
-          <p:column>
-            <f:facet name="header">Document No./Type</f:facet>
-            <h:outputText value="#{event.documentReference}" />
-            <h:outputText value="#{event.documentType}" />
-          </p:column>
-          <p:column>
-            <f:facet name="header">Update Date</f:facet>
-            <h:outputText value="#{event.recordUpdateDateTime}" />
-          </p:column>
-        </p:dataTable>
+    <p:growl id="messages"/>
+      <h:panelGrid columns="1">
+        <h:panelGroup>
+            <h:outputLabel>Container Number:</h:outputLabel>
+            <p:inputText id="containerNumber" value="#{movementEnquiryBean.containerNumber}">
+              <f:validator validatorId="containerNumberValidator" />
+              <p:ajax event="blur" update="messages" />
+            </p:inputText>
+
+            <h:outputLabel>Event Type:</h:outputLabel>
+            <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
+              <f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+                itemValue="#{_eventType}" /></p:selectOneMenu>
+            <p:commandButton value="Search" action="#{movementEnquiryBean.search}" update="eventDataTable" />
+          </h:panelGroup>
+        <ui:include src="movementResultTable.xhtml"/>
+
       </h:panelGrid>
     </h:form>
   </ui:define>

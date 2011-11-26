@@ -2,6 +2,7 @@ package equipment.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -56,5 +57,10 @@ abstract class AbstractBaseDao {
   @SuppressWarnings("unchecked")
   public <T> T load(Serializable o) {
      return (T) getCurrentSession().load(getDomainClass(), o);
+  }
+  
+  @SuppressWarnings("unchecked")
+  public <T> List<T> findBy(Map<String, Object> propertyNameValues) {
+    return getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.allEq(propertyNameValues)).list();
   }
 }

@@ -7,7 +7,8 @@
       <h:panelGrid columns="4" columnClasses="column1, column2, column1, column2">
         <h:outputLabel value="Event Date:" />
         <h:panelGroup>
-          <p:calendar value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}" pattern="MM/dd/yyyy HH:mm" />
+          <p:calendar id="eventDate" widget="eventDate" value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}"
+            pattern="MM/dd/yyyy HH:mm" required="true"/>
         </h:panelGroup>
         <h:outputLabel value="Event Type:" />
         <h:panelGroup>

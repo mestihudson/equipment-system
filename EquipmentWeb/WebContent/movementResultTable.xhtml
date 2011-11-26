@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <p:dataTable id="eventDataTable" value="#{movementEnquiryBean.mediumEventsModel}" var="event"
+    selection="#{movementEnquiryBean.selectedEvents}">
+    <p:column selectionMode="multiple" />
+    <p:column>
+      <f:facet name="header">Event Type</f:facet>
+      <h:outputText value="#{event.eventType.description}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Container Number</f:facet>
+      <h:outputText value="#{event.containerNumber}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Facility</f:facet>
+      <h:outputText value="#{event.facilityCode}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Next Location</f:facet>
+      <h:outputText value="#{event.nextLocation}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Activity Date</f:facet>
+      <h:outputText value="#{event.eventDateTimeLocal}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Document No./Type</f:facet>
+      <h:outputText value="#{event.documentReference}" />
+      <h:outputText value="#{event.documentType}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Update Date</f:facet>
+      <h:outputText value="#{event.recordUpdateDateTime}" />
+    </p:column>
+  </p:dataTable>
+</ui:composition>
