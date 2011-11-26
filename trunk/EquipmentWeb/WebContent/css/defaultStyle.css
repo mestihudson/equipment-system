@@ -1,13 +1,13 @@
-
 body {
 	margin: 0px;
 	padding: 0;
 	color: #616161;
-	font-size:0.8em;
+	font-size: 0.8em;
 }
 
 .ui-widget {
-	font-size:1em;
+	font-size: 1em;
+	font-weight: normal;
 }
 
 .column1 {
@@ -23,10 +23,20 @@ h:panelGrid {
 }
 
 .ui-selectonemenu {
-	vertical-align: middle;
+	vertical-align: top;
 	font-weight: normal;
 }
 
-.ui-widget-header {
-	font-weight: normal;
+.ui-datatable-data {
+	font-size: 0.9em;
+	font-family: Arial;
+}
+
+.ui-button .ui-button-text {
+	line-height: 0.8;
+}
+
+.ui-inputfield {
+	padding-top: 3px;
+	padding-bottom:3px;
 }

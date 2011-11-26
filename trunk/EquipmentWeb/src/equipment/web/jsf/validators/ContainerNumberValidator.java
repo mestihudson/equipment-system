@@ -5,12 +5,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.FacesValidator;
 import javax.faces.validator.ValidatorException;
 
+import equipment.utils.StringUtil;
+
 @FacesValidator("containerNumberValidator")
 public class ContainerNumberValidator extends AbstractInputValidator {
 
   @Override
   public void validate(FacesContext facesContext, UIComponent uiComponent, Object newValue) throws ValidatorException {
     String containerNumber = ((String) newValue).trim();
+    if(StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
+      return;
+    }
     if (containerNumber.indexOf("-") >= 0) {
       containerNumber = containerNumber.substring(0, containerNumber.indexOf("-"));
     }
