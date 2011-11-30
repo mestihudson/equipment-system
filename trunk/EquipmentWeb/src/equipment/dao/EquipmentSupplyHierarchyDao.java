@@ -2,7 +2,7 @@ package equipment.dao;
 
 import org.springframework.stereotype.Repository;
 
-import equipment.domain.EquipmentSupplyHierarchy;
+import equipment.domain.entity.EquipmentSupplyHierarchy;
 
 @Repository("equipmentSupplyHierarchyDao")
 public class EquipmentSupplyHierarchyDao extends AbstractBaseDao {

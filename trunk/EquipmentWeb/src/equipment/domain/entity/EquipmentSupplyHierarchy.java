@@ -1,4 +1,4 @@
-package equipment.domain;
+package equipment.domain.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

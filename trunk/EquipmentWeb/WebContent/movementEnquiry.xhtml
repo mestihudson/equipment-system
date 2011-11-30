@@ -13,9 +13,10 @@
             </p:inputText>
 
             <h:outputLabel>Event Type:</h:outputLabel>
-            <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
-              <f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
-                itemValue="#{_eventType}" /></p:selectOneMenu>
+            <h:selectOneMenu value="#{movementEnquiryBean.eventType}">
+              <f:selectItem itemLabel="-" noSelectionOption="true"/>
+              <f:selectItems value="#{movementEnquiryBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+                itemValue="#{_eventType}" /></h:selectOneMenu>
             <p:commandButton value="Search" action="#{movementEnquiryBean.search}" update="eventDataTable" />
           </h:panelGroup>
         <ui:include src="movementResultTable.xhtml"/>

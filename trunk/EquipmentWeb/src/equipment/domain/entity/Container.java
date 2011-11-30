@@ -1,4 +1,4 @@
-package equipment.domain;
+package equipment.domain.entity;
 
 import java.util.Date;
 

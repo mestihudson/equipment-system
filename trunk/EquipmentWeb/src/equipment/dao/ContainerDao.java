@@ -3,7 +3,7 @@ package equipment.dao;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import equipment.domain.Container;
+import equipment.domain.entity.Container;
 
 @Repository("containerDao")
 @Scope("singleton")

@@ -6,7 +6,7 @@ import javax.faces.model.ListDataModel;
 
 import org.primefaces.model.SelectableDataModel;
 
-import equipment.domain.EquipmentEvent;
+import equipment.domain.entity.EquipmentEvent;
 
 public class EquipmentEventDataModel extends ListDataModel<EquipmentEvent> implements SelectableDataModel<EquipmentEvent> {
 
@@ -18,9 +18,15 @@ public class EquipmentEventDataModel extends ListDataModel<EquipmentEvent> imple
     super(data);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public EquipmentEvent getRowData(String eventTimestamp) {
-    //TODO
+    List<EquipmentEvent> equipmentEvents = (List<EquipmentEvent>)getWrappedData();
+    for(EquipmentEvent equipmentEvent : equipmentEvents) {
+      if(equipmentEvent.getEventTimestamp().equals(eventTimestamp)) {
+        return equipmentEvent;
+      }
+    }
     return null;
   }
 
