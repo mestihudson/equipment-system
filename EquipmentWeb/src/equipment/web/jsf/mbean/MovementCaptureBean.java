@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.domain.EquipmentEvent;
+import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.DocumentType;
 import equipment.domain.enums.EquipmentCondition;
@@ -31,17 +31,17 @@ public class MovementCaptureBean implements Serializable {
   @Resource(name = "equipmentEventService")
   private EquipmentEventService equipmentEventService;
 
-  EquipmentEvent equipmentEvent;
+  @Resource(name = "facilityService")
+  private FacilityService facilityService;
 
+  private EquipmentEvent equipmentEvent;
+  
   public EquipmentEvent getEquipmentEvent() {
     if (equipmentEvent == null) {
       equipmentEvent = new EquipmentEvent();
     }
     return equipmentEvent;
   }
-
-  @Resource(name = "facilityService")
-  private FacilityService facilityService;
 
   public EnumSet<WeightUnit> getWeightUnits() {
     return EnumSet.allOf(WeightUnit.class);

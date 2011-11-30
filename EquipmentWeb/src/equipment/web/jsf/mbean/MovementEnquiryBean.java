@@ -1,6 +1,7 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
+import java.util.EnumSet;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,28 +10,34 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import equipment.dao.EquipmentEventDao;
-import equipment.domain.EquipmentEvent;
+import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.enums.EventType;
 import equipment.utils.StringUtil;
 
 @Component("movementEnquiryBean")
 @Scope("request")
-public class MovementEnquiryBean implements Serializable{
-	private static final long serialVersionUID = -1522497061055049165L;
-  @Resource(name="equipmentEventDao")
+public class MovementEnquiryBean implements Serializable {
+  private static final long serialVersionUID = -1522497061055049165L;
+  @Resource(name = "equipmentEventDao")
   private EquipmentEventDao equipmentEventDao;
-  
-	private String containerNumber;
-	private EventType eventType;
-	private EquipmentEventDataModel mediumEventsModel;
-	
-	private List<EquipmentEvent> equipmentEvents;
+
+  private String containerNumber;
+  private EventType eventType;
+  private EquipmentEventDataModel mediumEventsModel;
+
+  private List<EquipmentEvent> equipmentEvents;
   private EquipmentEvent[] selectedEvents;
 
-	public List<EquipmentEvent> getEquipmentEvents() {
-		return equipmentEvents;
-	}
+  public List<EquipmentEvent> getEquipmentEvents() {
+    return equipmentEvents;
+  }
 
+  public EnumSet<EventType> getEventTypes() {
+    return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
+        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
+  }
+
+  
   public EquipmentEvent[] getSelectedEvents() {
     return selectedEvents;
   }
@@ -46,7 +53,7 @@ public class MovementEnquiryBean implements Serializable{
   public void setContainerNumber(String containerNumber) {
     this.containerNumber = containerNumber;
   }
-	
+
   public EventType getEventType() {
     return eventType;
   }
@@ -64,10 +71,12 @@ public class MovementEnquiryBean implements Serializable{
   }
 
   public void search() {
-    if(StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
+    if (StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
       equipmentEvents = equipmentEventDao.findAll();
     } else {
       equipmentEvents = equipmentEventDao.findByContainerNumber(getContainerNumber());
     }
+    System.out.println("Event Type is " + getEventType());
+    mediumEventsModel = new EquipmentEventDataModel(equipmentEvents);
   }
 }
