@@ -1,5 +1,6 @@
 package equipment.domain.enums;
 
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -72,5 +73,10 @@ public enum EventType   {
 
   public String getDescription() {
     return description;
+  }
+
+  public static EnumSet<EventType> getEventTypes() {
+    return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
+        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
   }
 }
