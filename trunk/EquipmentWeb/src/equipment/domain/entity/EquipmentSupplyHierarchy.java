@@ -16,33 +16,36 @@ import equipment.domain.enums.Territory;
 public class EquipmentSupplyHierarchy {
 
   @Id
-  @Column(name="FCIL_CDE")
-  private String facilityCode;
+  @Column(name="FACILITY")
+  private String facility;
   
-  @Column(name="OFCE_CDE")
-  private String officeCode;
+  @Column(name="OFFICE")
+  private String office;
 
   @Column(name="REG_CDE")
   private String regionCode;
+  
+  @Column(name="REGION")
+  private String region;
   
   @Enumerated(value = EnumType.STRING)
   @Column(name="TERRITORY")
   private Territory territory;
 
-  public String getFacilityCode() {
-    return facilityCode;
+  public String getFacility() {
+    return facility;
   }
 
-  public void setFacilityCode(String facilityCode) {
-    this.facilityCode = facilityCode;
+  public void setFacility(String facility) {
+    this.facility = facility;
   }
 
-  public String getOfficeCode() {
-    return officeCode;
+  public String getOffice() {
+    return office;
   }
 
-  public void setOfficeCode(String officeCode) {
-    this.officeCode = officeCode;
+  public void setOffice(String office) {
+    this.office = office;
   }
 
   public String getRegionCode() {
@@ -53,6 +56,14 @@ public class EquipmentSupplyHierarchy {
     this.regionCode = regionCode;
   }
 
+  public String getRegion() {
+    return region;
+  }
+
+  public void setRegion(String region) {
+    this.region = region;
+  }
+
   public Territory getTerritory() {
     return territory;
   }
@@ -60,6 +71,6 @@ public class EquipmentSupplyHierarchy {
   public void setTerritory(Territory territory) {
     this.territory = territory;
   }
-  
+
   
 }

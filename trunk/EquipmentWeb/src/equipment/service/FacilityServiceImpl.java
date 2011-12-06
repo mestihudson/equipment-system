@@ -25,8 +25,8 @@ public class FacilityServiceImpl implements FacilityService {
   @Override
   public List<String> findFacilityCodesStartWith(String query) {
     Criteria criteria = equipmentSupplyHierarchyDao.createCriteria();
-    criteria.add(Restrictions.like(EquipmentSupplyHierarchyDao.FCIL_CDE, query + "%").ignoreCase()).setProjection(
-        Property.forName(EquipmentSupplyHierarchyDao.FCIL_CDE));
+    criteria.add(Restrictions.like(EquipmentSupplyHierarchyDao.FACILITY, query.toUpperCase() + "%")).setProjection(
+        Property.forName(EquipmentSupplyHierarchyDao.FACILITY));
     return criteria.list();
   }
 }
