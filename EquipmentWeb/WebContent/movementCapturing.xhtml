@@ -52,12 +52,12 @@
         <h:outputLabel value="Current Location:" />
         <h:panelGroup>
           <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.equipmentEvent.facilityCode}"
-            completeMethod="#{movementCaptureBean.completeFacility}" forceSelection="true" />
+            completeMethod="#{movementCaptureBean.completeFacility}" forceSelection="true" maxResults="10"/>
         </h:panelGroup>
 
         <h:outputLabel for="nextLocation" value="Next Location:" />
         <h:panelGroup>
-          <p:autoComplete id="nextLocation" value="#{movementCaptureBean.equipmentEvent.nextLocation}"
+          <p:autoComplete id="nextLocation" value="#{movementCaptureBean.equipmentEvent.nextLocation}" maxResults="10"
             completeMethod="#{movementCaptureBean.completeFacility}" />
         </h:panelGroup>
 

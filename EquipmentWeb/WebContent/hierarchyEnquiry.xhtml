@@ -3,25 +3,21 @@
   <ui:define name="title">Hierarchy Enquiry</ui:define>
   <ui:define name="content">
     <h:form>
-    <p:growl id="messages"/>
-      <h:panelGrid columns="1">
-        <h:panelGroup>
-            <h:outputLabel>Container Number:</h:outputLabel>
-            <p:inputText id="containerNumber" value="#{movementEnquiryBean.containerNumber}">
-              <f:validator validatorId="containerNumberValidator" />
-              <p:ajax event="blur" update="messages" />
-            </p:inputText>
+      <p:dataTable var="hierarchy" value="#{hierarchyBean.supplyHierarchies}" paginator="true" rows="20"
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+            rowsPerPageTemplate="20,30,50">  
 
-            <h:outputLabel>Event Type:</h:outputLabel>
-            <h:selectOneMenu value="#{movementEnquiryBean.eventType}">
-              <f:selectItem itemLabel="-" noSelectionOption="true"/>
-              <f:selectItems value="#{EventType.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
-                itemValue="#{_eventType}" /></h:selectOneMenu>
-            <p:commandButton value="Search" action="#{movementEnquiryBean.search}" update="eventDataTable" />
-          </h:panelGroup>
-        <ui:include src="movementResultTable.xhtml"/>
-
-      </h:panelGrid>
+      <p:column filterBy="#{hierarchy.facility}" headerText="Facility">  
+        <h:outputText value="#{hierarchy.facility}" />
+      </p:column>
+      <p:column filterBy="#{hierarchy.office}" headerText="Office" filterMatchMode="exact">
+        <h:outputText value="#{hierarchy.office}" />
+      </p:column>
+      <p:column filterBy="#{hierarchy.region}" headerText="Region" filterMatchMode="contains">  
+        <h:outputText value="#{hierarchy.regionCode} - #{hierarchy.region}" />
+      </p:column>
+      
+      </p:dataTable>
     </h:form>
   </ui:define>
 </ui:composition>
