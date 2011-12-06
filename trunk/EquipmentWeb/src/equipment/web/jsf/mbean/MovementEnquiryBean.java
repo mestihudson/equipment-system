@@ -2,7 +2,9 @@ package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -36,7 +38,6 @@ public class MovementEnquiryBean implements Serializable {
     return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
         EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
   }
-
   
   public EquipmentEvent[] getSelectedEvents() {
     return selectedEvents;
@@ -71,12 +72,14 @@ public class MovementEnquiryBean implements Serializable {
   }
 
   public void search() {
-    if (StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
-      equipmentEvents = equipmentEventDao.findAll();
-    } else {
-      equipmentEvents = equipmentEventDao.findByContainerNumber(getContainerNumber());
+    Map<String, Object> propertyNameValues = new HashMap<String, Object>();
+    if(StringUtil.isNotNullAndNotEmptyWithTrim(containerNumber)) {
+      propertyNameValues.put("containerNumber", containerNumber);
     }
-    System.out.println("Event Type is " + getEventType());
+    if(eventType != null) {
+      propertyNameValues.put("eventType", eventType);
+    }
+    equipmentEvents = equipmentEventDao.findBy(propertyNameValues);
     mediumEventsModel = new EquipmentEventDataModel(equipmentEvents);
   }
 }
