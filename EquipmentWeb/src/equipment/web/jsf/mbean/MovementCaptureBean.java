@@ -18,6 +18,7 @@ import equipment.domain.enums.DocumentType;
 import equipment.domain.enums.EquipmentCondition;
 import equipment.domain.enums.EventType;
 import equipment.domain.enums.LoadEmptyIndicator;
+import equipment.domain.enums.Territory;
 import equipment.domain.enums.WeightUnit;
 import equipment.service.EquipmentEventService;
 import equipment.service.FacilityService;
