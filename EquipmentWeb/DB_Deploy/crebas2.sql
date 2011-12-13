@@ -1,12 +1,12 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/11/20 19:48:01                          */
+/* Created on:     2011/12/11 15:32:09                          */
 /*==============================================================*/
 
 
 drop table if exists dbeqp.CONTAINER;
 
-drop table if exists EQP_EVENT_LOG;
+drop table if exists dbeqp.EQP_EVENT_LOG;
 
 drop table if exists dbeqp.EQP_LATEST_INFO;
 
@@ -38,7 +38,7 @@ create table dbeqp.CONTAINER
 /*==============================================================*/
 /* Table: EQP_EVENT_LOG                                         */
 /*==============================================================*/
-create table EQP_EVENT_LOG
+create table dbeqp.EQP_EVENT_LOG
 (
    EVENT_TIMESTAMP      char(32) not null,
    EVENT_CRE_DT         datetime not null,
@@ -62,7 +62,7 @@ create table EQP_EVENT_LOG
    DOC_TYPE             char(2),
    GROSS_WT             numeric(7,2),
    GROSS_WT_UNIT        enum('LBS','KT','KGS'),
-   CNTR_COND            varchar(1),
+   CNTR_COND            int,
    HZ_IND               boolean,
    REMARKS              blob,
    CONTRA_ACTION        char(1),
@@ -98,12 +98,13 @@ create table dbeqp.EQP_REJECTION
 /*==============================================================*/
 create table dbeqp.EQP_SUPPLY_HIERARCHY
 (
-   FCIL_CDE             char(5) not null,
-   REG_CDE              char(3) not null,
-   OFCE_CDE             char(3) not null,
+   FACILITY             char(5) not null,
+   OFFICE               char(3) not null,
+   REGION               varchar(20) not null,
+   REG_CDE              char(4),
    TERRITORY            char(3) not null,
    REC_UPD_DT           datetime,
-   primary key (FCIL_CDE)
+   primary key (FACILITY)
 );
 
 /*==============================================================*/
@@ -143,8 +144,8 @@ create table dbeqp.GSP_OFFICE
    primary key (CODE)
 );
 
-alter table EQP_EVENT_LOG add constraint FK_Reference_3 foreign key (FCIL_CDE)
-      references dbeqp.EQP_SUPPLY_HIERARCHY (FCIL_CDE) on delete restrict on update restrict;
+alter table dbeqp.EQP_EVENT_LOG add constraint FK_Reference_3 foreign key (FCIL_CDE)
+      references dbeqp.EQP_SUPPLY_HIERARCHY (FACILITY) on delete restrict on update restrict;
 
 alter table dbeqp.EQP_LATEST_INFO add constraint FK_Reference_2 foreign key (EQMT_NUM)
       references dbeqp.CONTAINER (EQMT_NUM) on delete restrict on update restrict;

@@ -18,11 +18,17 @@ import equipment.domain.enums.Territory;
 @Scope("request")
 public class HierarchyBean implements Serializable {
   private static final long serialVersionUID = -5650490585039961293L;
+  private List<EquipmentSupplyHierarchy> supplyHierarchies;
+  
   @Resource(name = "equipmentSupplyHierarchyDao")
   private EquipmentSupplyHierarchyDao equipmentSupplyHierarchyDao;
 
+  
   public List<EquipmentSupplyHierarchy> getSupplyHierarchies() {
-    return equipmentSupplyHierarchyDao.findAll();
+    if(supplyHierarchies == null) {
+      supplyHierarchies = equipmentSupplyHierarchyDao.findAll();
+    }
+    return supplyHierarchies;
   }
 
   public List<SelectItem> getTerritories() {

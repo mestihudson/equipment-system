@@ -1,0 +1,43 @@
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <ui:define name="title">Equipment Creation</ui:define>
+  <ui:define name="content">
+    <h:form id="equipmentCreation">
+      <p:messages id="messages" showDetail="true" showSummary="false" />
+      <h:panelGrid columns="2" width="40%">
+        <h:panelGroup>
+          <h:panelGrid columns="2">
+            <h:outputLabel value="Event Type:" />
+            <p:selectOneMenu value="#{equipmentCTBean.selectedSubEventType}">
+              <f:selectItems value="#{equipmentCTBean.subEventTypes}" var="_subEventType" itemLabel="#{_subEventType.description}"
+                itemValue="#{_subEventType}" />
+            </p:selectOneMenu>
+          </h:panelGrid>
+          <p:panel>
+            <h:panelGrid columns="2">
+              <h:outputLabel value="Container No." />
+              <p:inputText value="#{equipmentCTBean.containerNumber}" size="10" />
+              <h:outputLabel value="Check digit" />
+              <p:inputText id="checkDigit" size="1" value="#{equipmentCTBean.containerCheckDigit}" />
+              <h:panelGrid columns="1">
+                <p:commandButton value="add" actionListener="#{equipmentCTBean.addContainer}" update="containerNumberList" />
+                <p:commandButton value="remove" />
+              </h:panelGrid>
+              <p:selectOneListbox id="containerNumberList" converter="checkedContainerNumberConverter" style="height:100px">
+                <f:selectItems value="#{equipmentCTBean.checkedContainerNumbers}" var="_checkedContainerNumber"
+                  itemLabel="#{_checkedContainerNumber.outputString}" itemValue="#{_checkedContainerNumber}" />
+              </p:selectOneListbox>
+            </h:panelGrid>
+          </p:panel>
+        </h:panelGroup>
+        <h:panelGrid columns="2">
+          <h:outputLabel value="Activity Date:" />
+          <p:calendar id="eventDate" widget="eventDate" value="#{equipmentCTBean.activityDateTime}" pattern="MM/dd/yyyy HH:mm"
+            required="true" />
+          <h:outputLabel value="Facility" />
+        </h:panelGrid>
+      </h:panelGrid>
+      <p:commandButton value="Save" update="messages" />
+    </h:form>
+  </ui:define>
+</ui:composition>
