@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import equipment.dao.EquipmentSupplyHierarchyDao;
 import equipment.domain.entity.EquipmentSupplyHierarchy;
 import equipment.domain.enums.Territory;
+import equipment.service.FacilityService;
 
 @Component("hierarchyBean")
 @Scope("request")
@@ -22,8 +23,10 @@ public class HierarchyBean implements Serializable {
   
   @Resource(name = "equipmentSupplyHierarchyDao")
   private EquipmentSupplyHierarchyDao equipmentSupplyHierarchyDao;
-
   
+  @Resource(name = "facilityService")
+  private FacilityService facilityService;
+
   public List<EquipmentSupplyHierarchy> getSupplyHierarchies() {
     if(supplyHierarchies == null) {
       supplyHierarchies = equipmentSupplyHierarchyDao.findAll();
@@ -39,4 +42,12 @@ public class HierarchyBean implements Serializable {
     }
     return options;
   }
+  
+  public List<String> completeFacility(String query) {
+    if (query.length() > 0 && query.length() < 5) {
+      return facilityService.findFacilityCodesStartWith(query);
+    }
+    return null;
+  }
+
 }

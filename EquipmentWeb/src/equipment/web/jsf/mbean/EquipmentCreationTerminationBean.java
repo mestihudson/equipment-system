@@ -28,6 +28,10 @@ public class EquipmentCreationTerminationBean implements Serializable {
   private SubEventType selectedSubEventType;
   private Date activityDateTime;
   private String facilityCode;
+  private String sizeTypeGroup;
+  private String isoCode;
+  private String referenceNumber;
+  private String materialType;
   
   @Resource(name = "containerService")
   private ContainerService containerService;
@@ -100,5 +104,37 @@ public class EquipmentCreationTerminationBean implements Serializable {
 
   public void setFacilityCode(String facilityCode) {
     this.facilityCode = facilityCode;
+  }
+
+  public String getSizeTypeGroup() {
+    return sizeTypeGroup;
+  }
+
+  public void setSizeTypeGroup(String sizeTypeGroup) {
+    this.sizeTypeGroup = sizeTypeGroup;
+  }
+
+  public String getIsoCode() {
+    return isoCode;
+  }
+
+  public void setIsoCode(String isoCode) {
+    this.isoCode = isoCode;
+  }
+
+  public String getReferenceNumber() {
+    return referenceNumber;
+  }
+
+  public void setReferenceNumber(String referenceNumber) {
+    this.referenceNumber = referenceNumber;
+  }
+
+  public String getMaterialType() {
+    return materialType;
+  }
+
+  public void setMaterialType(String materialType) {
+    this.materialType = materialType;
   }
 }
