@@ -52,7 +52,7 @@
         <h:outputLabel value="Current Location:" />
         <h:panelGroup>
           <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.equipmentEvent.facilityCode}"
-            completeMethod="#{movementCaptureBean.completeFacility}" forceSelection="true" maxResults="10"/>
+            completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10"/>
         </h:panelGroup>
 
         <h:outputLabel for="nextLocation" value="Next Location:" />

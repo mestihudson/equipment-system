@@ -32,9 +32,6 @@ public class MovementCaptureBean implements Serializable {
   @Resource(name = "equipmentEventService")
   private EquipmentEventService equipmentEventService;
 
-  @Resource(name = "facilityService")
-  private FacilityService facilityService;
-
   private EquipmentEvent equipmentEvent;
   
   public EquipmentEvent getEquipmentEvent() {
@@ -67,13 +64,6 @@ public class MovementCaptureBean implements Serializable {
 
   public EnumSet<Direction> getDirections() {
     return EnumSet.allOf(Direction.class);
-  }
-
-  public List<String> completeFacility(String query) {
-    if (query.length() > 0 && query.length() < 5) {
-      return facilityService.findFacilityCodesStartWith(query);
-    }
-    return null;
   }
 
   public void save() {
