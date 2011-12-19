@@ -3,7 +3,6 @@ package equipment.web.jsf.mbean;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.EnumSet;
-import java.util.List;
 
 import javax.annotation.Resource;
 import javax.faces.application.FacesMessage;
@@ -12,16 +11,16 @@ import javax.faces.context.FacesContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.domain.entity.EquipmentEvent;
+import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.DocumentType;
 import equipment.domain.enums.EquipmentCondition;
 import equipment.domain.enums.EventType;
 import equipment.domain.enums.LoadEmptyIndicator;
-import equipment.domain.enums.Territory;
+import equipment.domain.enums.ValidationType;
 import equipment.domain.enums.WeightUnit;
-import equipment.service.EquipmentEventService;
-import equipment.service.FacilityService;
+import equipment.service.EventValidationService;
+import equipment.validation.IncomingMovementEvent;
 
 @Component("movementCaptureBean")
 @Scope("request")
@@ -29,16 +28,16 @@ public class MovementCaptureBean implements Serializable {
 
   private static final long serialVersionUID = 1906335266687624174L;
 
-  @Resource(name = "equipmentEventService")
-  private EquipmentEventService equipmentEventService;
+  @Resource(name = "eventValidationService")
+  private EventValidationService eventValidationService;
 
-  private EquipmentEvent equipmentEvent;
+  private IncomingMovementEvent incomingEvent;
   
-  public EquipmentEvent getEquipmentEvent() {
-    if (equipmentEvent == null) {
-      equipmentEvent = new EquipmentEvent();
+  public IncomingMovementEvent getIncomingEvent() {
+    if (incomingEvent == null) {
+      incomingEvent = new IncomingMovementEvent();
     }
-    return equipmentEvent;
+    return incomingEvent;
   }
 
   public EnumSet<WeightUnit> getWeightUnits() {
@@ -67,12 +66,13 @@ public class MovementCaptureBean implements Serializable {
   }
 
   public void save() {
-    getEquipmentEvent().setEventTimestamp(String.valueOf(System.currentTimeMillis()));
-    getEquipmentEvent().setEventCreationDateTime(new Timestamp(System.currentTimeMillis()));
-    getEquipmentEvent().setEventDateTimeLocal(new Timestamp(System.currentTimeMillis()));
-    equipmentEventService.save(getEquipmentEvent());
+    buildIncomingEvent();
+    eventValidationService.validateEvent(getIncomingEvent(), ValidationType.NEW);
     FacesContext context = FacesContext.getCurrentInstance();
     context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Movement Capturing", "Save Successful"));
+  }
+
+  private void buildIncomingEvent() {
   }
 
 }

@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import equipment.domain.enums.ValidationType;
 import equipment.validation.EquipmentEventValidation;
 import equipment.validation.IEventValidation;
-import equipment.validation.IncomingEquipmentEvent;
 import equipment.validation.IncomingEvent;
-import equipment.validation.IncomingMovementEvent;
 import equipment.validation.MovementEventValidation;
 import equipment.validation.ValidationResult;
 

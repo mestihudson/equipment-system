@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import equipment.dao.EquipmentEventDao;
+import equipment.dao.MovementEventDao;
 
-@Service("equipmentEventService")
+@Service("movementEventService")
 @Scope("singleton")
 @Transactional
-public class EquipmentEventServiceImpl extends EquipmentEventDao implements EquipmentEventService {
+public class MovementEventServiceImpl extends MovementEventDao implements MovementEventService {
 	
 }

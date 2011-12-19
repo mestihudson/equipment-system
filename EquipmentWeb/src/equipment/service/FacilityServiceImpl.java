@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import equipment.dao.EquipmentSupplyHierarchyDao;
+import equipment.dao.SupplyHierarchyDao;
 
 @Service("facilityService")
 @Scope("singleton")
@@ -19,14 +19,14 @@ import equipment.dao.EquipmentSupplyHierarchyDao;
 public class FacilityServiceImpl implements FacilityService {
 
   @Resource(name = "equipmentSupplyHierarchyDao")
-  public EquipmentSupplyHierarchyDao equipmentSupplyHierarchyDao;
+  public SupplyHierarchyDao equipmentSupplyHierarchyDao;
 
   @SuppressWarnings("unchecked")
   @Override
   public List<String> findFacilityCodesStartWith(String query) {
     Criteria criteria = equipmentSupplyHierarchyDao.createCriteria();
-    criteria.add(Restrictions.like(EquipmentSupplyHierarchyDao.FACILITY, query.toUpperCase() + "%")).setProjection(
-        Property.forName(EquipmentSupplyHierarchyDao.FACILITY));
+    criteria.add(Restrictions.like(SupplyHierarchyDao.FACILITY, query.toUpperCase() + "%")).setProjection(
+        Property.forName(SupplyHierarchyDao.FACILITY));
     return criteria.list();
   }
 }
