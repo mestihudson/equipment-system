@@ -13,7 +13,7 @@ import equipment.domain.enums.Territory;
 
 @Entity(name="EQP_SUPPLY_HIERARCHY")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class EquipmentSupplyHierarchy {
+public class SupplyHierarchy {
 
   @Id
   @Column(name="FACILITY")

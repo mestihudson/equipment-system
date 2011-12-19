@@ -22,7 +22,7 @@ import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
 
 @Entity(name = "EQP_EVENT_LOG")
-public class EquipmentEvent {
+public class MovementEvent {
 
 	@Id
 	@GenericGenerator(name="idGenerator", strategy="uuid")

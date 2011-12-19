@@ -11,8 +11,8 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.dao.EquipmentEventDao;
-import equipment.domain.entity.EquipmentEvent;
+import equipment.dao.MovementEventDao;
+import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.EventType;
 import equipment.utils.StringUtil;
 
@@ -20,18 +20,18 @@ import equipment.utils.StringUtil;
 @Scope("request")
 public class MovementEnquiryBean implements Serializable {
   private static final long serialVersionUID = -1522497061055049165L;
-  @Resource(name = "equipmentEventDao")
-  private EquipmentEventDao equipmentEventDao;
+  @Resource(name = "movementEventDao")
+  private MovementEventDao movementEventDao;
 
   private String containerNumber;
   private EventType eventType;
-  private EquipmentEventDataModel mediumEventsModel;
+  private MovementEventDataModel mediumEventsModel;
 
-  private List<EquipmentEvent> equipmentEvents;
-  private EquipmentEvent[] selectedEvents;
+  private List<MovementEvent> movementEvents;
+  private MovementEvent[] selectedEvents;
 
-  public List<EquipmentEvent> getEquipmentEvents() {
-    return equipmentEvents;
+  public List<MovementEvent> getMovementEvents() {
+    return movementEvents;
   }
 
   public EnumSet<EventType> getEventTypes() {
@@ -39,11 +39,11 @@ public class MovementEnquiryBean implements Serializable {
         EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
   }
   
-  public EquipmentEvent[] getSelectedEvents() {
+  public MovementEvent[] getSelectedEvents() {
     return selectedEvents;
   }
 
-  public void setSelectedEvents(EquipmentEvent[] selectedEvents) {
+  public void setSelectedEvents(MovementEvent[] selectedEvents) {
     this.selectedEvents = selectedEvents;
   }
 
@@ -63,11 +63,11 @@ public class MovementEnquiryBean implements Serializable {
     this.eventType = eventType;
   }
 
-  public EquipmentEventDataModel getMediumEventsModel() {
+  public MovementEventDataModel getMediumEventsModel() {
     return mediumEventsModel;
   }
 
-  public void setMediumEventsModel(EquipmentEventDataModel mediumEventsModel) {
+  public void setMediumEventsModel(MovementEventDataModel mediumEventsModel) {
     this.mediumEventsModel = mediumEventsModel;
   }
 
@@ -79,7 +79,7 @@ public class MovementEnquiryBean implements Serializable {
     if(eventType != null) {
       propertyNameValues.put("eventType", eventType);
     }
-    equipmentEvents = equipmentEventDao.findBy(propertyNameValues);
-    mediumEventsModel = new EquipmentEventDataModel(equipmentEvents);
+    movementEvents = movementEventDao.findBy(propertyNameValues);
+    mediumEventsModel = new MovementEventDataModel(movementEvents);
   }
 }

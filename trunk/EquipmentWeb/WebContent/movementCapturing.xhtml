@@ -7,12 +7,12 @@
       <h:panelGrid columns="4" columnClasses="column1, column2, column1, column2">
         <h:outputLabel value="Event Date:" />
         <h:panelGroup>
-          <p:calendar id="eventDate" widget="eventDate" value="#{movementCaptureBean.equipmentEvent.eventDateTimeLocal}"
+          <p:calendar id="eventDate" widget="eventDate" value="#{movementCaptureBean.incomingEvent.eventDateTimeLocal}"
             pattern="MM/dd/yyyy HH:mm" required="true"/>
         </h:panelGroup>
         <h:outputLabel value="Event Type:" />
         <h:panelGroup>
-          <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.eventType}">
+          <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.eventType}">
             <f:selectItems value="#{movementCaptureBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
               itemValue="#{_eventType}" />
           </p:selectOneMenu>
@@ -20,14 +20,14 @@
 
         <h:outputLabel value="Container Number:" />
         <h:panelGroup>
-          <p:inputText id="containerNumber" value="#{movementCaptureBean.equipmentEvent.containerNumber}" required="true">
+          <p:inputText id="containerNumber" value="#{movementCaptureBean.incomingEvent.containerNumber}" required="true">
             <f:validator validatorId="containerNumberValidator" />
             <p:ajax event="blur" update="messages" />
           </p:inputText>
         </h:panelGroup>
         <h:outputLabel value="Container Condition:" />
         <h:panelGroup>
-          <p:selectOneMenu id="containerCondition" value="#{movementCaptureBean.equipmentEvent.containerCondition}">
+          <p:selectOneMenu id="containerCondition" value="#{movementCaptureBean.incomingEvent.containerCondition}">
             <f:selectItems value="#{movementCaptureBean.equipmentConditions}" var="_condition" itemLabel="#{_condition.description}"
               itemValue="#{_condition}" />
           </p:selectOneMenu>
@@ -35,7 +35,7 @@
 
         <h:outputLabel value="Ladden/Empty:" />
         <h:panelGroup>
-          <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.loadEmptyIndicator}">
+          <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.loadEmptyIndicator}">
             <f:selectItems value="#{movementCaptureBean.loadEmptyIndicators}" var="_loadEmptyIndicator"
               itemLabel="#{_loadEmptyIndicator.description}" itemValue="#{_loadEmptyIndicator}" />
           </p:selectOneMenu>
@@ -43,7 +43,7 @@
 
         <h:outputLabel value="Hazard Indicator:" />
         <h:panelGroup>
-          <p:selectOneMenu value="#{movementCaptureBean.equipmentEvent.hazardIndicator}">
+          <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.hazardIndicator}">
             <f:selectItem itemValue="#{true}" itemLabel="Yes" />
             <f:selectItem itemValue="#{false}" itemLabel="No" />
           </p:selectOneMenu>
@@ -51,24 +51,24 @@
 
         <h:outputLabel value="Current Location:" />
         <h:panelGroup>
-          <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.equipmentEvent.facilityCode}"
+          <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.incomingEvent.facilityCode}"
             completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10"/>
         </h:panelGroup>
 
         <h:outputLabel for="nextLocation" value="Next Location:" />
         <h:panelGroup>
-          <p:autoComplete id="nextLocation" value="#{movementCaptureBean.equipmentEvent.nextLocation}" maxResults="10"
+          <p:autoComplete id="nextLocation" value="#{movementCaptureBean.incomingEvent.nextLocation}" maxResults="10"
             completeMethod="#{movementCaptureBean.completeFacility}" />
         </h:panelGroup>
 
         <h:outputLabel value="Document Reference:" />
         <h:panelGroup>
-          <p:inputText value="#{movementCaptureBean.equipmentEvent.documentReference}" />
+          <p:inputText value="#{movementCaptureBean.incomingEvent.documentReference}" />
         </h:panelGroup>
 
         <h:outputLabel value="Document Type:" />
         <h:panelGroup>
-          <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.documentType}">
+          <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.documentType}">
             <f:selectItem itemLabel="-" noSelectionOption="true" />
             <f:selectItems value="#{movementCaptureBean.documentTypes}" var="_documentType" itemLabel="#{_documentType.description}"
               itemValue="#{_documentType}" />
@@ -77,20 +77,20 @@
 
         <h:outputLabel value="Seal Number:" />
         <h:panelGroup>
-          <p:inputText value="#{movementCaptureBean.equipmentEvent.sealNumber}" />
+          <p:inputText value="#{movementCaptureBean.incomingEvent.sealNumber}" />
         </h:panelGroup>
 
         <h:outputLabel value="Seal Type:" />
         <h:panelGroup>
-          <p:inputText value="#{movementCaptureBean.equipmentEvent.sealType}" />
+          <p:inputText value="#{movementCaptureBean.incomingEvent.sealType}" />
         </h:panelGroup>
 
         <h:outputLabel value="Vsl/Voy/Dir:" />
         <h:panelGroup>
           <h:panelGrid columns="3">
-            <p:inputText value="#{movementCaptureBean.equipmentEvent.vesselCode}" size="2" />
-            <p:inputText value="#{movementCaptureBean.equipmentEvent.voyageNumber}" size="2" />
-            <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.directionBound}">
+            <p:inputText value="#{movementCaptureBean.incomingEvent.vesselCode}" size="2" />
+            <p:inputText value="#{movementCaptureBean.incomingEvent.voyageNumber}" size="2" />
+            <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.directionBound}">
               <f:selectItem itemLabel="-" noSelectionOption="true" />
               <f:selectItems value="#{movementCaptureBean.directions}" var="_direction" itemLabel="#{_direction.label}"
                 itemValue="#{_direction}" />
@@ -101,8 +101,8 @@
         <h:outputLabel for="spinnerBasic" value="Gross Weight:" />
         <h:panelGroup>
           <h:panelGrid columns="2">
-            <p:spinner id="spinnerBasic" size="8" value="#{movementCaptureBean.equipmentEvent.grossWeight}" stepFactor="0.25" />
-            <h:selectOneMenu value="#{movementCaptureBean.equipmentEvent.grossWeightUnit}">
+            <p:spinner id="spinnerBasic" size="8" value="#{movementCaptureBean.incomingEvent.grossWeight}" stepFactor="0.25" />
+            <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.grossWeightUnit}">
               <f:selectItems value="#{movementCaptureBean.weightUnits}" />
             </h:selectOneMenu>
           </h:panelGrid>
@@ -110,16 +110,16 @@
 
         <h:outputLabel value="Discharge Port:" />
         <h:panelGroup>
-          <p:inputText value="#{movementCaptureBean.equipmentEvent.dischargePort}" />
+          <p:inputText value="#{movementCaptureBean.incomingEvent.dischargePort}" />
         </h:panelGroup>
 
         <h:outputLabel value="Load Port:" />
         <h:panelGroup>
-          <p:inputText value="#{movementCaptureBean.equipmentEvent.loadPort}" />
+          <p:inputText value="#{movementCaptureBean.incomingEvent.loadPort}" />
         </h:panelGroup>
 
         <h:outputLabel value="Remarks:" />
-        <p:inputTextarea value="#{movementCaptureBean.equipmentEvent.remarks}" />
+        <p:inputTextarea value="#{movementCaptureBean.incomingEvent.remarks}" />
 
       </h:panelGrid>
       <p:commandButton value="Save" action="#{movementCaptureBean.save}" update="messages" />

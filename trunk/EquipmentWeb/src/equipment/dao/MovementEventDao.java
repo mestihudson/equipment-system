@@ -6,18 +6,18 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import equipment.domain.entity.EquipmentEvent;
+import equipment.domain.entity.MovementEvent;
 
-@Repository("equipmentEventDao")
-public class EquipmentEventDao extends AbstractBaseDao {
+@Repository("movementEventDao")
+public class MovementEventDao extends AbstractBaseDao {
   private final static String CNTR_NUM = "containerNumber";
 
   @Override
   public Class<?> getDomainClass() {
-    return EquipmentEvent.class;
+    return MovementEvent.class;
   }
 
-  public List<EquipmentEvent> findByContainerNumber(String containerNumber) {
+  public List<MovementEvent> findByContainerNumber(String containerNumber) {
     Map<String, Object> nameValue = new HashMap<String, Object>();
     nameValue.put(CNTR_NUM, containerNumber);
     return findBy(nameValue);
