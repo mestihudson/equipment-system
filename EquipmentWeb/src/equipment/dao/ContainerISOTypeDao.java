@@ -2,14 +2,13 @@ package equipment.dao;
 
 import org.springframework.stereotype.Repository;
 
-import equipment.domain.entity.Container;
-
+import equipment.domain.entity.ContainerISOType;
 @Repository("containerDao")
-public class ContainerDao extends AbstractBaseDao {
+public class ContainerISOTypeDao extends AbstractBaseDao {
 
   @Override
   public Class<?> getDomainClass() {
-    return Container.class;
+    return ContainerISOType.class;
   }
 
 }
