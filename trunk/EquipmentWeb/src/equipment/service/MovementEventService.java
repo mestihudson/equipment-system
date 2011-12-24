@@ -1,6 +1,10 @@
 package equipment.service;
 
-import equipment.dao.IBaseDao;
+import java.util.Collection;
 
-public interface MovementEventService extends IBaseDao {
+import equipment.domain.entity.MovementEvent;
+
+public interface MovementEventService {
+  Collection<MovementEvent> findByContainerNumber(String containerNumber);
+  void deleteEvents(Collection<MovementEvent> events);
 }
