@@ -3,21 +3,28 @@ package equipment.web.jsf.mbean;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import equipment.service.ContainerIsoTypeService;
 
 @Component("sizeTypeBean")
 @Scope("request")
 public class SizeTypeBean implements Serializable{
   private static final long serialVersionUID = 2458463346642161595L;
-  private HashMap<String, String> sizeTypeGroup;
+  
+  @Resource(name="containerIsoTypeService")
+  private ContainerIsoTypeService containerIsoTypeService;
 
-  public List<String> getSizeTypeGroups() {
-    return null;
+  public Set<String> getSizeTypeGroups() {
+    return null;//containerIsoTypeService.getAllGroupCodes();
   }
   
-  public List<String> getIsoCodes() {
-    return null;
+  public Set<String> getIsoCodes() {
+    return null;//containerIsoTypeService.getAllIsoCodes();
   }
 }

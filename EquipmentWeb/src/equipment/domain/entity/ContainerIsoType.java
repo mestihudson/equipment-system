@@ -1,11 +1,15 @@
 package equipment.domain.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity(name = "CNTR_ISO_TYPE")
-public class ContainerISOType {
+public class ContainerIsoType implements Serializable{
+  private static final long serialVersionUID = -7019881277304361575L;
+
   @Id
   @Column(name="ISO_CDE")
   private String isoCode;
