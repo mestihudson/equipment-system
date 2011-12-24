@@ -10,6 +10,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -30,6 +31,10 @@ abstract class AbstractBaseDao {
 
   public Criteria createCriteria() {
     return getCurrentSession().createCriteria(getDomainClass());
+  }
+  
+  public void update(Object o) {
+    getCurrentSession().update(o);
   }
   
   public void save(Object o) {
