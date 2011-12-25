@@ -1,10 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/25 15:52:23                          */
+/* Created on:     2011/12/25 16:44:09                          */
 /*==============================================================*/
 
 
-drop table if exists dbeqp.eqmt_event_associtation;
+drop table if exists dbeqp.eqmt_event_association;
 
 /*==============================================================*/
 /* Table: CNTR_ISO_TYPE                                         */
@@ -45,6 +45,7 @@ create table dbeqp.EQMT_EVENT_ASSOCIATION
    EVENT_TYPE           char(2),
    EQMT_TYPE_GRP_CDE    char(4),
    EQMT_TYPE_CDE        char(4),
+   MATERIAL             varchar(20),
    primary key (EVENT_TIMESTAMP)
 );
 
