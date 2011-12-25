@@ -1,24 +1,21 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/11 15:32:09                          */
+/* Created on:     2011/12/25 15:52:23                          */
 /*==============================================================*/
 
 
-drop table if exists dbeqp.CONTAINER;
+drop table if exists dbeqp.eqmt_event_associtation;
 
-drop table if exists dbeqp.EQP_EVENT_LOG;
-
-drop table if exists dbeqp.EQP_LATEST_INFO;
-
-drop table if exists dbeqp.EQP_REJECTION;
-
-drop table if exists dbeqp.EQP_SUPPLY_HIERARCHY;
-
-drop table if exists dbeqp.GSP_CITY;
-
-drop table if exists dbeqp.GSP_FACILITY;
-
-drop table if exists dbeqp.GSP_OFFICE;
+/*==============================================================*/
+/* Table: CNTR_ISO_TYPE                                         */
+/*==============================================================*/
+create table dbeqp.CNTR_ISO_TYPE
+(
+   ISO_CDE              char(4) not null,
+   GROUP_CDE            char(4),
+   DESCRIPTION          varchar(50),
+   primary key (ISO_CDE)
+);
 
 /*==============================================================*/
 /* Table: CONTAINER                                             */
@@ -33,6 +30,22 @@ create table dbeqp.CONTAINER
    CREATE_DT            timestamp,
    UPDATE_DT            timestamp,
    primary key (EQMT_NUM)
+);
+
+/*==============================================================*/
+/* Table: EQMT_EVENT_ASSOCIATION                                */
+/*==============================================================*/
+create table dbeqp.EQMT_EVENT_ASSOCIATION
+(
+   EVENT_TIMESTAMP      char(32) not null,
+   EQMT_NUM             varchar(10),
+   SEQ_NUM              int,
+   LOC                  char(5),
+   EVENT_DT_LOC         datetime,
+   EVENT_TYPE           char(2),
+   EQMT_TYPE_GRP_CDE    char(4),
+   EQMT_TYPE_CDE        char(4),
+   primary key (EVENT_TIMESTAMP)
 );
 
 /*==============================================================*/
@@ -143,6 +156,9 @@ create table dbeqp.GSP_OFFICE
    REC_UPD_DT           char(10),
    primary key (CODE)
 );
+
+alter table dbeqp.EQMT_EVENT_ASSOCIATION add constraint FK_Reference_4 foreign key (LOC)
+      references dbeqp.EQP_SUPPLY_HIERARCHY (FACILITY) on delete restrict on update restrict;
 
 alter table dbeqp.EQP_EVENT_LOG add constraint FK_Reference_3 foreign key (FCIL_CDE)
       references dbeqp.EQP_SUPPLY_HIERARCHY (FACILITY) on delete restrict on update restrict;
