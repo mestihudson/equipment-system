@@ -11,17 +11,17 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.dao.MovementEventDao;
 import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.EventType;
+import equipment.service.MovementEventService;
 import equipment.utils.StringUtil;
 
-@Component("movementEnquiryBean")
+@Component("movementEventEditingBean")
 @Scope("request")
-public class MovementEnquiryBean implements Serializable {
+public class MovementEventEditingBean implements Serializable {
   private static final long serialVersionUID = -1522497061055049165L;
-  @Resource(name = "movementEventDao")
-  private MovementEventDao movementEventDao;
+  @Resource(name = "movementEventService")
+  private MovementEventService movementEventService;
 
   private String containerNumber;
   private EventType eventType;
@@ -38,7 +38,7 @@ public class MovementEnquiryBean implements Serializable {
     return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
         EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
   }
-  
+
   public MovementEvent[] getSelectedEvents() {
     return selectedEvents;
   }
@@ -72,14 +72,16 @@ public class MovementEnquiryBean implements Serializable {
   }
 
   public void search() {
-    Map<String, Object> propertyNameValues = new HashMap<String, Object>();
-    if(StringUtil.isNotNullAndNotEmptyWithTrim(containerNumber)) {
-      propertyNameValues.put("containerNumber", containerNumber);
-    }
-    if(eventType != null) {
-      propertyNameValues.put("eventType", eventType);
-    }
-    movementEvents = movementEventDao.findBy(propertyNameValues);
+    // Map<String, Object> propertyNameValues = new HashMap<String, Object>();
+    // if(StringUtil.isNotNullAndNotEmptyWithTrim(containerNumber)) {
+    // propertyNameValues.put("containerNumber", containerNumber);
+    // }
+    // if(eventType != null) {
+    // propertyNameValues.put("eventType", eventType);
+    // }
+    // movementEvents = movementEventDao.findBy(propertyNameValues);
+    // mediumEventsModel = new MovementEventDataModel(movementEvents);
+    movementEventService.findByContainerNumber(containerNumber);
     mediumEventsModel = new MovementEventDataModel(movementEvents);
   }
 }

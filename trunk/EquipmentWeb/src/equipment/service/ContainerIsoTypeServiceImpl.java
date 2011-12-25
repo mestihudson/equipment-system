@@ -36,7 +36,7 @@ public class ContainerIsoTypeServiceImpl implements ContainerIsoTypeService, Ini
 
   @Override
   public Set<String> getAllGroupCodes() {
-    Set<String> groupCodes = new TreeSet<>();
+    Set<String> groupCodes = new TreeSet<String>();
     for (ContainerIsoType type : isoGroupMaps.values()) {
       groupCodes.add(type.getGroupCode());
     }

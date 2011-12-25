@@ -1,5 +1,6 @@
 package equipment.domain.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -22,9 +23,11 @@ import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
 
 @Entity(name = "EQP_EVENT_LOG")
-public class MovementEvent {
+public class MovementEvent implements Serializable{
 
-	@Id
+  private static final long serialVersionUID = -321023715030025820L;
+
+  @Id
 	@GenericGenerator(name="idGenerator", strategy="uuid")
 	@GeneratedValue(generator="idGenerator")
 	@Column(name = "EVENT_TIMESTAMP")

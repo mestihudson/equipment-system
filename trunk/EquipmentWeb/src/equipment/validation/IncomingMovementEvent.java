@@ -2,11 +2,13 @@ package equipment.validation;
 
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.EquipmentCondition;
+import equipment.domain.enums.EventType;
 import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
 
 public class IncomingMovementEvent extends IncomingEvent {
   private static final long serialVersionUID = 1185169475757708326L;
+  private EventType eventType;
   private String sealNumber;
   private String sealType;
   private String containerGroupCode;
@@ -30,6 +32,12 @@ public class IncomingMovementEvent extends IncomingEvent {
   private String nature;
   private String containerCheckDigit;
   private String updateUser;
+  public EventType getEventType() {
+    return eventType;
+  }
+  public void setEventType(EventType eventType) {
+    this.eventType = eventType;
+  }
   public String getSealNumber() {
     return sealNumber;
   }

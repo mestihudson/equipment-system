@@ -1,8 +1,6 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -21,10 +19,10 @@ public class SizeTypeBean implements Serializable{
   private ContainerIsoTypeService containerIsoTypeService;
 
   public Set<String> getSizeTypeGroups() {
-    return null;//containerIsoTypeService.getAllGroupCodes();
+    return containerIsoTypeService.getAllGroupCodes();
   }
   
   public Set<String> getIsoCodes() {
-    return null;//containerIsoTypeService.getAllIsoCodes();
+    return containerIsoTypeService.getAllIsoCodes();
   }
 }

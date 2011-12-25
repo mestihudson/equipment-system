@@ -41,10 +41,12 @@
           <p:inputText value="#{equipmentCTBean.referenceNumber}"/>
           <h:outputLabel value="Size Type Group:" />
           <p:selectOneMenu id="sizeTypeGroup" value="#{equipmentCTBean.sizeTypeGroup}">
+            <f:selectItem noSelectionOption="true" itemLabel="-"/>
             <f:selectItems value="#{sizeTypeBean.sizeTypeGroups}" var="_sizeTypeGroup" />
           </p:selectOneMenu>
           <h:outputLabel value="ISO Code:" />
           <p:selectOneMenu id="isoCode" value="#{equipmentCTBean.isoCode}">
+            <f:selectItem noSelectionOption="true" itemLabel="-"/>
             <f:selectItems value="#{sizeTypeBean.isoCodes}" var="_isoCode" />
           </p:selectOneMenu>
           <h:outputLabel value="Material Type:" />

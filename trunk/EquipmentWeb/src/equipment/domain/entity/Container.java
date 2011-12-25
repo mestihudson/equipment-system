@@ -1,17 +1,18 @@
 package equipment.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity(name = "CONTAINER")
-public class Container {
-	@Id
+public class Container implements Serializable{
+  private static final long serialVersionUID = 3003213004295156000L;
+
+  @Id
 	@Column(name="EQMT_NUM")
 	private String equipmentNumber;
 	
