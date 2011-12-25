@@ -1,0 +1,35 @@
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <ui:define name="title">Movement Enquiry</ui:define>
+  <ui:define name="content">
+    <h:form>
+      <p:growl id="messages" />
+      <h:panelGrid columns="1">
+        <h:panelGroup>
+          <h:outputLabel>Container Number:</h:outputLabel>
+          <p:inputText id="containerNumber" value="#{equipmentEnquiryBean.containerNumber}">
+          </p:inputText>
+
+          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" />
+        </h:panelGroup>
+        <h:panelGrid columns="6">
+          <h:outputLabel>Size/Type:</h:outputLabel>
+          <p:inputText readonly="true" value="20GP"></p:inputText>
+          <h:outputLabel>Size/Type:</h:outputLabel>
+          <p:inputText readonly="true" value="21GP"></p:inputText>
+          <h:outputLabel>Size/Type:</h:outputLabel>
+          <p:inputText readonly="true" value="22GP"></p:inputText>
+          <h:outputLabel>Size/Type:</h:outputLabel>
+          <p:inputText readonly="true" value="24GP"></p:inputText>
+        </h:panelGrid>
+        <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="row">
+          <p:column>
+            <f:facet name="header">Container Number</f:facet>
+          <h:outputLabel value="#{row}" />
+          </p:column>
+        </p:dataTable>
+      </h:panelGrid>
+    </h:form>
+  </ui:define>
+</ui:composition>
