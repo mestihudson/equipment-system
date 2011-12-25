@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/25 16:44:09                          */
+/* Created on:     2011/12/25 16:47:52                          */
 /*==============================================================*/
 
 
@@ -46,6 +46,8 @@ create table dbeqp.EQMT_EVENT_ASSOCIATION
    EQMT_TYPE_GRP_CDE    char(4),
    EQMT_TYPE_CDE        char(4),
    MATERIAL             varchar(20),
+   UPD_USER             varchar(16),
+   REC_UPD_DT           datetime,
    primary key (EVENT_TIMESTAMP)
 );
 
