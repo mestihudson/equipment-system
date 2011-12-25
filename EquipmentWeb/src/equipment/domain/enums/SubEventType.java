@@ -1,5 +1,8 @@
 package equipment.domain.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public enum SubEventType {
   ON_HIRE("02", "On hire"),
@@ -31,5 +34,17 @@ public enum SubEventType {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  private static Map<String, SubEventType> subEventTypes = new HashMap<String, SubEventType>();
+  
+  static {
+    for (SubEventType subEventType : SubEventType.values()) {
+      subEventTypes.put(subEventType.getCode(), subEventType);
+    }
+  }
+
+  public static SubEventType getSubEventTypeForCode(String code) {
+    return subEventTypes.get(code);
   }
 }

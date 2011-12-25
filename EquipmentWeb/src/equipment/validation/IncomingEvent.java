@@ -9,20 +9,15 @@ public abstract class IncomingEvent implements Serializable{
   private static final long serialVersionUID = -476649668008487830L;
   
   private String equipmentNumber;
-  private EventType eventType;
   private String facilityCode;
   private Date eventDateTime;
+  private String updateUser;
+  
   public String getEquipmentNumber() {
     return equipmentNumber;
   }
   public void setEquipmentNumber(String equipmentNumber) {
     this.equipmentNumber = equipmentNumber;
-  }
-  public EventType getEventType() {
-    return eventType;
-  }
-  public void setEventType(EventType eventType) {
-    this.eventType = eventType;
   }
   public String getFacilityCode() {
     return facilityCode;
@@ -35,6 +30,12 @@ public abstract class IncomingEvent implements Serializable{
   }
   public void setEventDateTime(Date eventDateTime) {
     this.eventDateTime = eventDateTime;
+  }
+  public String getUpdateUser() {
+    return updateUser;
+  }
+  public void setUpdateUser(String updateUser) {
+    this.updateUser = updateUser;
   }
   
 }

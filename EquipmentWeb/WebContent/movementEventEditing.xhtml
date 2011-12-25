@@ -7,17 +7,17 @@
       <h:panelGrid columns="1">
         <h:panelGroup>
             <h:outputLabel>Container Number:</h:outputLabel>
-            <p:inputText id="containerNumber" value="#{movementEnquiryBean.containerNumber}">
+            <p:inputText id="containerNumber" value="#{MovementEventEditingBean.containerNumber}">
               <f:validator validatorId="containerNumberValidator" />
               <p:ajax event="blur" update="messages" />
             </p:inputText>
 
             <h:outputLabel>Event Type:</h:outputLabel>
-            <h:selectOneMenu value="#{movementEnquiryBean.eventType}">
+            <h:selectOneMenu value="#{MovementEventEditingBean.eventType}">
               <f:selectItem itemLabel="-" noSelectionOption="true"/>
               <f:selectItems value="#{EventType.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
                 itemValue="#{_eventType}" /></h:selectOneMenu>
-            <p:commandButton value="Search" action="#{movementEnquiryBean.search}" update="eventDataTable" />
+            <p:commandButton value="Search" action="#{MovementEventEditingBean.search}" update="eventDataTable" />
           </h:panelGroup>
         <ui:include src="movementResultTable.xhtml"/>
 

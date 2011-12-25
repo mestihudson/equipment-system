@@ -13,9 +13,13 @@ import org.springframework.stereotype.Component;
 
 import equipment.domain.enums.EventType;
 import equipment.domain.enums.SubEventType;
+import equipment.domain.enums.ValidationType;
 import equipment.domain.objects.CheckedContainerNumber;
 import equipment.service.ContainerService;
+import equipment.service.EventValidationService;
 import equipment.utils.StringUtil;
+import equipment.validation.IncomingEquipmentEvent;
+import equipment.validation.IncomingEvent;
 
 @Component("equipmentCTBean")
 @Scope("view")
@@ -32,14 +36,39 @@ public class EquipmentCreationTerminationBean implements Serializable {
   private String isoCode;
   private String referenceNumber;
   private String materialType;
-  
+
   @Resource(name = "containerService")
   private ContainerService containerService;
+
+  @Resource(name = "eventValidationService")
+  private EventValidationService eventValidationService;
+
+  public void addContainer() {
+    if (StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
+      return;
+    }
+    if (containerCheckDigit == 0) {
+      return;
+    }
+    checkedContainerNumbers.add(new CheckedContainerNumber(this.containerNumber, this.containerCheckDigit));
+  }
+
+  public EnumSet<SubEventType> getSubEventTypes() {
+    return EnumSet.of(SubEventType.ON_HIRE, SubEventType.PURCHASE, SubEventType.SOC);
+  }
 
   public char calculateCheckDigit(String containerNumber) {
     return containerService.calculateCheckDigit(containerNumber);
   }
 
+  public void save() {
+    eventValidationService.validateEvent(getIncomingEvent(), ValidationType.CREATION);
+  }
+
+  private IncomingEvent getIncomingEvent() {
+    return new IncomingEquipmentEvent();
+  }
+  
   public String getContainerNumber() {
     return containerNumber;
   }
@@ -62,24 +91,6 @@ public class EquipmentCreationTerminationBean implements Serializable {
 
   public void setCheckedContainerNumbers(Set<CheckedContainerNumber> checkedContainerNumbers) {
     this.checkedContainerNumbers = checkedContainerNumbers;
-  }
-
-  public void addContainer() {
-    if (StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
-      return;
-    }
-    if (containerCheckDigit == 0) {
-      return;
-    }
-    checkedContainerNumbers.add(new CheckedContainerNumber(this.containerNumber, this.containerCheckDigit));
-  }
-
-  public EnumSet<SubEventType> getSubEventTypes() {
-    return EnumSet.of(SubEventType.ON_HIRE, SubEventType.PURCHASE, SubEventType.SOC);
-  }
-  public EnumSet<EventType> getEventTypes() {
-    return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
-        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
   }
 
   public SubEventType getSelectedSubEventType() {
