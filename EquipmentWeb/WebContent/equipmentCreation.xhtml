@@ -13,22 +13,7 @@
                 itemValue="#{_subEventType}" />
             </p:selectOneMenu>
           </h:panelGrid>
-          <p:panel>
-            <h:panelGrid columns="2">
-              <h:outputLabel value="Container No." />
-              <p:inputText value="#{equipmentCTBean.containerNumber}" size="10" />
-              <h:outputLabel value="Check digit" />
-              <p:inputText id="checkDigit" size="1" value="#{equipmentCTBean.containerCheckDigit}" />
-              <h:panelGrid columns="1">
-                <p:commandButton value="add" actionListener="#{equipmentCTBean.addContainer}" update="containerNumberList" />
-                <p:commandButton value="remove" />
-              </h:panelGrid>
-              <p:selectOneListbox id="containerNumberList" converter="checkedContainerNumberConverter" style="height:100px">
-                <f:selectItems value="#{equipmentCTBean.checkedContainerNumbers}" var="_checkedContainerNumber"
-                  itemLabel="#{_checkedContainerNumber.outputString}" itemValue="#{_checkedContainerNumber}" />
-              </p:selectOneListbox>
-            </h:panelGrid>
-          </p:panel>
+          <ui:include src="/composition/containerBatchPanel.xhtml" />
         </h:panelGroup>
         <h:panelGrid columns="2">
           <h:outputLabel value="Activity Date:" />
