@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/26 20:40:09                          */
+/* Created on:     2011/12/26 20:44:49                          */
 /*==============================================================*/
 
 
@@ -99,7 +99,7 @@ create table dbeqp.EQP_LATEST_INFO
    EVENT_TYPE           char(2) not null,
    ISO_CDE              char(4),
    GROUP_CDE            char(4),
-   STATE                char(4),
+   STATE                char(2),
    CURR_LOCA            char(5),
    NEXT_LOCA            char(5),
    SVC_LOOP             varchar(4),
