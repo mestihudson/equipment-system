@@ -40,14 +40,15 @@
           <h:outputLabel value="Authorization No.:" />
           <p:inputText value="#{equipmentCTBean.referenceNumber}"/>
           <h:outputLabel value="Size Type Group:" />
-          <p:selectOneMenu id="sizeTypeGroup" value="#{equipmentCTBean.sizeTypeGroup}">
-            <f:selectItem noSelectionOption="true" itemLabel="-"/>
-            <f:selectItems value="#{sizeTypeBean.sizeTypeGroups}" var="_sizeTypeGroup" />
+          <p:selectOneMenu id="groupCode" value="#{equipmentCTBean.groupCode}">
+            <f:selectItems value="#{equipmentCTBean.groupCodes}" var="_groupCode" />
+            <p:ajax event="change" update="isoCode"/>
           </p:selectOneMenu>
           <h:outputLabel value="ISO Code:" />
           <p:selectOneMenu id="isoCode" value="#{equipmentCTBean.isoCode}">
             <f:selectItem noSelectionOption="true" itemLabel="-"/>
-            <f:selectItems value="#{sizeTypeBean.isoCodes}" var="_isoCode" />
+            <f:selectItems value="#{equipmentCTBean.isoCodes}" var="_isoCode" />
+            <p:ajax event="change" update="groupCode"/>
           </p:selectOneMenu>
           <h:outputLabel value="Material Type:" />
           <p:selectOneMenu id="materialType" value="#{equipmentCTBean.materialType}">

@@ -2,6 +2,7 @@ package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ import equipment.service.FacilityService;
 @Scope("request")
 public class HierarchyBean implements Serializable {
   private static final long serialVersionUID = -5650490585039961293L;
-  private List<SupplyHierarchy> supplyHierarchies;
+  private Collection<SupplyHierarchy> supplyHierarchies;
   
   @Resource(name = "equipmentSupplyHierarchyDao")
   private SupplyHierarchyDao equipmentSupplyHierarchyDao;
@@ -27,7 +28,7 @@ public class HierarchyBean implements Serializable {
   @Resource(name = "facilityService")
   private FacilityService facilityService;
 
-  public List<SupplyHierarchy> getSupplyHierarchies() {
+  public Collection<SupplyHierarchy> getSupplyHierarchies() {
     if(supplyHierarchies == null) {
       supplyHierarchies = equipmentSupplyHierarchyDao.findAll();
     }
