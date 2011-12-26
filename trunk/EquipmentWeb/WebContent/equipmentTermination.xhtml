@@ -5,24 +5,20 @@
     <h:form id="equipmentCreation">
       <p:messages id="messages" showDetail="true" showSummary="false" />
       <h:panelGrid columns="2" width="95%">
-        <h:panelGroup>
-          <h:panelGrid columns="2">
-            <h:outputLabel value="Event Type:" />
-            <p:selectOneMenu value="#{equipmentCTBean.selectedSubEventType}">
-              <f:selectItems value="#{equipmentCTBean.subEventTypes}" var="_subEventType" itemLabel="#{_subEventType.description}"
-                itemValue="#{_subEventType}" />
-            </p:selectOneMenu>
-          </h:panelGrid>
-          <ui:include src="/composition/containerBatchPanel.xhtml" />
-        </h:panelGroup>
+        <ui:include src="/composition/containerBatchPanel.xhtml" />
         <h:panelGrid columns="2">
+          <h:outputLabel value="Event Type:" />
+          <p:selectOneMenu value="#{equipmentCTBean.selectedSubEventType}">
+            <f:selectItems value="#{equipmentCTBean.subEventTypesForTermination}" var="_subEventType" itemLabel="#{_subEventType.description}"
+              itemValue="#{_subEventType}" />
+          </p:selectOneMenu>
           <h:outputLabel value="Activity Date:" />
           <p:calendar id="eventDate" widget="eventDate" value="#{equipmentCTBean.activityDateTime}" pattern="MM/dd/yyyy HH:mm"
             required="true" />
           <h:outputLabel value="Facility Code:" />
           <p:autoComplete id="facilityCode" required="true" value="#{equipmentCTBean.facilityCode}"
             completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10" />
-          
+
         </h:panelGrid>
       </h:panelGrid>
       <p:commandButton value="Save" update="messages" />
