@@ -1,0 +1,31 @@
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <ui:define name="title">Equipment Creation</ui:define>
+  <ui:define name="content">
+    <h:form id="equipmentCreation">
+      <p:messages id="messages" showDetail="true" showSummary="false" />
+      <h:panelGrid columns="2" width="95%">
+        <h:panelGroup>
+          <h:panelGrid columns="2">
+            <h:outputLabel value="Event Type:" />
+            <p:selectOneMenu value="#{equipmentCTBean.selectedSubEventType}">
+              <f:selectItems value="#{equipmentCTBean.subEventTypes}" var="_subEventType" itemLabel="#{_subEventType.description}"
+                itemValue="#{_subEventType}" />
+            </p:selectOneMenu>
+          </h:panelGrid>
+          <ui:include src="/composition/containerBatchPanel.xhtml" />
+        </h:panelGroup>
+        <h:panelGrid columns="2">
+          <h:outputLabel value="Activity Date:" />
+          <p:calendar id="eventDate" widget="eventDate" value="#{equipmentCTBean.activityDateTime}" pattern="MM/dd/yyyy HH:mm"
+            required="true" />
+          <h:outputLabel value="Facility Code:" />
+          <p:autoComplete id="facilityCode" required="true" value="#{equipmentCTBean.facilityCode}"
+            completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10" />
+          
+        </h:panelGrid>
+      </h:panelGrid>
+      <p:commandButton value="Save" update="messages" />
+    </h:form>
+  </ui:define>
+</ui:composition>
