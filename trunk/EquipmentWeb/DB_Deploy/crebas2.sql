@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/26 20:33:48                          */
+/* Created on:     2011/12/26 20:40:09                          */
 /*==============================================================*/
 
 
@@ -111,6 +111,7 @@ create table dbeqp.EQP_LATEST_INFO
    DOC_TYPE             char(2),
    LOAD_PORT            char(3),
    DSGH_PORT            char(3),
+   UPD_USER             varchar(16),
    REC_UPD_DT           datetime,
    primary key (EQMT_NUM)
 );
