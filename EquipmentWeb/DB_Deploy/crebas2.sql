@@ -1,10 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/25 16:47:52                          */
+/* Created on:     2011/12/26 20:33:48                          */
 /*==============================================================*/
 
 
-drop table if exists dbeqp.eqmt_event_association;
+drop table if exists dbeqp.eqp_latest_info;
 
 /*==============================================================*/
 /* Table: CNTR_ISO_TYPE                                         */
@@ -97,6 +97,20 @@ create table dbeqp.EQP_LATEST_INFO
    EQMT_NUM             varchar(10) not null,
    EQMT_TYPE            CHAR(1) not null,
    EVENT_TYPE           char(2) not null,
+   ISO_CDE              char(4),
+   GROUP_CDE            char(4),
+   STATE                char(4),
+   CURR_LOCA            char(5),
+   NEXT_LOCA            char(5),
+   SVC_LOOP             varchar(4),
+   VSL_CDE              varchar(3),
+   VOY_NUM              varchar(3),
+   DIR_BOUND            varchar(5),
+   CONTRA_ACTION        char(1),
+   DOC_REF              varchar(12),
+   DOC_TYPE             char(2),
+   LOAD_PORT            char(3),
+   DSGH_PORT            char(3),
    REC_UPD_DT           datetime,
    primary key (EQMT_NUM)
 );

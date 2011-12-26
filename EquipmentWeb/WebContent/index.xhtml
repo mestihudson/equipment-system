@@ -9,9 +9,9 @@
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/defaultStyle.css" />
   </h:head>
   <h:body>
-    <p:layout style="min-width:400px;min-height:768px;" id="layout">
+    <p:layout id="layout" fullPage="true">
       <p:layoutUnit position="north" resizable="true" size="100" minSize="40" maxSize="200">
-        <h:outputText value="Welcome to Equipment movement tracing System"></h:outputText>
+        <h:outputText value="Welcome to Equipment Movement Tracing System"></h:outputText>
       </p:layoutUnit>
 
       <p:layoutUnit position="west" resizable="true" size="400" minSize="40" maxSize="200">
@@ -26,7 +26,7 @@
             </p:submenu>
             <p:submenu label="Equipment">
               <p:menuitem value="Creation" target="main" url="equipmentCreation.xhtml"/>
-              <p:menuitem value="Termination" target="main"/>
+              <p:menuitem value="Termination" target="main" url="equipmentTermination.xhtml"/>
               <p:menuitem value="Undo" target="main"/>
             </p:submenu>
             <p:submenu label="Basic Data Setting">
