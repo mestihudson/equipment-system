@@ -1,7 +1,7 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 
 import javax.annotation.Resource;
 
@@ -19,7 +19,7 @@ public class PanBean implements Serializable {
   private PanDao panDao;
   
 
-  public List<Pan> getTask() {
+  public Collection<Pan> getTask() {
     return panDao.findAll();
   }
   

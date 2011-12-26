@@ -1,13 +1,13 @@
 package equipment.service;
 
-import java.util.Set;
+import java.util.Collection;
 
 import equipment.domain.entity.ContainerIsoType;
 
 public interface ContainerIsoTypeService {
-  Set<String> getAllIsoCodes();
-  Set<String> getAllGroupCodes();
-  String getGroupByIso();
-  Set<String> getIsoByGroup();
-  Set<ContainerIsoType> getAll();
+  Collection<String> getAllIsoCodes();
+  Collection<String> getAllGroupCodes();
+  String getGroupByIso(String isoCode);
+  Collection<String> getIsoByGroup(String groupCode);
+  Collection<ContainerIsoType> getAll();
 }

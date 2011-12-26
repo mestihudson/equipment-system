@@ -1,7 +1,8 @@
 package equipment.service;
 
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -23,19 +24,19 @@ public class ContainerIsoTypeServiceImpl implements ContainerIsoTypeService, Ini
 
   @Override
   public void afterPropertiesSet() throws Exception {
-    List<ContainerIsoType> types = containerIsoTypeDao.findAll();
+    Collection<ContainerIsoType> types = containerIsoTypeDao.findAll();
     for (ContainerIsoType type : types) {
       isoGroupMaps.put(type.getIsoCode(), type);
     }
   }
 
   @Override
-  public Set<String> getAllIsoCodes() {
+  public Collection<String> getAllIsoCodes() {
     return isoGroupMaps.keySet();
   }
 
   @Override
-  public Set<String> getAllGroupCodes() {
+  public Collection<String> getAllGroupCodes() {
     Set<String> groupCodes = new TreeSet<String>();
     for (ContainerIsoType type : isoGroupMaps.values()) {
       groupCodes.add(type.getGroupCode());
@@ -44,21 +45,28 @@ public class ContainerIsoTypeServiceImpl implements ContainerIsoTypeService, Ini
   }
 
   @Override
-  public String getGroupByIso() {
-    // TODO Auto-generated method stub
-    return null;
+  public String getGroupByIso(String isoCode) {
+    if(isoGroupMaps.containsKey(isoCode)) {
+      return isoGroupMaps.get(isoCode).getGroupCode();
+    } else {
+      return null;
+    }
   }
 
   @Override
-  public Set<String> getIsoByGroup() {
-    // TODO Auto-generated method stub
-    return null;
+  public Collection<String> getIsoByGroup(String groupCode) {
+    Set<String> isoCodes = new TreeSet<String>();
+    for(Entry<String, ContainerIsoType> entry:isoGroupMaps.entrySet()) {
+      if(entry.getValue().getGroupCode().equals(groupCode)) {
+        isoCodes.add(entry.getKey());
+      }
+    }
+    return isoCodes;
   }
 
   @Override
-  public Set<ContainerIsoType> getAll() {
-    // TODO Auto-generated method stub
-    return null;
+  public Collection<ContainerIsoType> getAll() {
+    return containerIsoTypeDao.findAll();
   }
 
 }

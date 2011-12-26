@@ -1,20 +1,23 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.TreeSet;
 
 import javax.annotation.Resource;
+import javax.faces.model.SelectItem;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.domain.enums.EventType;
 import equipment.domain.enums.SubEventType;
 import equipment.domain.enums.ValidationType;
 import equipment.domain.objects.CheckedContainerNumber;
+import equipment.service.ContainerIsoTypeService;
 import equipment.service.ContainerService;
 import equipment.service.EventValidationService;
 import equipment.utils.StringUtil;
@@ -32,13 +35,16 @@ public class EquipmentCreationTerminationBean implements Serializable {
   private SubEventType selectedSubEventType;
   private Date activityDateTime;
   private String facilityCode;
-  private String sizeTypeGroup;
+  private String groupCode;
   private String isoCode;
   private String referenceNumber;
   private String materialType;
 
   @Resource(name = "containerService")
   private ContainerService containerService;
+
+  @Resource(name = "containerIsoTypeService")
+  private ContainerIsoTypeService containerIsoTypeService;
 
   @Resource(name = "eventValidationService")
   private EventValidationService eventValidationService;
@@ -68,7 +74,36 @@ public class EquipmentCreationTerminationBean implements Serializable {
   private IncomingEvent getIncomingEvent() {
     return new IncomingEquipmentEvent();
   }
+
+  public Collection<SelectItem> getGroupCodes(){
+    Collection<SelectItem> selectItems = new ArrayList<SelectItem>();
+    if (StringUtil.isNullOrEmptyWithTrim(isoCode)) {
+      selectItems.add(new SelectItem("-","-",null,false,false,true));
+      for(String groupCode : containerIsoTypeService.getAllGroupCodes()) {
+        selectItems.add(new SelectItem(groupCode));
+      }
+    } else {
+      selectItems.add(new SelectItem(containerIsoTypeService.getGroupByIso(isoCode)));
+    }
+    return selectItems;
+  }
   
+//  public Collection<String> getGroupCodes() {
+//    if (StringUtil.isNullOrEmptyWithTrim(isoCode)) {
+//      return containerIsoTypeService.getAllGroupCodes();
+//    } else {
+//      return Arrays.asList(containerIsoTypeService.getGroupByIso(isoCode));
+//    }
+//  }
+
+  public Collection<String> getIsoCodes() {
+    if (StringUtil.isNullOrEmptyWithTrim(groupCode)) {
+      return containerIsoTypeService.getAllIsoCodes();
+    } else {
+      return containerIsoTypeService.getIsoByGroup(groupCode);
+    }
+  }
+
   public String getContainerNumber() {
     return containerNumber;
   }
@@ -117,14 +152,6 @@ public class EquipmentCreationTerminationBean implements Serializable {
     this.facilityCode = facilityCode;
   }
 
-  public String getSizeTypeGroup() {
-    return sizeTypeGroup;
-  }
-
-  public void setSizeTypeGroup(String sizeTypeGroup) {
-    this.sizeTypeGroup = sizeTypeGroup;
-  }
-
   public String getIsoCode() {
     return isoCode;
   }
@@ -147,5 +174,17 @@ public class EquipmentCreationTerminationBean implements Serializable {
 
   public void setMaterialType(String materialType) {
     this.materialType = materialType;
+  }
+
+  public String getGroupCode() {
+    return groupCode;
+  }
+
+  public void setGroupCode(String groupCode) {
+    this.groupCode = groupCode;
+  }
+  
+  public void dummy() {
+    System.out.println("kkk");
   }
 }

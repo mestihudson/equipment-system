@@ -1,7 +1,7 @@
 package equipment.dao;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -10,7 +10,6 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.SimpleExpression;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
@@ -50,7 +49,7 @@ abstract class AbstractBaseDao {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> List<T> findAll() {
+  public <T> Collection<T> findAll() {
     return getCurrentSession().createCriteria(getDomainClass()).list();
   }
 
@@ -58,14 +57,14 @@ abstract class AbstractBaseDao {
   public <T> T findById(Serializable o) {
     return (T) getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.idEq(o));
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T> T load(Serializable o) {
      return (T) getCurrentSession().load(getDomainClass(), o);
   }
-  
+
   @SuppressWarnings("unchecked")
-  public <T> List<T> findBy(Map<String, Object> propertyNameValues) {
+  public <T> Collection<T> findBy(Map<String, Object> propertyNameValues) {
     return getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.allEq(propertyNameValues)).list();
   }
 }
