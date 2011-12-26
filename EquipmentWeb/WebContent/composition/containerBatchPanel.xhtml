@@ -7,7 +7,7 @@
       <h:outputLabel value="Check digit" />
       <p:inputText id="checkDigit" size="1" value="#{equipmentCTBean.containerCheckDigit}" />
       <h:panelGrid columns="1">
-        <p:commandButton value="add" actionListener="#{equipmentCTBean.addContainer}" update="containerNumberList" />
+        <p:commandButton value="add" action="#{equipmentCTBean.addContainer}" update="containerNumberList" />
         <p:commandButton value="remove" />
       </h:panelGrid>
       <p:selectOneListbox id="containerNumberList" converter="checkedContainerNumberConverter" style="height:100px">

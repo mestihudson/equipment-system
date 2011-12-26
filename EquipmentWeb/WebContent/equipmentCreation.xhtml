@@ -9,7 +9,7 @@
           <h:panelGrid columns="2">
             <h:outputLabel value="Event Type:" />
             <p:selectOneMenu value="#{equipmentCTBean.selectedSubEventType}">
-              <f:selectItems value="#{equipmentCTBean.subEventTypes}" var="_subEventType" itemLabel="#{_subEventType.description}"
+              <f:selectItems value="#{equipmentCTBean.subEventTypesForCreation}" var="_subEventType" itemLabel="#{_subEventType.description}"
                 itemValue="#{_subEventType}" />
             </p:selectOneMenu>
           </h:panelGrid>

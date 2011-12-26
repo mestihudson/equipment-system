@@ -59,8 +59,12 @@ public class EquipmentCreationTerminationBean implements Serializable {
     checkedContainerNumbers.add(new CheckedContainerNumber(this.containerNumber, this.containerCheckDigit));
   }
 
-  public EnumSet<SubEventType> getSubEventTypes() {
+  public EnumSet<SubEventType> getSubEventTypesForCreation() {
     return EnumSet.of(SubEventType.ON_HIRE, SubEventType.PURCHASE, SubEventType.SOC);
+  }
+  
+  public EnumSet<SubEventType> getSubEventTypesForTermination() {
+    return EnumSet.of(SubEventType.OFF_HIRE, SubEventType.SOLD, SubEventType.END_SOC);
   }
 
   public char calculateCheckDigit(String containerNumber) {
@@ -87,14 +91,6 @@ public class EquipmentCreationTerminationBean implements Serializable {
     }
     return selectItems;
   }
-  
-//  public Collection<String> getGroupCodes() {
-//    if (StringUtil.isNullOrEmptyWithTrim(isoCode)) {
-//      return containerIsoTypeService.getAllGroupCodes();
-//    } else {
-//      return Arrays.asList(containerIsoTypeService.getGroupByIso(isoCode));
-//    }
-//  }
 
   public Collection<String> getIsoCodes() {
     if (StringUtil.isNullOrEmptyWithTrim(groupCode)) {
