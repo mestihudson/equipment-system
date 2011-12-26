@@ -79,7 +79,6 @@ public class EquipmentLatestInfo implements Serializable {
 
   @Column(name = "DSGH_PORT")
   private String dischargePort;
-  
 
   @Column(name = "UPD_USER")
   private String updateUser;
