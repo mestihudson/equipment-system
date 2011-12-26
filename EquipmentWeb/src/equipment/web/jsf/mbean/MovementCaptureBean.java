@@ -1,7 +1,6 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.EnumSet;
 
 import javax.annotation.Resource;
@@ -11,7 +10,6 @@ import javax.faces.context.FacesContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.DocumentType;
 import equipment.domain.enums.EquipmentCondition;
