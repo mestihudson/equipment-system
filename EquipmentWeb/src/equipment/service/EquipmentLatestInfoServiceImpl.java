@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 import equipment.dao.EquipmentLatestInfoDao;
 import equipment.domain.entity.EquipmentLatestInfo;
 
-@Service("EquipmentLatestInfoService")
+@Service("equipmentLatestInfoService")
 @Scope("singleton")
 public class EquipmentLatestInfoServiceImpl implements EquipmentLatestInfoService {
 
-  @Resource(name = "EquipmentLatestInfoDao")
+  @Resource(name = "equipmentLatestInfoDao")
   private EquipmentLatestInfoDao equipmentLatestInfoDao;
 
   @Override
