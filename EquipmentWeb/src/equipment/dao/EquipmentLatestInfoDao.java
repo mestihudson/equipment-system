@@ -1,5 +1,7 @@
 package equipment.dao;
 
+import java.util.Collection;
+
 import org.springframework.stereotype.Repository;
 
 import equipment.domain.entity.EquipmentLatestInfo;
@@ -12,4 +14,7 @@ public class EquipmentLatestInfoDao extends AbstractBaseDao {
     return EquipmentLatestInfo.class;
   }
   
+  public EquipmentLatestInfo findByContainerNumber(String containerNumber){
+    return findById(getDomainClass());
+  }
 }
