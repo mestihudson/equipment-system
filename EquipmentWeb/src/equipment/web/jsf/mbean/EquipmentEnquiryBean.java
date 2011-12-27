@@ -9,6 +9,8 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import equipment.domain.entity.EquipmentLatestInfo;
+
 @Component("equipmentEnquiryBean")
 @Scope("request")
 public class EquipmentEnquiryBean implements Serializable {
@@ -17,6 +19,8 @@ public class EquipmentEnquiryBean implements Serializable {
 
   private String containerNumber;
 
+  private EquipmentLatestInfo equiplastinfo;
+  
   public String getContainerNumber() {
     return containerNumber;
   }
@@ -33,5 +37,13 @@ public class EquipmentEnquiryBean implements Serializable {
     List<String> s = new ArrayList<String>();
     s.add("S");
     return s;
+  }
+
+  public EquipmentLatestInfo getEquiplastinfo() {
+    return equiplastinfo;
+  }
+
+  public void setEquiplastinfo(EquipmentLatestInfo equiplastinfo) {
+    this.equiplastinfo = equiplastinfo;
   }
 }
