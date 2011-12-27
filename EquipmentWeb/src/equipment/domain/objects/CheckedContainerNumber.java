@@ -1,6 +1,8 @@
 package equipment.domain.objects;
 
-public class CheckedContainerNumber implements Comparable<CheckedContainerNumber>{
+import equipment.utils.StringUtil;
+
+public class CheckedContainerNumber implements Comparable<CheckedContainerNumber> {
   public final static String DEFAULT_SEPERATOR = "-";
   private String containerNumber;
   private char checkDigit;
@@ -55,6 +57,14 @@ public class CheckedContainerNumber implements Comparable<CheckedContainerNumber
   @Override
   public int compareTo(CheckedContainerNumber o) {
     return this.containerNumber.compareTo(o.containerNumber);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    return o instanceof CheckedContainerNumber
+        && o != null
+        && StringUtil.isEquals(this.containerNumber, ((CheckedContainerNumber) o).containerNumber)
+        && this.checkDigit == ((CheckedContainerNumber) o).checkDigit;
   }
 
 }

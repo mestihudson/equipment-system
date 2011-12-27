@@ -3,16 +3,18 @@
   <p:panel>
     <h:panelGrid columns="2">
       <h:outputLabel value="Container No." />
-      <p:inputText value="#{equipmentCTBean.containerNumber}" size="10" />
+      <p:inputText id="containerNumber" value="#{equipmentCTBean.containerNumber}" size="10" />
       <h:outputLabel value="Check digit" />
       <p:inputText id="checkDigit" size="1" value="#{equipmentCTBean.containerCheckDigit}" />
       <h:panelGrid columns="1">
-        <p:commandButton value="add" action="#{equipmentCTBean.addContainer}" update="containerNumberList" />
-        <p:commandButton value="remove" />
+        <p:commandButton value="add" process="@this,containerNumber,checkDigit" action="#{equipmentCTBean.addContainer}"
+          update="containerNumberList" />
+        <p:commandButton value="remove" process="@this" action="#{equipmentCTBean.removeContainer}" update="containerNumberList" />
       </h:panelGrid>
-      <p:selectOneListbox id="containerNumberList" converter="checkedContainerNumberConverter" style="height:100px">
+      <p:selectOneListbox id="containerNumberList" valueChangeListener="#{equipmentCTBean.containerSelectListener}" style="height:100px">
         <f:selectItems value="#{equipmentCTBean.checkedContainerNumbers}" var="_checkedContainerNumber"
-          itemLabel="#{_checkedContainerNumber.outputString}" itemValue="#{_checkedContainerNumber}" />
+          itemLabel="#{_checkedContainerNumber}" itemValue="#{_checkedContainerNumber}" />
+        <p:ajax event="change" valueChangeListener="#{equipmentCTBean.containerSelectListener}" />
       </p:selectOneListbox>
     </h:panelGrid>
   </p:panel>
