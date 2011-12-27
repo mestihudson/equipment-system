@@ -1,12 +1,30 @@
 package equipment.validation;
 
-import equipment.domain.enums.ValidationType;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
-public class MovementEventValidation implements IEventValidation {
+@Service("movementEventValidation")
+@Scope("prototype")
+public class MovementEventValidation extends EventValidationTemplate {
+  private ValidationResult validationResult;
+  @Override
+  protected void applyRules() {
+    // TODO Auto-generated method stub
+    
+  }
 
   @Override
-  public ValidationResult validate(IncomingEvent event, ValidationType validationType) {
+  protected void processResults() {
     // TODO Auto-generated method stub
-    return null;
+    
+  }
+
+  @Override
+  protected ValidationResult getValidationResult() {
+    return validationResult;
+  }
+
+  public void setValidationResult(ValidationResult validationResult) {
+    this.validationResult = validationResult;
   }
 }

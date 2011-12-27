@@ -1,17 +1,23 @@
 package equipment.service;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import equipment.domain.enums.ValidationType;
 import equipment.validation.EquipmentEventValidation;
-import equipment.validation.IEventValidation;
+import equipment.validation.EventValidationTemplate;
 import equipment.validation.IncomingEvent;
 import equipment.validation.MovementEventValidation;
 import equipment.validation.ValidationResult;
 
 @Service("eventValidationService")
 public class EventValidationServiceImpl implements EventValidationService {
-  IEventValidation eventValidation;
+  EventValidationTemplate eventValidation;
+  @Resource(name = "movementEventValidation")
+  private MovementEventValidation movementEventValidation;
+  @Resource(name = "equipmentEventValidation")
+  private EquipmentEventValidation equipmentEventValidation;
   
   @Override
   public ValidationResult validateEvent(IncomingEvent event, ValidationType validationType) {
@@ -19,10 +25,10 @@ public class EventValidationServiceImpl implements EventValidationService {
     case NEW:
     case REVALIDATE:
     case EDIT:
-      return new MovementEventValidation().validate(event, validationType);
+      return movementEventValidation.validate(event, validationType);
     case CREATION:
     case TERMINATION:
-      return new EquipmentEventValidation().validate(event, validationType);
+      return equipmentEventValidation.validate(event, validationType);
     default:
       return null;
     }

@@ -1,10 +1,10 @@
 package equipment.validation;
 
-import javax.annotation.Resource;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
-import org.springframework.stereotype.Service;
-
-@Service("validationEnvironment")
+@Component("validationEnvironment")
+@Scope("prototype")
 public class ValidationEnvironment {
 
   

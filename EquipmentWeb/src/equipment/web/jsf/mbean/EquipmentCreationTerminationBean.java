@@ -1,6 +1,5 @@
 package equipment.web.jsf.mbean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -9,14 +8,13 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.annotation.Resource;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import equipment.domain.enums.EquipmentType;
 import equipment.domain.enums.SubEventType;
 import equipment.domain.enums.ValidationType;
 import equipment.service.ContainerIsoTypeService;
@@ -84,7 +82,9 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
     if (checkedContainerNumbers.size() == 0) {
       addErrorMessage("Container Number is mandatory");
     } else {
-      eventValidationService.validateEvent(getIncomingEvent(), ValidationType.CREATION);
+      for (IncomingEvent event : getIncomingEvents()) {
+        eventValidationService.validateEvent(event, ValidationType.CREATION);
+      }
     }
   }
 
@@ -92,8 +92,20 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
     selectedContainerNumber = (String) event.getNewValue();
   }
 
-  private IncomingEvent getIncomingEvent() {
-    return new IncomingEquipmentEvent();
+  private Collection<IncomingEvent> getIncomingEvents() {
+    Collection<IncomingEvent> incomingEvents = new ArrayList<IncomingEvent>();
+    for (String containerNumber : checkedContainerNumbers) {
+      IncomingEquipmentEvent event = new IncomingEquipmentEvent();
+      event.setEquipmentNumber(containerNumber);
+      event.setEquipmentType(EquipmentType.CONTAINER);
+      event.setEventType(this.selectedSubEventType);
+      event.setEquipmentTypeCode(isoCode);
+      event.setEquipmentTypeGroupCode(groupCode);
+      event.setFacilityCode(facilityCode);
+      event.setDocumentReference(referenceNumber);
+      incomingEvents.add(event);
+    }
+    return incomingEvents;
   }
 
   public Collection<SelectItem> getGroupCodes() {
