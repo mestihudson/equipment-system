@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.springframework.context.annotation.Scope;
@@ -16,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import equipment.domain.enums.SubEventType;
 import equipment.domain.enums.ValidationType;
-import equipment.domain.objects.CheckedContainerNumber;
 import equipment.service.ContainerIsoTypeService;
 import equipment.service.ContainerService;
 import equipment.service.EventValidationService;
@@ -26,12 +28,12 @@ import equipment.validation.IncomingEvent;
 
 @Component("equipmentCTBean")
 @Scope("view")
-public class EquipmentCreationTerminationBean implements Serializable {
+public class EquipmentCreationTerminationBean extends AbstractManagedBean {
   private static final long serialVersionUID = 964800661749286255L;
 
   private String containerNumber;
   private char containerCheckDigit;
-  private Set<CheckedContainerNumber> checkedContainerNumbers = new TreeSet<CheckedContainerNumber>();
+  private Set<String> checkedContainerNumbers = new TreeSet<String>();
   private SubEventType selectedSubEventType;
   private Date activityDateTime;
   private String facilityCode;
@@ -39,6 +41,7 @@ public class EquipmentCreationTerminationBean implements Serializable {
   private String isoCode;
   private String referenceNumber;
   private String materialType;
+  private String selectedContainerNumber;
 
   @Resource(name = "containerService")
   private ContainerService containerService;
@@ -56,13 +59,19 @@ public class EquipmentCreationTerminationBean implements Serializable {
     if (containerCheckDigit == 0) {
       return;
     }
-    checkedContainerNumbers.add(new CheckedContainerNumber(this.containerNumber, this.containerCheckDigit));
+    checkedContainerNumbers.add(this.containerNumber.toUpperCase() + "-" + this.containerCheckDigit);
+  }
+
+  public void removeContainer() {
+    if (selectedContainerNumber != null) {
+      checkedContainerNumbers.remove(selectedContainerNumber);
+    }
   }
 
   public EnumSet<SubEventType> getSubEventTypesForCreation() {
     return EnumSet.of(SubEventType.ON_HIRE, SubEventType.PURCHASE, SubEventType.SOC);
   }
-  
+
   public EnumSet<SubEventType> getSubEventTypesForTermination() {
     return EnumSet.of(SubEventType.OFF_HIRE, SubEventType.SOLD, SubEventType.END_SOC);
   }
@@ -72,18 +81,26 @@ public class EquipmentCreationTerminationBean implements Serializable {
   }
 
   public void save() {
-    eventValidationService.validateEvent(getIncomingEvent(), ValidationType.CREATION);
+    if (checkedContainerNumbers.size() == 0) {
+      addErrorMessage("Container Number is mandatory");
+    } else {
+      eventValidationService.validateEvent(getIncomingEvent(), ValidationType.CREATION);
+    }
+  }
+
+  public void containerSelectListener(ValueChangeEvent event) {
+    selectedContainerNumber = (String) event.getNewValue();
   }
 
   private IncomingEvent getIncomingEvent() {
     return new IncomingEquipmentEvent();
   }
 
-  public Collection<SelectItem> getGroupCodes(){
+  public Collection<SelectItem> getGroupCodes() {
     Collection<SelectItem> selectItems = new ArrayList<SelectItem>();
     if (StringUtil.isNullOrEmptyWithTrim(isoCode)) {
-      selectItems.add(new SelectItem("-","-",null,false,false,true));
-      for(String groupCode : containerIsoTypeService.getAllGroupCodes()) {
+      selectItems.add(new SelectItem("-", "-", null, false, false, true));
+      for (String groupCode : containerIsoTypeService.getAllGroupCodes()) {
         selectItems.add(new SelectItem(groupCode));
       }
     } else {
@@ -116,11 +133,11 @@ public class EquipmentCreationTerminationBean implements Serializable {
     this.containerCheckDigit = containerCheckDigit;
   }
 
-  public Set<CheckedContainerNumber> getCheckedContainerNumbers() {
+  public Set<String> getCheckedContainerNumbers() {
     return checkedContainerNumbers;
   }
 
-  public void setCheckedContainerNumbers(Set<CheckedContainerNumber> checkedContainerNumbers) {
+  public void setCheckedContainerNumbers(Set<String> checkedContainerNumbers) {
     this.checkedContainerNumbers = checkedContainerNumbers;
   }
 
@@ -179,8 +196,12 @@ public class EquipmentCreationTerminationBean implements Serializable {
   public void setGroupCode(String groupCode) {
     this.groupCode = groupCode;
   }
-  
-  public void dummy() {
-    System.out.println("kkk");
+
+  public String getSelectedContainerNumber() {
+    return selectedContainerNumber;
+  }
+
+  public void setSelectedContainerNumber(String selectedContainerNumber) {
+    this.selectedContainerNumber = selectedContainerNumber;
   }
 }

@@ -25,12 +25,12 @@
           <h:outputLabel value="Authorization No.:" />
           <p:inputText value="#{equipmentCTBean.referenceNumber}"/>
           <h:outputLabel value="Size Type Group:" />
-          <p:selectOneMenu id="groupCode" value="#{equipmentCTBean.groupCode}">
+          <p:selectOneMenu id="groupCode" value="#{equipmentCTBean.groupCode}" required="true">
             <f:selectItems value="#{equipmentCTBean.groupCodes}" var="_groupCode" />
             <p:ajax event="change" update="isoCode"/>
           </p:selectOneMenu>
           <h:outputLabel value="ISO Code:" />
-          <p:selectOneMenu id="isoCode" value="#{equipmentCTBean.isoCode}">
+          <p:selectOneMenu id="isoCode" value="#{equipmentCTBean.isoCode}" required="true">
             <f:selectItem noSelectionOption="true" itemLabel="-"/>
             <f:selectItems value="#{equipmentCTBean.isoCodes}" var="_isoCode" />
             <p:ajax event="change" update="groupCode"/>
@@ -44,7 +44,7 @@
           </p:selectOneMenu>
         </h:panelGrid>
       </h:panelGrid>
-      <p:commandButton value="Save" update="messages" />
+      <p:commandButton value="Save" action="#{equipmentCTBean.save}" update="messages" />
     </h:form>
   </ui:define>
 </ui:composition>
