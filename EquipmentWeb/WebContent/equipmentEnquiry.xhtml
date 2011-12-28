@@ -13,20 +13,36 @@
 
           <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" />
         </h:panelGroup>
-        <h:panelGrid columns="6">
-          <h:outputLabel>Size/Type:</h:outputLabel>
-          <p:inputText readonly="true" value="20GP"></p:inputText>
-          <h:outputLabel>Size/Type:</h:outputLabel>
-          <p:inputText readonly="true" value="21GP"></p:inputText>
-          <h:outputLabel>Size/Type:</h:outputLabel>
-          <p:inputText readonly="true" value="22GP"></p:inputText>
-          <h:outputLabel>Size/Type:</h:outputLabel>
-          <p:inputText readonly="true" value="24GP"></p:inputText>
+        <h:panelGrid columns="8">
+         <h:outputLabel>Equipment Number:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.equipmentNumber}"></p:inputText>
+          <h:outputLabel>Event Type:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.eventType}"></p:inputText>
+          <h:outputLabel> ISO Code:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.isoCode}"></p:inputText>
+          <h:outputLabel>Group Code:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.groupCode}"></p:inputText>
+          <h:outputLabel>State:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.state}"></p:inputText>
+          <h:outputLabel>Current Location:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.currentLocation}"></p:inputText>
+          <h:outputLabel>Next Location:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.nextLocation}"></p:inputText>
+          <h:outputLabel>Contract Action:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.contraAction}"></p:inputText>
+          <h:outputLabel>Document Reference:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.documentReference}"></p:inputText>
+          <h:outputLabel>Document Type:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.documentType}"></p:inputText>
+          <h:outputLabel>Load Port:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.loadPort}"></p:inputText>
+          <h:outputLabel>Discharge Prot:</h:outputLabel>
+          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equiplastinfo.dischargePort}"></p:inputText>
         </h:panelGrid>
         <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="row">
           <p:column>
             <f:facet name="header">Container Number</f:facet>
-          <h:outputLabel value="#{row}" />
+            <h:outputLabel value="#{row}" />
           </p:column>
         </p:dataTable>
       </h:panelGrid>
