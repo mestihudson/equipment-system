@@ -16,14 +16,21 @@
   <context:component-scan base-package="equipment.service" />
   <context:component-scan base-package="equipment.dao" />
   <context:component-scan base-package="equipment.web.jsf.mbean" />
+  <context:component-scan base-package="equipment.validation" />
 
+  <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="location">
+      <value>WEB-INF/config.properties</value>
+    </property>
+  </bean>
+  
   <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
     <property name="driverClassName" value="com.mysql.jdbc.Driver">
     </property>
-    <property name="url" value="jdbc:mysql://localhost:3306/dbeqp">
+    <property name="url" value="${database.oracle.url}">
     </property>
-    <property name="username" value="root"></property>
-    <property name="password" value="19821210"></property>
+    <property name="username" value="${database.oracle.user}"></property>
+    <property name="password" value="${database.oracle.password}"></property>
   </bean>
 
   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
