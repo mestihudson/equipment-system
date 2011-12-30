@@ -1,25 +1,11 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/30 19:34:40                          */
+/* Created on:     2011/12/31 0:04:03                           */
 /*==============================================================*/
 
 drop table if exists dbeqp.cntr_iso_type;
 drop table if exists eqp_supply_hierarchy;
-drop table if exists dbeqp.container;
-
 drop table if exists dbeqp.eqmt_event_association;
-
-drop table if exists dbeqp.eqp_event_log;
-
-drop table if exists dbeqp.eqp_latest_info;
-
-drop table if exists dbeqp.eqp_rejection;
-
-drop table if exists dbeqp.gsp_city;
-
-drop table if exists dbeqp.gsp_facility;
-
-drop table if exists dbeqp.gsp_office;
 
 /*==============================================================*/
 /* Table: CNTR_ISO_TYPE                                         */
@@ -53,13 +39,14 @@ create table dbeqp.CONTAINER
 create table dbeqp.EQMT_EVENT_ASSOCIATION
 (
    EVENT_TIMESTAMP      char(32) not null,
-   EQMT_NUM             varchar(10),
+   EQMT_NUM             varchar(10) not null,
+   EQMT_TYPE            char(1) not null,
    SEQ_NUM              int,
    LOC                  char(5),
-   EVENT_DT_LOC         datetime,
-   EVENT_TYPE           char(2),
-   EQMT_TYPE_GRP_CDE    char(4),
-   EQMT_TYPE_CDE        char(4),
+   EVENT_DT_LOC         datetime not null,
+   EVENT_TYPE           char(2) not null,
+   EQMT_TYPE_GRP_CDE    char(4) not null,
+   EQMT_TYPE_CDE        char(4) not null,
    MATERIAL             varchar(20),
    DOC_NUM              varchar(20),
    UPD_USER             varchar(16),

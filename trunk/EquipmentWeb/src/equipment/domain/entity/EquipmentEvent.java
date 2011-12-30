@@ -46,9 +46,9 @@ public class EquipmentEvent implements Serializable{
   
   @Column(name="EVENT_TYPE", nullable=false)
   @Type(type = "equipment.utils.GenericEnumUserType", parameters = {
-      @Parameter(name = "enumClass", value = "equipment.domain.enums.EventType"),
+      @Parameter(name = "enumClass", value = "equipment.domain.enums.SubEventType"),
       @Parameter(name = "identifierMethod", value = "getCode"),
-      @Parameter(name = "valueOfMethod", value = "getEventTypeForCode") })
+      @Parameter(name = "valueOfMethod", value = "getSubEventTypeForCode") })
   private SubEventType eventType;
   
   @Column(name="EQMT_TYPE_GRP_CDE", nullable=false)
