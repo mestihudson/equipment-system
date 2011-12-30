@@ -1,10 +1,9 @@
 package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
 import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.EventType;
 import equipment.service.MovementEventService;
-import equipment.utils.StringUtil;
 
 @Component("movementEventEditingBean")
 @Scope("request")
@@ -81,7 +79,7 @@ public class MovementEventEditingBean implements Serializable {
     // }
     // movementEvents = movementEventDao.findBy(propertyNameValues);
     // mediumEventsModel = new MovementEventDataModel(movementEvents);
-    movementEventService.findByContainerNumber(containerNumber);
+    movementEvents=new ArrayList(movementEventService.findByContainerNumber(containerNumber));
     mediumEventsModel = new MovementEventDataModel(movementEvents);
   }
 }
