@@ -2,10 +2,12 @@ package equipment.validation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import equipment.dao.MovementEventDao;
 import equipment.domain.entity.MovementEvent;
 import equipment.validation.checks.AbstractValidationCheck;
 import equipment.validation.checks.ContainerCheck;
@@ -13,10 +15,9 @@ import equipment.validation.checks.ContainerCheck;
 @Service
 @Scope("prototype")
 public class MovementEventValidation extends EventValidationTemplate {
-//  private static List<AbstractValidationCheck> checkList;
-//  static {
-//    checkList.add(new ContainerCheck());
-//  }
+
+  @Autowired
+  private MovementEventDao movementEventDao;
   
   @Override
   protected void applyRules() {
@@ -30,6 +31,7 @@ public class MovementEventValidation extends EventValidationTemplate {
   @Override
   protected void addToEventLog() {
     MovementEvent event = validationEnvironment.createMovementEventLog();
+    movementEventDao.save(event);
   }
 
   @Override
