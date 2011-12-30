@@ -58,7 +58,7 @@
         <h:outputLabel for="nextLocation" value="Next Location:" />
         <h:panelGroup>
           <p:autoComplete id="nextLocation" value="#{movementCaptureBean.incomingEvent.nextLocation}" maxResults="10"
-            completeMethod="#{movementCaptureBean.completeFacility}" />
+            completeMethod="#{hierarchyBean.completeFacility}" />
         </h:panelGroup>
 
         <h:outputLabel value="Document Reference:" />
