@@ -15,7 +15,7 @@
           <h:outputLabel>Event Type:</h:outputLabel>
           <h:selectOneMenu value="#{movementEventEditingBean.eventType}">
             <f:selectItem itemLabel="-" noSelectionOption="true" />
-            <f:selectItems value="#{EventType.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}" itemValue="#{_eventType}" />
+            <f:selectItems value="#{movementEventEditingBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}" itemValue="#{_eventType}" />
           </h:selectOneMenu>
           <p:commandButton value="Search" action="#{movementEventEditingBean.search}" update="eventDataTable" />
         </h:panelGroup>
