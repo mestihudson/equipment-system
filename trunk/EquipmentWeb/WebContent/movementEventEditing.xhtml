@@ -3,13 +3,15 @@
   <ui:define name="title">Movement Enquiry</ui:define>
   <ui:define name="content">
     <h:form>
-      <p:growl id="messages" />
+      <p:messages id="messages" showDetail="true" showSummary="false" />
       <h:panelGrid columns="1">
         <h:panelGroup>
           <h:outputLabel>Container Number:</h:outputLabel>
           <p:inputText id="containerNumber" value="#{movementEventEditingBean.containerNumber}">
+          <!-- 
             <f:validator validatorId="containerNumberValidator" />
             <p:ajax event="blur" update="messages" />
+             -->
           </p:inputText>
 
           <h:outputLabel>Event Type:</h:outputLabel>
@@ -19,8 +21,10 @@
           </h:selectOneMenu>
           <p:commandButton value="Search" action="#{movementEventEditingBean.search}" update="eventDataTable" />
         </h:panelGroup>
+        <p:commandButton value="Delete Selected Event" onclick="if (!confirm('你确认要删除所选记录么?')) return false;" icon="ui-icon-search"  action="#{movementEventEditingBean.delete}" update="messages eventDataTable" >
+        
+        </p:commandButton>
         <ui:include src="/composition/movementResultTable.xhtml" />
-
       </h:panelGrid>
     </h:form>
   </ui:define>

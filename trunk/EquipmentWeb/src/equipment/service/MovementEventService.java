@@ -9,4 +9,5 @@ public interface MovementEventService {
   Collection<MovementEvent> findByContainerNumber(String containerNumber);
   void deleteEvents(Collection<MovementEvent> events);
   MovementEvent findLastEventBeforeDate(String containerNumber, Date date);
+  int removeEvents(MovementEvent[] selectedEvents);
 }
