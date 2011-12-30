@@ -31,7 +31,6 @@ public class IncomingMovementEvent extends IncomingEvent {
   private String positionAtRoute;
   private String nature;
   private String containerCheckDigit;
-  private String updateUser;
   public EventType getEventType() {
     return eventType;
   }
@@ -169,12 +168,6 @@ public class IncomingMovementEvent extends IncomingEvent {
   }
   public void setContainerCheckDigit(String containerCheckDigit) {
     this.containerCheckDigit = containerCheckDigit;
-  }
-  public String getUpdateUser() {
-    return updateUser;
-  }
-  public void setUpdateUser(String updateUser) {
-    this.updateUser = updateUser;
   }
   public String getContainerNumber() {
     return getEquipmentNumber();

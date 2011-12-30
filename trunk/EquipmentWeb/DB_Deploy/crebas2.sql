@@ -1,10 +1,24 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2011/12/26 20:44:49                          */
+/* Created on:     2011/12/30 19:34:40                          */
 /*==============================================================*/
 
 
+drop table if exists dbeqp.container;
+
+drop table if exists dbeqp.eqmt_event_association;
+
+drop table if exists dbeqp.eqp_event_log;
+
 drop table if exists dbeqp.eqp_latest_info;
+
+drop table if exists dbeqp.eqp_rejection;
+
+drop table if exists dbeqp.gsp_city;
+
+drop table if exists dbeqp.gsp_facility;
+
+drop table if exists dbeqp.gsp_office;
 
 /*==============================================================*/
 /* Table: CNTR_ISO_TYPE                                         */
@@ -26,7 +40,7 @@ create table dbeqp.CONTAINER
    ISO_CDE              char(4) not null,
    GROUP_CDE            char(4) not null,
    CHK_DIGIT            char(1) not null,
-   STATE                boolean not null,
+   ACTIVE               boolean not null,
    CREATE_DT            timestamp,
    UPDATE_DT            timestamp,
    primary key (EQMT_NUM)
@@ -46,6 +60,7 @@ create table dbeqp.EQMT_EVENT_ASSOCIATION
    EQMT_TYPE_GRP_CDE    char(4),
    EQMT_TYPE_CDE        char(4),
    MATERIAL             varchar(20),
+   DOC_NUM              varchar(20),
    UPD_USER             varchar(16),
    REC_UPD_DT           datetime,
    primary key (EVENT_TIMESTAMP)
@@ -96,11 +111,13 @@ create table dbeqp.EQP_LATEST_INFO
 (
    EQMT_NUM             varchar(10) not null,
    EQMT_TYPE            CHAR(1) not null,
+   EVENT_TIMESTAMP      char(32) not null,
+   EVENT_DT_LOC         datetime not null,
    EVENT_TYPE           char(2) not null,
    ISO_CDE              char(4),
    GROUP_CDE            char(4),
-   STATE                char(2),
-   CURR_LOCA            char(5),
+   ACTIVE               boolean,
+   CURR_LOCA            char(5) not null,
    NEXT_LOCA            char(5),
    SVC_LOOP             varchar(4),
    VSL_CDE              varchar(3),

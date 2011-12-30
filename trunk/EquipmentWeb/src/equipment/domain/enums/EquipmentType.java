@@ -16,7 +16,7 @@ public enum EquipmentType {
     this.code = code;
   }
 
-  public EquipmentType getEquipmentTypeForCode(String code) {
+  public static EquipmentType getEquipmentTypeForCode(String code) {
     if ("C".equals(code)) {
       return CONTAINER;
     } else if ("T".equals(code)) {

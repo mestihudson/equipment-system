@@ -1,5 +1,6 @@
 package equipment.validation.checks;
 
+import equipment.domain.enums.ValidationType;
 import equipment.validation.IncomingEvent;
 import equipment.validation.ValidationEnvironment;
 
@@ -12,13 +13,12 @@ public class ContainerCheck extends AbstractValidationCheck {
   }
 
   @Override
-  public boolean applyTo(IncomingEvent event) {
+  public boolean applyTo(IncomingEvent event, ValidationType validatinoType) {
     return true;
   }
 
   @Override
   public void validate(ValidationEnvironment validationEnvironment) {
-    
 
   }
 

@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
+import equipment.domain.enums.ContraAction;
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.EquipmentCondition;
 import equipment.domain.enums.EventType;
@@ -49,7 +50,7 @@ public class MovementEvent implements Serializable{
 	private EventType eventType;
 
 	@Column(name = "EVENT_DT_LOC")
-	private Date eventDateTimeLocal;
+	private Date eventDateTime;
 
 	@Column(name = "SEAL_NUM")
 	private String sealNumber;
@@ -110,7 +111,11 @@ public class MovementEvent implements Serializable{
 	private String remarks;
 
 	@Column(name = "CONTRA_ACTION")
-	private String contraAction;
+  @Type(type = "equipment.utils.GenericEnumUserType", parameters = {
+      @Parameter(name = "enumClass", value = "equipment.domain.enums.ContraAction"),
+      @Parameter(name = "identifierMethod", value = "getCode"),
+      @Parameter(name = "valueOfMethod", value = "getContraActionForCode") })
+	private ContraAction contraAction;
 
 	@Column(name = "POS_AT_ROUTE")
 	private String positionAtRoute;
@@ -167,12 +172,12 @@ public class MovementEvent implements Serializable{
     this.eventType = eventType;
   }
 
-  public Date getEventDateTimeLocal() {
-    return eventDateTimeLocal;
+  public Date getEventDateTime() {
+    return eventDateTime;
   }
 
-  public void setEventDateTimeLocal(Date eventDateTimeLocal) {
-    this.eventDateTimeLocal = eventDateTimeLocal;
+  public void setEventDateTime(Date eventDateTime) {
+    this.eventDateTime = eventDateTime;
   }
 
   public String getSealNumber() {
@@ -319,11 +324,11 @@ public class MovementEvent implements Serializable{
     this.remarks = remarks;
   }
 
-  public String getContraAction() {
+  public ContraAction getContraAction() {
     return contraAction;
   }
 
-  public void setContraAction(String contraAction) {
+  public void setContraAction(ContraAction contraAction) {
     this.contraAction = contraAction;
   }
 

@@ -13,7 +13,7 @@ public enum ContraAction {
   public void setCode(String code) {
     this.code = code;
   }
-  public ContraAction getContraActionForCode(String code) {
+  public static ContraAction getContraActionForCode(String code) {
     if ("N".equals(code)) {
       return NEW;
     } else if ("D".equals(code)) {

@@ -2,7 +2,6 @@ package equipment.domain.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,8 +24,8 @@ public class Container implements Serializable{
 	@Column(name="CHK_DIGIT")
 	private Character checkDigit;
 	
-	@Column(name="STATE")
-	private Boolean state;
+	@Column(name="ACTIVE")
+	private Boolean active;
 	
 	@Column(name="CREATE_DT")
 	private Date createDateTime;
@@ -66,14 +65,6 @@ public class Container implements Serializable{
     this.checkDigit = checkDigit;
   }
 
-  public Boolean getState() {
-		return state;
-	}
-
-	public void setState(Boolean state) {
-		this.state = state;
-	}
-
 	public Date getCreateDateTime() {
 		return createDateTime;
 	}
@@ -89,5 +80,13 @@ public class Container implements Serializable{
 	public void setUpdateDateTime(Date updateDateTime) {
 		this.updateDateTime = updateDateTime;
 	}
+
+  public Boolean getActive() {
+    return active;
+  }
+
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
 	
 }

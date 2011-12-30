@@ -10,7 +10,8 @@ public class IncomingEquipmentEvent extends IncomingEvent {
   private String equipmentTypeGroupCode;
   private String equipmentTypeCode;
   private String material;
-  private String documentReference;
+  private String documentNumber;
+  private char checkDigit;
   
   public EquipmentType getEquipmentType() {
     return equipmentType;
@@ -42,10 +43,16 @@ public class IncomingEquipmentEvent extends IncomingEvent {
   public void setMaterial(String material) {
     this.material = material;
   }
-  public String getDocumentReference() {
-    return documentReference;
+  public String getDocumentNumber() {
+    return documentNumber;
   }
-  public void setDocumentReference(String documentReference) {
-    this.documentReference = documentReference;
+  public void setDocumentNumber(String documentNumber) {
+    this.documentNumber = documentNumber;
+  }
+  public char getCheckDigit() {
+    return checkDigit;
+  }
+  public void setCheckDigit(char checkDigit) {
+    this.checkDigit = checkDigit;
   }
 }

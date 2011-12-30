@@ -1,30 +1,40 @@
 package equipment.validation;
 
+import java.util.List;
+
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-@Service("movementEventValidation")
+import equipment.domain.entity.MovementEvent;
+import equipment.validation.checks.AbstractValidationCheck;
+import equipment.validation.checks.ContainerCheck;
+
+@Service
 @Scope("prototype")
 public class MovementEventValidation extends EventValidationTemplate {
-  private ValidationResult validationResult;
+//  private static List<AbstractValidationCheck> checkList;
+//  static {
+//    checkList.add(new ContainerCheck());
+//  }
+  
   @Override
   protected void applyRules() {
-    // TODO Auto-generated method stub
-    
+//    for(AbstractValidationCheck check : checkList) {
+//      if(check.applyTo(validationEnvironment.getIncomingEvent(), validationEnvironment.getValidationType())) {
+//        check.validate(validationEnvironment);
+//      }
+//    }
   }
 
   @Override
-  protected void processResults() {
-    // TODO Auto-generated method stub
-    
+  protected void addToEventLog() {
+    MovementEvent event = validationEnvironment.createMovementEventLog();
   }
 
   @Override
-  protected ValidationResult getValidationResult() {
-    return validationResult;
-  }
-
-  public void setValidationResult(ValidationResult validationResult) {
-    this.validationResult = validationResult;
+  protected void updateOrCreateEquipment() {
+    // TODO Auto-generated method stub
+    
   }
 }
