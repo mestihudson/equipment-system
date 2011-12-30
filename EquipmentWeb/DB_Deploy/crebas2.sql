@@ -3,7 +3,8 @@
 /* Created on:     2011/12/30 19:34:40                          */
 /*==============================================================*/
 
-
+drop table if exists dbeqp.cntr_iso_type;
+drop table if exists eqp_supply_hierarchy;
 drop table if exists dbeqp.container;
 
 drop table if exists dbeqp.eqmt_event_association;

@@ -30,8 +30,7 @@ public class MovementEventServiceImpl implements MovementEventService {
 
   @Override
   public Collection<MovementEvent> findByContainerNumber(String containerNumber) {
-    // TODO Auto-generated method stub
-    return null;
+	  return movementEventDao.findByContainerNumber(containerNumber);
   }
   
   @SuppressWarnings("unchecked")
