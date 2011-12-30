@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import equipment.dao.ContainerDao;
+import equipment.dao.EquipmentEventDao;
 import equipment.domain.entity.Container;
 import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.enums.ValidationType;
@@ -14,6 +15,8 @@ import equipment.domain.enums.ValidationType;
 public class EquipmentEventValidation extends EventValidationTemplate {
   @Autowired
   private ContainerDao containerDao;
+  @Autowired
+  private EquipmentEventDao equipmentEventDao;
   
   @Override
   protected void applyRules() {
@@ -24,6 +27,8 @@ public class EquipmentEventValidation extends EventValidationTemplate {
   @Override
   protected void addToEventLog() {
     EquipmentEvent event = validationEnvironment.createEquipmentEventLog();
+    equipmentEventDao.save(event);
+    
   }
 
   @Override

@@ -24,7 +24,7 @@ public class EquipmentEnquiryBean implements Serializable {
 
   private String containerNumber;
 
-  private EquipmentLatestInfo equiplastinfo;
+  private EquipmentLatestInfo equipmentLatestInfo = new EquipmentLatestInfo();
 
   public String getContainerNumber() {
     return containerNumber;
@@ -35,7 +35,7 @@ public class EquipmentEnquiryBean implements Serializable {
   }
 
   public void search() {
-    equiplastinfo = equipmentLatestInfoService.findByEquipmentNumber(containerNumber);
+    setEquipmentLatestInfo(equipmentLatestInfoService.findByEquipmentNumber(containerNumber));
   }
 
   public Collection<String> getTablelist() {
@@ -44,11 +44,12 @@ public class EquipmentEnquiryBean implements Serializable {
     return s;
   }
 
-  public EquipmentLatestInfo getEquiplastinfo() {
-    return equiplastinfo;
+  public EquipmentLatestInfo getEquipmentLatestInfo() {
+    return equipmentLatestInfo;
   }
 
-  public void setEquiplastinfo(EquipmentLatestInfo equiplastinfo) {
-    this.equiplastinfo = equiplastinfo;
+  public void setEquipmentLatestInfo(EquipmentLatestInfo equipmentLatestInfo) {
+    this.equipmentLatestInfo = equipmentLatestInfo;
   }
+
 }
