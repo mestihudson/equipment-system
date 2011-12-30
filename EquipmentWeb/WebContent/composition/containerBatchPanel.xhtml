@@ -8,12 +8,12 @@
       <p:inputText id="checkDigit" size="1" value="#{equipmentCTBean.containerCheckDigit}" />
       <h:panelGrid columns="1">
         <p:commandButton value="add" process="@this,containerNumber,checkDigit" action="#{equipmentCTBean.addContainer}"
-          update="containerNumberList" />
+          update="containerNumberList, messages" />
         <p:commandButton value="remove" process="@this" action="#{equipmentCTBean.removeContainer}" update="containerNumberList" />
       </h:panelGrid>
       <p:selectOneListbox id="containerNumberList" valueChangeListener="#{equipmentCTBean.containerSelectListener}" style="height:100px">
-        <f:selectItems value="#{equipmentCTBean.checkedContainerNumbers}" var="_checkedContainerNumber"
-          itemLabel="#{_checkedContainerNumber}" itemValue="#{_checkedContainerNumber}" />
+        <f:selectItems value="#{equipmentCTBean.containerNumbers}" var="_containerNumber"
+          itemLabel="#{_containerNumber}" itemValue="#{_containerNumber}" />
         <p:ajax event="change" valueChangeListener="#{equipmentCTBean.containerSelectListener}" />
       </p:selectOneListbox>
     </h:panelGrid>

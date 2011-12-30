@@ -2,18 +2,20 @@ package equipment.service;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import equipment.domain.enums.ValidationType;
 import equipment.validation.EquipmentEventValidation;
-import equipment.validation.EventValidationTemplate;
 import equipment.validation.IncomingEvent;
 import equipment.validation.MovementEventValidation;
 import equipment.validation.ValidationResult;
 
 @Service("eventValidationService")
+@Transactional
+@Scope("prototype")
 public class EventValidationServiceImpl implements EventValidationService {
-  EventValidationTemplate eventValidation;
   @Resource(name = "movementEventValidation")
   private MovementEventValidation movementEventValidation;
   @Resource(name = "equipmentEventValidation")

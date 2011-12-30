@@ -14,15 +14,18 @@ import javax.faces.model.SelectItem;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import equipment.domain.bo.ContainerNumberResolver;
 import equipment.domain.enums.EquipmentType;
 import equipment.domain.enums.SubEventType;
 import equipment.domain.enums.ValidationType;
+import equipment.exceptions.ContainerConvertException;
 import equipment.service.ContainerIsoTypeService;
 import equipment.service.ContainerService;
 import equipment.service.EventValidationService;
 import equipment.utils.StringUtil;
 import equipment.validation.IncomingEquipmentEvent;
 import equipment.validation.IncomingEvent;
+import equipment.validation.ValidationResult;
 
 @Component("equipmentCTBean")
 @Scope("view")
@@ -31,7 +34,7 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
 
   private String containerNumber;
   private char containerCheckDigit;
-  private Set<String> checkedContainerNumbers = new TreeSet<String>();
+  private Set<String> containerNumbers = new TreeSet<String>();
   private SubEventType selectedSubEventType;
   private Date activityDateTime;
   private String facilityCode;
@@ -51,18 +54,16 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
   private EventValidationService eventValidationService;
 
   public void addContainer() {
-    if (StringUtil.isNullOrEmptyWithTrim(containerNumber)) {
-      return;
+    try {
+      containerNumbers.add(ContainerNumberResolver.formContainerNumber(containerNumber, containerCheckDigit));
+    } catch (ContainerConvertException cce) {
+      addErrorMessage(cce.getDetailMessage());
     }
-    if (containerCheckDigit == 0) {
-      return;
-    }
-    checkedContainerNumbers.add(this.containerNumber.toUpperCase() + "-" + this.containerCheckDigit);
   }
 
   public void removeContainer() {
     if (selectedContainerNumber != null) {
-      checkedContainerNumbers.remove(selectedContainerNumber);
+      containerNumbers.remove(selectedContainerNumber);
     }
   }
 
@@ -78,12 +79,31 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
     return containerService.calculateCheckDigit(containerNumber);
   }
 
-  public void save() {
-    if (checkedContainerNumbers.size() == 0) {
+  public void saveCreation() {
+    if (containerNumbers.size() == 0) {
       addErrorMessage("Container Number is mandatory");
     } else {
       for (IncomingEvent event : getIncomingEvents()) {
-        eventValidationService.validateEvent(event, ValidationType.CREATION);
+        try {
+          ValidationResult result = eventValidationService.validateEvent(event, ValidationType.CREATION);
+          if (result.hasRejection()) {
+            addWarnMessage(event.getEquipmentNumber() + " has rejected.  Please process it in rejections.");
+          } else {
+            addInfoMessage(event.getEquipmentNumber() + " was successfully created.");
+          }
+        } catch (Throwable e) {
+          addErrorMessage(event.getEquipmentNumber() + " failed to create.");
+        }
+      }
+    }
+  }
+
+  public void saveTermination() {
+    if (containerNumbers.size() == 0) {
+      addErrorMessage("Container Number is mandatory");
+    } else {
+      for (IncomingEvent event : getIncomingEvents()) {
+        eventValidationService.validateEvent(event, ValidationType.TERMINATION);
       }
     }
   }
@@ -94,16 +114,25 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
 
   private Collection<IncomingEvent> getIncomingEvents() {
     Collection<IncomingEvent> incomingEvents = new ArrayList<IncomingEvent>();
-    for (String containerNumber : checkedContainerNumbers) {
-      IncomingEquipmentEvent event = new IncomingEquipmentEvent();
-      event.setEquipmentNumber(containerNumber);
-      event.setEquipmentType(EquipmentType.CONTAINER);
-      event.setEventType(this.selectedSubEventType);
-      event.setEquipmentTypeCode(isoCode);
-      event.setEquipmentTypeGroupCode(groupCode);
-      event.setFacilityCode(facilityCode);
-      event.setDocumentReference(referenceNumber);
-      incomingEvents.add(event);
+    for (String containerNumber : containerNumbers) {
+      if (containerNumber == null) {
+        continue;
+      }
+      try {
+        IncomingEquipmentEvent event = new IncomingEquipmentEvent();
+        event.setEquipmentNumber(ContainerNumberResolver.resolveContainerNumber(containerNumber));
+        event.setCheckDigit(ContainerNumberResolver.resolveCheckDigit(containerNumber));
+        event.setEquipmentType(EquipmentType.CONTAINER);
+        event.setEventDateTime(activityDateTime);
+        event.setEventType(this.selectedSubEventType);
+        event.setEquipmentTypeCode(isoCode);
+        event.setEquipmentTypeGroupCode(groupCode);
+        event.setFacilityCode(facilityCode);
+        event.setDocumentNumber(referenceNumber);
+        incomingEvents.add(event);
+      } catch (ContainerConvertException cce) {
+
+      }
     }
     return incomingEvents;
   }
@@ -145,12 +174,12 @@ public class EquipmentCreationTerminationBean extends AbstractManagedBean {
     this.containerCheckDigit = containerCheckDigit;
   }
 
-  public Set<String> getCheckedContainerNumbers() {
-    return checkedContainerNumbers;
+  public Set<String> getContainerNumbers() {
+    return containerNumbers;
   }
 
-  public void setCheckedContainerNumbers(Set<String> checkedContainerNumbers) {
-    this.checkedContainerNumbers = checkedContainerNumbers;
+  public void setContainerNumbers(Set<String> containerNumbers) {
+    this.containerNumbers = containerNumbers;
   }
 
   public SubEventType getSelectedSubEventType() {

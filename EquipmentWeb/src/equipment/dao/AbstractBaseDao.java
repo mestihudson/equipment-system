@@ -39,6 +39,10 @@ abstract class AbstractBaseDao {
   public void save(Object o) {
     getCurrentSession().save(o);
   }
+  
+  public void saveOrUpdate(Object o) {
+    getCurrentSession().saveOrUpdate(o);
+  }
 
   public void delete(Object o) {
     getCurrentSession().delete(o);
@@ -54,13 +58,13 @@ abstract class AbstractBaseDao {
   }
 
   @SuppressWarnings("unchecked")
-  public <T> T findById(Serializable o) {
-    return (T) getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.idEq(o));
-  }
-
-  @SuppressWarnings("unchecked")
   public <T> T load(Serializable o) {
      return (T) getCurrentSession().load(getDomainClass(), o);
+  }
+  
+  @SuppressWarnings("unchecked")
+  public <T> T get(Serializable o) {
+     return (T) getCurrentSession().get(getDomainClass(), o);
   }
 
   @SuppressWarnings("unchecked")

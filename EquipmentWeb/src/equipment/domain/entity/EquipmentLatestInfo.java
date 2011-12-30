@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
+import equipment.domain.enums.ContraAction;
 import equipment.domain.enums.Direction;
 import equipment.domain.enums.EquipmentType;
 
@@ -33,14 +34,20 @@ public class EquipmentLatestInfo implements Serializable {
   @Column(name = "EVENT_TYPE")
   private String eventType;
 
+  @Column(name = "EVENT_TIMESTAMP")
+  private String eventTimestamp;
+  
+  @Column(name = "EVENT_DT_LOC")
+  private Date eventDateTime;
+  
   @Column(name = "ISO_CDE")
   private String isoCode;
 
   @Column(name = "GROUP_CDE")
   private String groupCode;
   
-  @Column(name = "STATE")
-  private String state;
+  @Column(name = "ACTIVE")
+  private boolean active;
 
   @Column(name = "CURR_LOCA")
   private String currentLocation;
@@ -66,7 +73,7 @@ public class EquipmentLatestInfo implements Serializable {
       @Parameter(name = "enumClass", value = "equipment.domain.enums.ContraAction"),
       @Parameter(name = "identifierMethod", value = "getCode"),
       @Parameter(name = "valueOfMethod", value = "getContraActionForCode") })
-  private String contraAction;
+  private ContraAction contraAction;
   
   @Column(name = "DOC_REF")
   private String documentReference;
@@ -126,14 +133,6 @@ public class EquipmentLatestInfo implements Serializable {
     this.groupCode = groupCode;
   }
 
-  public String getState() {
-    return state;
-  }
-
-  public void setState(String state) {
-    this.state = state;
-  }
-
   public String getCurrentLocation() {
     return currentLocation;
   }
@@ -182,11 +181,11 @@ public class EquipmentLatestInfo implements Serializable {
     this.directionBound = directionBound;
   }
 
-  public String getContraAction() {
+  public ContraAction getContraAction() {
     return contraAction;
   }
 
-  public void setContraAction(String contraAction) {
+  public void setContraAction(ContraAction contraAction) {
     this.contraAction = contraAction;
   }
 
@@ -237,6 +236,28 @@ public class EquipmentLatestInfo implements Serializable {
   public void setRecordUpdateDateTime(Date recordUpdateDateTime) {
     this.recordUpdateDateTime = recordUpdateDateTime;
   }
-  
-  
+
+  public Date getEventDateTime() {
+    return eventDateTime;
+  }
+
+  public void setEventDateTime(Date eventDateTime) {
+    this.eventDateTime = eventDateTime;
+  }
+
+  public String getEventTimestamp() {
+    return eventTimestamp;
+  }
+
+  public void setEventTimestamp(String eventTimestamp) {
+    this.eventTimestamp = eventTimestamp;
+  }
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 }

@@ -42,7 +42,7 @@ public class EquipmentEvent implements Serializable{
   private String location;
   
   @Column(name="EVENT_DT_LOC", nullable=false)
-  private Date eventDateTimeLocal;
+  private Date eventDateTime;
   
   @Column(name="EVENT_TYPE", nullable=false)
   @Type(type = "equipment.utils.GenericEnumUserType", parameters = {
@@ -59,6 +59,15 @@ public class EquipmentEvent implements Serializable{
   
   @Column(name="MATERIAL")
   private String material;
+  
+  @Column(name = "DOC_NUM")
+  private String documentNumber;
+  
+  @Column(name = "UPD_USER")
+  private String updateUser;
+  
+  @Column(name = "REC_UPD_DT")
+  private Date recordUpdateDateTime;
 
   public String getEventTimestamp() {
     return eventTimestamp;
@@ -92,12 +101,12 @@ public class EquipmentEvent implements Serializable{
     this.location = location;
   }
 
-  public Date getEventDateTimeLocal() {
-    return eventDateTimeLocal;
+  public Date getEventDateTime() {
+    return eventDateTime;
   }
 
-  public void setEventDateTimeLocal(Date eventDateTimeLocal) {
-    this.eventDateTimeLocal = eventDateTimeLocal;
+  public void setEventDateTime(Date eventDateTime) {
+    this.eventDateTime = eventDateTime;
   }
 
   public SubEventType getEventType() {
@@ -138,6 +147,30 @@ public class EquipmentEvent implements Serializable{
 
   public void setMaterial(String material) {
     this.material = material;
+  }
+
+  public String getUpdateUser() {
+    return updateUser;
+  }
+
+  public void setUpdateUser(String updateUser) {
+    this.updateUser = updateUser;
+  }
+
+  public Date getRecordUpdateDateTime() {
+    return recordUpdateDateTime;
+  }
+
+  public void setRecordUpdateDateTime(Date recordUpdateDateTime) {
+    this.recordUpdateDateTime = recordUpdateDateTime;
+  }
+
+  public String getDocumentNumber() {
+    return documentNumber;
+  }
+
+  public void setDocumentNumber(String documentNumber) {
+    this.documentNumber = documentNumber;
   }
   
 }

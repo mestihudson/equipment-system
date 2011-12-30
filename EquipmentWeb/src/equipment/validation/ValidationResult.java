@@ -13,4 +13,8 @@ public class ValidationResult {
   public void addValidationError(ValidationError validationError) {
     errors.add(validationError);
   }
+  
+  public List<ValidationError> getValidationErrors() {
+    return errors;
+  }
 }

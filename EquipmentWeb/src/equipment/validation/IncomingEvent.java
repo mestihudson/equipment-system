@@ -3,8 +3,6 @@ package equipment.validation;
 import java.io.Serializable;
 import java.util.Date;
 
-import equipment.domain.enums.EventType;
-
 public abstract class IncomingEvent implements Serializable{
   private static final long serialVersionUID = -476649668008487830L;
   

@@ -2,7 +2,6 @@ package equipment.web.jsf.mbean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import equipment.domain.entity.EquipmentLatestInfo;
 import equipment.service.EquipmentLatestInfoService;
-import equipment.service.MovementEventService;
 
 @Component("equipmentEnquiryBean")
 @Scope("request")
@@ -37,7 +35,7 @@ public class EquipmentEnquiryBean implements Serializable {
   }
 
   public void search() {
-    equiplastinfo = equipmentLatestInfoService.findByContainerNumber(containerNumber);
+    equiplastinfo = equipmentLatestInfoService.findByEquipmentNumber(containerNumber);
   }
 
   public Collection<String> getTablelist() {
