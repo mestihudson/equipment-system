@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import equipment.domain.entity.MovementEvent;
@@ -20,8 +22,6 @@ public class MovementEventDao extends AbstractBaseDao {
   }
 
   public Collection<MovementEvent> findByContainerNumber(String containerNumber) {
-    Map<String, Object> nameValue = new HashMap<String, Object>();
-    nameValue.put(CNTR_NUM, containerNumber);
-    return findBy(nameValue);
+    return getCurrentSession().createCriteria(getDomainClass()).add(Restrictions.like(CNTR_NUM,containerNumber,MatchMode.ANYWHERE)).list();
   }
 }

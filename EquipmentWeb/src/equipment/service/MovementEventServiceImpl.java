@@ -47,4 +47,17 @@ public class MovementEventServiceImpl implements MovementEventService {
       return result.get(0);
     }
   }
+
+@Override
+public int removeEvents(MovementEvent[] selectedEvents) {
+	int count=0;
+	for(MovementEvent event : selectedEvents){
+		Object obj =movementEventDao.load(event.getEventTimestamp());
+		if(obj!=null){
+		movementEventDao.delete(obj);
+		count++;
+		}
+	}
+	return count;
+}
 }

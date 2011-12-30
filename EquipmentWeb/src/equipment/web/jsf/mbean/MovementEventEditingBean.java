@@ -6,21 +6,26 @@ import java.util.EnumSet;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.EventType;
+import equipment.service.EventValidationService;
 import equipment.service.MovementEventService;
 
 @Component("movementEventEditingBean")
-@Scope("request")
+@Scope("view")
 public class MovementEventEditingBean implements Serializable {
   private static final long serialVersionUID = -1522497061055049165L;
   @Resource(name = "movementEventService")
   private MovementEventService movementEventService;
-
+  @Resource(name = "eventValidationService")
+  private EventValidationService eventValidationService;
+  
   private String containerNumber;
   private EventType eventType;
   private MovementEventDataModel mediumEventsModel;
@@ -81,5 +86,18 @@ public class MovementEventEditingBean implements Serializable {
     // mediumEventsModel = new MovementEventDataModel(movementEvents);
     movementEvents=new ArrayList(movementEventService.findByContainerNumber(containerNumber));
     mediumEventsModel = new MovementEventDataModel(movementEvents);
+  }
+  public void delete(){
+	  if(selectedEvents.length==0){
+		  FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_WARN,"请选择必要操作", "您至少需要选择1条要删除的事件消息");
+          FacesContext.getCurrentInstance().addMessage("请选择必要操作", fm);
+	  }else{
+		  int count =movementEventService.removeEvents(selectedEvents);
+		  if(count>0){
+		  FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_INFO,"", "成功删除"+count+"条消息");
+		  FacesContext.getCurrentInstance().addMessage("", fm);
+		  search();
+		  }
+	  }
   }
 }
