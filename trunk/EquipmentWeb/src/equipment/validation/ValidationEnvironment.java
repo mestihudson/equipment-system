@@ -128,6 +128,7 @@ public class ValidationEnvironment {
       IncomingMovementEvent incomingMovementEvent = (IncomingMovementEvent) incomingEvent;
       MovementEvent movementEvent = new MovementEvent();
       movementEvent.setEventTimestamp(getEventTimestamp());
+      movementEvent.setEventCreationDateTime(TimestampUtil.now());
       movementEvent.setRecordUpdateDateTime(TimestampUtil.now());
       BeanUtils.copyProperties(incomingMovementEvent, movementEvent, new String[] { "equipmentNumber" });
       movementEvent.setContainerNumber(incomingMovementEvent.getEquipmentNumber());
