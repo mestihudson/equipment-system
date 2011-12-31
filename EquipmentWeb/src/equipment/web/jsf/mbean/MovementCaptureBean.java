@@ -1,11 +1,8 @@
 package equipment.web.jsf.mbean;
 
-import java.io.Serializable;
 import java.util.EnumSet;
 
 import javax.annotation.Resource;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -19,10 +16,12 @@ import equipment.domain.enums.ValidationType;
 import equipment.domain.enums.WeightUnit;
 import equipment.service.EventValidationService;
 import equipment.validation.IncomingMovementEvent;
+import equipment.validation.ValidationError;
+import equipment.validation.ValidationResult;
 
 @Component("movementCaptureBean")
 @Scope("request")
-public class MovementCaptureBean implements Serializable {
+public class MovementCaptureBean extends AbstractManagedBean {
 
   private static final long serialVersionUID = 1906335266687624174L;
 
@@ -65,9 +64,15 @@ public class MovementCaptureBean implements Serializable {
 
   public void save() {
     buildIncomingEvent();
-    eventValidationService.validateEvent(getIncomingEvent(), ValidationType.NEW);
-    FacesContext context = FacesContext.getCurrentInstance();
-    context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Movement Capturing", "Save Successful"));
+    ValidationResult result = eventValidationService.validateEvent(getIncomingEvent(), ValidationType.NEW);
+    if(result.hasRejection()) {
+      addWarnMessage("The movement has been rejected.  The reason as below:");
+      for(ValidationError error : result.getValidationErrors()) {
+        addWarnMessage(error.getErrorMessage().getDescription());
+      }
+    } else {
+      addInfoMessage("Save Successful");
+    }
   }
 
   private void buildIncomingEvent() {

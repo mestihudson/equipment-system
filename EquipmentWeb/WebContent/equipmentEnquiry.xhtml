@@ -1,52 +1,40 @@
-<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:p="http://primefaces.org/ui" xmlns:h="http://java.sun.com/jsf/html"
-  xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
   <ui:define name="title">Movement Enquiry</ui:define>
   <ui:define name="content">
     <h:form>
-      <p:growl id="messages" />
+      <p:messages id="messages" showDetail="true" showSummary="false" />
       <h:panelGrid columns="1">
         <h:panelGroup>
           <h:outputLabel>Container Number:</h:outputLabel>
           <p:inputText id="containerNumber" value="#{equipmentEnquiryBean.containerNumber}">
           </p:inputText>
 
-          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}"
-            update="latestInfoPanel" />
+          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" update="latestInfoPanel messages" />
         </h:panelGroup>
         <h:panelGrid id="latestInfoPanel" columns="8">
-          <h:outputLabel>Equipment Number:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.equipmentNumber}"></p:inputText>
           <h:outputLabel>Event Type:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.eventType}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.eventType}"></p:inputText>
           <h:outputLabel> ISO Code:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.isoCode}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.isoCode}"></p:inputText>
           <h:outputLabel>Group Code:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.groupCode}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.groupCode}"></p:inputText>
           <h:outputLabel>State:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{(uipmentLatestInfo.active==null)?'':((equipmentEnquiryBean.equipmentLatestInfo.active)?'Active':'Inactive')}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.active}" converter="equipmentStatusConverter"></p:inputText>
           <h:outputLabel>Current Location:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.currentLocation}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.currentLocation}"></p:inputText>
           <h:outputLabel>Next Location:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.nextLocation}"></p:inputText>
-          <h:outputLabel>Contract Action:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.contraAction}"></p:inputText>
-          <h:outputLabel>Document Reference:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.documentReference}"></p:inputText>
-          <h:outputLabel>Document Type:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.documentType}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.nextLocation}"></p:inputText>
+          <h:outputLabel>Doc Ref No.:</h:outputLabel>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.documentReference}"></p:inputText>
+          <h:outputLabel>Doc Type:</h:outputLabel>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.documentType}"></p:inputText>
+          <h:outputLabel>Contra:</h:outputLabel>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.contraAction}"></p:inputText>
           <h:outputLabel>Load Port:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.loadPort}"></p:inputText>
-          <h:outputLabel>Discharge Prot:</h:outputLabel>
-          <p:inputText readonly="true"
-            value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.loadPort}"></p:inputText>
+          <h:outputLabel>Discharge Port:</h:outputLabel>
+          <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
         </h:panelGrid>
         <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="event">
           <p:column>

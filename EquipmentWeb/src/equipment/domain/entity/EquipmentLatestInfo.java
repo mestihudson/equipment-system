@@ -47,7 +47,7 @@ public class EquipmentLatestInfo implements Serializable {
   private String groupCode;
   
   @Column(name = "ACTIVE")
-  private boolean active;
+  private Boolean active;
 
   @Column(name = "CURR_LOCA")
   private String currentLocation;
@@ -253,11 +253,11 @@ public class EquipmentLatestInfo implements Serializable {
     this.eventTimestamp = eventTimestamp;
   }
 
-  public boolean isActive() {
+  public Boolean getActive() {
     return active;
   }
 
-  public void setActive(boolean active) {
+  public void setActive(Boolean active) {
     this.active = active;
   }
 }

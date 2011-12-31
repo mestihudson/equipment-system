@@ -17,7 +17,7 @@ import equipment.service.MovementEventService;
 
 @Component("equipmentEnquiryBean")
 @Scope("request")
-public class EquipmentEnquiryBean implements Serializable {
+public class EquipmentEnquiryBean extends AbstractManagedBean {
 
   private static final long serialVersionUID = 2268013658546622642L;
 
@@ -42,7 +42,12 @@ public class EquipmentEnquiryBean implements Serializable {
   }
 
   public void search() {
-    setEquipmentLatestInfo(equipmentLatestInfoService.findByEquipmentNumber(containerNumber));
+    EquipmentLatestInfo equipmentLatestInfo = equipmentLatestInfoService.findByEquipmentNumber(containerNumber);
+    if(equipmentLatestInfo == null) {
+      addErrorMessage("Equipment not exists");
+    } else {
+      setEquipmentLatestInfo(equipmentLatestInfo);
+    }
   }
 
   public Collection<MovementEvent> getTablelist() {
