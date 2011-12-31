@@ -8,10 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
@@ -28,8 +26,6 @@ public class MovementEvent implements Serializable{
   private static final long serialVersionUID = -321023715030025820L;
 
   @Id
-	@GenericGenerator(name="idGenerator", strategy="uuid")
-	@GeneratedValue(generator="idGenerator")
 	@Column(name = "EVENT_TIMESTAMP")
 	private String eventTimestamp;
 

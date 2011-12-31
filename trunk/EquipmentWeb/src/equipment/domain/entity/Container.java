@@ -25,7 +25,7 @@ public class Container implements Serializable{
 	private Character checkDigit;
 	
 	@Column(name="ACTIVE")
-	private Boolean active;
+	private boolean active;
 	
 	@Column(name="CREATE_DT")
 	private Date createDateTime;
@@ -81,12 +81,12 @@ public class Container implements Serializable{
 		this.updateDateTime = updateDateTime;
 	}
 
-  public Boolean getActive() {
+  public boolean isActive() {
     return active;
   }
 
-  public void setActive(Boolean active) {
+  public void setActive(boolean active) {
     this.active = active;
   }
-	
+
 }

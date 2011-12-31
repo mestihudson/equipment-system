@@ -11,6 +11,7 @@ import equipment.dao.MovementEventDao;
 import equipment.domain.entity.MovementEvent;
 import equipment.validation.checks.AbstractValidationCheck;
 import equipment.validation.checks.ContainerCheck;
+import equipment.validation.checks.EventDateCheck;
 
 @Service
 @Scope("prototype")
@@ -18,14 +19,11 @@ public class MovementEventValidation extends EventValidationTemplate {
 
   @Autowired
   private MovementEventDao movementEventDao;
-  
+
   @Override
-  protected void applyRules() {
-//    for(AbstractValidationCheck check : checkList) {
-//      if(check.applyTo(validationEnvironment.getIncomingEvent(), validationEnvironment.getValidationType())) {
-//        check.validate(validationEnvironment);
-//      }
-//    }
+  protected void initializeRules(List<AbstractValidationCheck> rules) {
+    rules.add(new ContainerCheck());
+    rules.add(new EventDateCheck());
   }
 
   @Override
@@ -36,7 +34,7 @@ public class MovementEventValidation extends EventValidationTemplate {
 
   @Override
   protected void updateOrCreateEquipment() {
-    // TODO Auto-generated method stub
-    
+    //do nothing
   }
+
 }

@@ -1,5 +1,7 @@
 package equipment.validation;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import equipment.dao.EquipmentEventDao;
 import equipment.domain.entity.Container;
 import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.enums.ValidationType;
+import equipment.validation.checks.AbstractValidationCheck;
 
 @Service
 @Scope("prototype")
@@ -17,9 +20,9 @@ public class EquipmentEventValidation extends EventValidationTemplate {
   private ContainerDao containerDao;
   @Autowired
   private EquipmentEventDao equipmentEventDao;
-  
+
   @Override
-  protected void applyRules() {
+  protected void initializeRules(List<AbstractValidationCheck> rules) {
     // TODO Auto-generated method stub
 
   }
@@ -28,7 +31,7 @@ public class EquipmentEventValidation extends EventValidationTemplate {
   protected void addToEventLog() {
     EquipmentEvent event = validationEnvironment.createEquipmentEventLog();
     equipmentEventDao.save(event);
-    
+
   }
 
   @Override

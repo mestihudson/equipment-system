@@ -54,7 +54,7 @@ public class ValidationEnvironment {
 
   @Resource(name = "containerService")
   private ContainerService containerService;
-  
+
   public void initialize() {
     eventTimestamp = null;
     equpimentLatestInfo = null;
@@ -104,8 +104,20 @@ public class ValidationEnvironment {
   public Rejection createRejection() {
     Rejection rejection = new Rejection();
     rejection.setEventTimestamp(getEventTimestamp());
-    // TODO set values into rejection
-    Collection<RejectionDetail> rejectionDetails = new ArrayList<RejectionDetail>();
+    if (validationType == ValidationType.CREATION || validationType == ValidationType.TERMINATION) {
+      IncomingEquipmentEvent incomingEquipmentEvent = (IncomingEquipmentEvent) incomingEvent;
+      rejection.setEventCreationDateTime(TimestampUtil.now());
+      rejection.setRecordUpdateDateTime(TimestampUtil.now());
+      BeanUtils.copyProperties(incomingEquipmentEvent, rejection, new String[] { "equipmentNumber" });
+      rejection.setContainerNumber(incomingEquipmentEvent.getEquipmentNumber());
+    } else {
+      IncomingMovementEvent incomingMovementEvent = (IncomingMovementEvent) incomingEvent;
+      rejection.setEventCreationDateTime(TimestampUtil.now());
+      rejection.setRecordUpdateDateTime(TimestampUtil.now());
+      BeanUtils.copyProperties(incomingMovementEvent, rejection, new String[] { "equipmentNumber" });
+      rejection.setContainerNumber(incomingMovementEvent.getEquipmentNumber());
+    }
+    Collection<RejectionDetail> rejectionDetails = rejection.getRejectionDetails();
     for (ValidationError error : validationResult.getValidationErrors()) {
       RejectionDetail detail = new RejectionDetail();
       detail.setEventTimestamp(getEventTimestamp());
@@ -115,7 +127,7 @@ public class ValidationEnvironment {
     }
     return rejection;
   }
-
+  
   public EquipmentLatestInfo getEquipmentLatestInfo() {
     if (equpimentLatestInfo == null) {
       equpimentLatestInfo = equipmentLatestInfoService.findByEquipmentNumber(incomingEvent.getEquipmentNumber());
@@ -146,15 +158,6 @@ public class ValidationEnvironment {
       BeanUtils.copyProperties(incomingEquipmentEvent, equipmentEvent, new String[] { "facilityCode" });
       equipmentEvent.setLocation(incomingEquipmentEvent.getFacilityCode());
       equipmentEvent.setRecordUpdateDateTime(TimestampUtil.now());
-      // equipmentEvent.setEquipmentNumber(incomingEquipmentEvent.getEquipmentNumber());
-      // equipmentEvent.setEquipmentType(incomingEquipmentEvent.getEquipmentType());
-      // equipmentEvent.setEquipmentTypeCode(incomingEquipmentEvent.getEquipmentTypeCode());
-      // equipmentEvent.setEquipmentTypeGroupCode(incomingEquipmentEvent.getEquipmentTypeGroupCode());
-      // equipmentEvent.setEventDateTime(incomingEquipmentEvent.getEventDateTime());
-      // equipmentEvent.setEventType(incomingEquipmentEvent.getEventType());
-      // equipmentEvent.setLocation(incomingEquipmentEvent.getFacilityCode());
-      // equipmentEvent.setMaterial(incomingEquipmentEvent.getMaterial());
-      // equipmentEvent.setUpdateUser(incomingEquipmentEvent.getUpdateUser());
       return equipmentEvent;
     } else {
       return null;

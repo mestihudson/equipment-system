@@ -1,21 +1,28 @@
 package equipment.validation;
 
-import javax.annotation.PreDestroy;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.springframework.beans.factory.InitializingBean;
 
 import equipment.dao.EquipmentLatestInfoDao;
 import equipment.dao.RejectionDao;
 import equipment.domain.entity.EquipmentLatestInfo;
 import equipment.domain.entity.Rejection;
 import equipment.domain.enums.ValidationType;
+import equipment.validation.checks.AbstractValidationCheck;
 
-public abstract class EventValidationTemplate {
+public abstract class EventValidationTemplate implements InitializingBean {
   @Resource(name = "validationEnvironment")
   protected ValidationEnvironment validationEnvironment;
   @Resource(name = "rejectionDao")
   private RejectionDao rejectionDao;
   @Resource(name = "equipmentLatestInfoDao")
   private EquipmentLatestInfoDao equipmentLatestInfoDao;
+
+  private List<AbstractValidationCheck> rules;
 
   public ValidationResult validate(IncomingEvent event, ValidationType validationType) {
     validationEnvironment.initialize();
@@ -26,12 +33,20 @@ public abstract class EventValidationTemplate {
     return validationEnvironment.getValidationResult();
   }
 
-  protected abstract void applyRules();
+  protected abstract void initializeRules(List<AbstractValidationCheck> rules);
+
+  private void applyRules() {
+    for(AbstractValidationCheck check : rules) {
+      if(check.applyTo(validationEnvironment.getIncomingEvent(), validationEnvironment.getValidationType())) {
+        check.validate(validationEnvironment);
+      }
+    }
+  }
 
   protected abstract void addToEventLog();
 
   protected abstract void updateOrCreateEquipment();
-  
+
   protected void processResults() {
     ValidationResult result = validationEnvironment.getValidationResult();
     if (result.hasRejection()) {
@@ -52,16 +67,17 @@ public abstract class EventValidationTemplate {
     if (validationEnvironment.isCurrent()) {
       EquipmentLatestInfo latestInfo = equipmentLatestInfoDao.get(validationEnvironment.getIncomingEvent()
           .getEquipmentNumber());
-      if(latestInfo == null) {
+      if (latestInfo == null) {
         latestInfo = new EquipmentLatestInfo();
       }
       validationEnvironment.update(latestInfo);
       equipmentLatestInfoDao.saveOrUpdate(latestInfo);
     }
   }
-  
-  @PreDestroy
-  public void destory(){
-    System.out.println("------------------------->destory");
+
+  @Override
+  public void afterPropertiesSet() throws Exception {
+    rules = new ArrayList<AbstractValidationCheck>();
+    initializeRules(rules);
   }
 }
