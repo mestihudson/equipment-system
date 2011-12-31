@@ -26,7 +26,7 @@
           <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.groupCode}"></p:inputText>
           <h:outputLabel>State:</h:outputLabel>
           <p:inputText readonly="true"
-            value="#{(equipmentEnquiryBean.equipmentLatestInfo.active)?'Active':'Inactive'}"></p:inputText>
+            value="#{(uipmentLatestInfo.active==null)?'':((equipmentEnquiryBean.equipmentLatestInfo.active)?'Active':'Inactive')}"></p:inputText>
           <h:outputLabel>Current Location:</h:outputLabel>
           <p:inputText readonly="true"
             value="#{equipmentEnquiryBean.equipmentLatestInfo.currentLocation}"></p:inputText>
