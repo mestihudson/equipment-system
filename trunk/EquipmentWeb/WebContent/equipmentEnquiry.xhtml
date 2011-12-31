@@ -11,11 +11,13 @@
           <p:inputText id="containerNumber" value="#{equipmentEnquiryBean.containerNumber}">
           </p:inputText>
 
-          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" update="latestInfoPanel"/>
+          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}"
+            update="latestInfoPanel" />
         </h:panelGroup>
         <h:panelGrid id="latestInfoPanel" columns="8">
-         <h:outputLabel>Equipment Number:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.equipmentNumber}"></p:inputText>
+          <h:outputLabel>Equipment Number:</h:outputLabel>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.equipmentNumber}"></p:inputText>
           <h:outputLabel>Event Type:</h:outputLabel>
           <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.eventType}"></p:inputText>
           <h:outputLabel> ISO Code:</h:outputLabel>
@@ -23,26 +25,58 @@
           <h:outputLabel>Group Code:</h:outputLabel>
           <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.groupCode}"></p:inputText>
           <h:outputLabel>State:</h:outputLabel>
-          <p:inputText readonly="true" value="#{(equipmentEnquiryBean.equipmentLatestInfo.active)?'Active':'Inactive'}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{(equipmentEnquiryBean.equipmentLatestInfo.active)?'Active':'Inactive'}"></p:inputText>
           <h:outputLabel>Current Location:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.currentLocation}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.currentLocation}"></p:inputText>
           <h:outputLabel>Next Location:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.nextLocation}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.nextLocation}"></p:inputText>
           <h:outputLabel>Contract Action:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.contraAction}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.contraAction}"></p:inputText>
           <h:outputLabel>Document Reference:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.documentReference}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.documentReference}"></p:inputText>
           <h:outputLabel>Document Type:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.documentType}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.documentType}"></p:inputText>
           <h:outputLabel>Load Port:</h:outputLabel>
           <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.loadPort}"></p:inputText>
           <h:outputLabel>Discharge Prot:</h:outputLabel>
-          <p:inputText readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
+          <p:inputText readonly="true"
+            value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
         </h:panelGrid>
-        <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="row">
+        <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="event">
+          <p:column>
+            <f:facet name="header">Event Type</f:facet>
+            <h:outputText value="#{event.eventType.description}" />
+          </p:column>
           <p:column>
             <f:facet name="header">Container Number</f:facet>
-            <h:outputLabel value="#{row}" />
+            <h:outputText value="#{event.containerNumber}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Facility</f:facet>
+            <h:outputText value="#{event.facilityCode}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Next Location</f:facet>
+            <h:outputText value="#{event.nextLocation}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Activity Date</f:facet>
+            <h:outputText value="#{event.eventDateTime}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Document No./Type</f:facet>
+            <h:outputText value="#{event.documentReference}" />
+            <h:outputText value="#{event.documentType}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Update Date</f:facet>
+            <h:outputText value="#{event.recordUpdateDateTime}" />
           </p:column>
         </p:dataTable>
       </h:panelGrid>
