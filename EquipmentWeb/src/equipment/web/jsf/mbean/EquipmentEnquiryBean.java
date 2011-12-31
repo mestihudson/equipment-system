@@ -11,7 +11,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import equipment.domain.entity.EquipmentLatestInfo;
+import equipment.domain.entity.MovementEvent;
 import equipment.service.EquipmentLatestInfoService;
+import equipment.service.MovementEventService;
 
 @Component("equipmentEnquiryBean")
 @Scope("request")
@@ -21,10 +23,15 @@ public class EquipmentEnquiryBean implements Serializable {
 
   @Resource(name = "equipmentLatestInfoService")
   private EquipmentLatestInfoService equipmentLatestInfoService;
+  
+  @Resource(name = "movementEventService")
+  private MovementEventService movementEventService;
 
   private String containerNumber;
 
   private EquipmentLatestInfo equipmentLatestInfo = new EquipmentLatestInfo();
+  
+  private Collection<MovementEvent> movementEvents;
 
   public String getContainerNumber() {
     return containerNumber;
@@ -38,10 +45,9 @@ public class EquipmentEnquiryBean implements Serializable {
     setEquipmentLatestInfo(equipmentLatestInfoService.findByEquipmentNumber(containerNumber));
   }
 
-  public Collection<String> getTablelist() {
-    List<String> s = new ArrayList<String>();
-    s.add("S");
-    return s;
+  public Collection<MovementEvent> getTablelist() {
+    movementEvents=movementEventService.findByContainerNumber(containerNumber);
+    return movementEvents;
   }
 
   public EquipmentLatestInfo getEquipmentLatestInfo() {
