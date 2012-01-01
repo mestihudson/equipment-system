@@ -23,14 +23,14 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
 
   @Resource(name = "equipmentLatestInfoService")
   private EquipmentLatestInfoService equipmentLatestInfoService;
-  
+
   @Resource(name = "movementEventService")
   private MovementEventService movementEventService;
 
   private String containerNumber;
 
   private EquipmentLatestInfo equipmentLatestInfo = new EquipmentLatestInfo();
-  
+
   private Collection<MovementEvent> movementEvents;
 
   public String getContainerNumber() {
@@ -43,15 +43,15 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
 
   public void search() {
     EquipmentLatestInfo equipmentLatestInfo = equipmentLatestInfoService.findByEquipmentNumber(containerNumber);
-    if(equipmentLatestInfo == null) {
+    if (equipmentLatestInfo == null) {
       addErrorMessage("Equipment not exists");
     } else {
       setEquipmentLatestInfo(equipmentLatestInfo);
+      movementEvents = movementEventService.findByContainerNumber(containerNumber);
     }
   }
 
   public Collection<MovementEvent> getTablelist() {
-    movementEvents=movementEventService.findByContainerNumber(containerNumber);
     return movementEvents;
   }
 

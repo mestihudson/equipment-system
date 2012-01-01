@@ -27,7 +27,6 @@ public class IncomingMovementEvent extends IncomingEvent {
   private EquipmentCondition containerCondition;
   private Boolean hazardIndicator;
   private String remarks;
-  private String contraAction;
   private String positionAtRoute;
   private String nature;
   private String containerCheckDigit;
@@ -144,12 +143,6 @@ public class IncomingMovementEvent extends IncomingEvent {
   }
   public void setRemarks(String remarks) {
     this.remarks = remarks;
-  }
-  public String getContraAction() {
-    return contraAction;
-  }
-  public void setContraAction(String contraAction) {
-    this.contraAction = contraAction;
   }
   public String getPositionAtRoute() {
     return positionAtRoute;

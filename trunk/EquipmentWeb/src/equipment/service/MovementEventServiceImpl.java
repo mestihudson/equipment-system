@@ -1,8 +1,9 @@
 package equipment.service;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import equipment.dao.MovementEventDao;
 import equipment.domain.entity.MovementEvent;
+import equipment.domain.enums.ContraAction;
 
 @Service("movementEventService")
 @Scope("singleton")
@@ -23,16 +25,23 @@ public class MovementEventServiceImpl implements MovementEventService {
   private MovementEventDao movementEventDao;
 
   @Override
-  public void deleteEvents(Collection<MovementEvent> events) {
-    // TODO Auto-generated method stub
-
+  public int deleteEvents(MovementEvent[] events) {
+    int count = 0;
+    for(MovementEvent event : events) {
+      event.setContraAction(ContraAction.DELETE);
+      movementEventDao.update(event);
+      count ++;
+    }
+    return count;
   }
 
   @Override
-  public Collection<MovementEvent> findByContainerNumber(String containerNumber) {
-	  return movementEventDao.findByContainerNumber(containerNumber);
+  public List<MovementEvent> findByContainerNumber(String containerNumber) {
+    Map<String, Object> restrictionMap = new HashMap<String,Object> ();
+    restrictionMap.put(MovementEventDao.CNTR_NUM, containerNumber);
+	  return movementEventDao.findBy(restrictionMap);
   }
-  
+
   @SuppressWarnings("unchecked")
   @Override
   public MovementEvent findLastEventBeforeDate(String containerNumber, Date date) {

@@ -7,15 +7,15 @@
       <h:panelGrid columns="1">
         <h:panelGroup>
           <h:outputLabel>Container Number:</h:outputLabel>
-          <p:inputText id="containerNumber" value="#{rejectionBean.containerNumber}" />
+          <p:inputText id="containerNumber" size="8" value="#{rejectionBean.containerNumber}" />
           <h:outputLabel>Event Type:</h:outputLabel>
-          <h:selectOneMenu value="#{rejectionBean.eventType}">
+          <p:selectOneMenu value="#{rejectionBean.eventType}">
             <f:selectItem itemLabel="-" noSelectionOption="true" />
             <f:selectItems value="#{rejectionBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
               itemValue="#{_eventType}" />
-          </h:selectOneMenu>
+          </p:selectOneMenu>
           <p:commandButton value="Search" action="#{rejectionBean.search}" icon="ui-icon-search" update="rejectionDataTable" />
-          <p:commandButton value="Delete" action="#{rejectionBean.delete}" icon="ui-icon-trash" update="messages rejectionDataTable" />
+          <p:commandButton value="Delete" onclick="deleteConfirmDialog.show()" icon="ui-icon-trash"/>
         </h:panelGroup>
         <p:dataTable id="rejectionDataTable" value="#{rejectionBean.mediumEventsModel}" var="rejection"
           selection="#{rejectionBean.selectedRejections}">
@@ -45,8 +45,8 @@
           </p:column>
         </p:dataTable>
       </h:panelGrid>
-      <p:dialog widgetVar="rejectionDetailDialog" width="700" height="400" id="rejectionDetailDialog">
-        <h:panelGrid columns="4" cellpadding="10">
+      <p:dialog widgetVar="rejectionDetailDialog" width="700" height="400" id="rejectionDetailDialog" header="Rejection Detail">
+        <h:panelGrid columns="4" cellpadding="5">
           <h:outputLabel value="Container Number:" />
           <h:outputLabel value="#{rejectionBean.rejectionInDialog.containerNumber}-#{rejectionBean.rejectionInDialog.containerCheckDigit}" />
 
@@ -90,10 +90,13 @@
           <h:outputLabel value="#{rejectionBean.rejectionInDialog.updateUser}" />
 
           <h:outputLabel value="Update Date:" />
-          <h:outputLabel value="#{rejectionBean.rejectionInDialog.updateDateTime}" />
-
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.recordUpdateDateTime}" />
         </h:panelGrid>
       </p:dialog>
+      <p:confirmDialog message="Are you sure to delete the rejection(s)?" header="Confirmation" severity="alert" widgetVar="deleteConfirmDialog">
+        <p:commandButton value="Yes" action="#{rejectionBean.delete}" oncomplete="deleteConfirmDialog.hide()" update="messages rejectionDataTable" />
+        <p:commandButton value="No" onclick="deleteConfirmDialog.hide();"/>
+      </p:confirmDialog>
     </h:form>
   </ui:define>
 </ui:composition>

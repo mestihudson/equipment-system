@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.event.ActionEvent;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -47,12 +45,20 @@ public class RejectionBean extends AbstractManagedBean {
   }
 
   public void delete() {
-    //TODO
+    if (selectedRejections.length == 0) {
+      addWarnMessage("Please select a rejection");
+    } else {
+      List<?> rejections = (List<?>)mediumEventsModel.getWrappedData();
+      for (Rejection rejection : selectedRejections) {
+        rejectionDao.delete(rejection);
+        rejections.remove(rejection);
+      }
+    }
   }
 
   public EnumSet<EventType> getEventTypes() {
     return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
-        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
+        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK);
   }
 
   public void setMediumEventsModel(RejectionDataModel mediumEventsModel) {

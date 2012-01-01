@@ -2,29 +2,36 @@
   xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
   <ui:define name="title">Movement Enquiry</ui:define>
   <ui:define name="content">
-    <h:form>
+    <h:form id="form">
       <p:messages id="messages" showDetail="true" showSummary="false" />
       <h:panelGrid columns="1">
         <h:panelGroup>
           <h:outputLabel>Container Number:</h:outputLabel>
           <p:inputText id="containerNumber" value="#{movementEventEditingBean.containerNumber}">
-          <!-- 
+            <!-- 
             <f:validator validatorId="containerNumberValidator" />
             <p:ajax event="blur" update="messages" />
              -->
           </p:inputText>
 
           <h:outputLabel>Event Type:</h:outputLabel>
-          <h:selectOneMenu value="#{movementEventEditingBean.eventType}">
+          <p:selectOneMenu value="#{movementEventEditingBean.eventType}">
             <f:selectItem itemLabel="-" noSelectionOption="true" />
-            <f:selectItems value="#{movementEventEditingBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}" itemValue="#{_eventType}" />
-          </h:selectOneMenu>
-          <p:commandButton value="Search" action="#{movementEventEditingBean.search}" update="eventDataTable" />
+            <f:selectItems value="#{movementEventEditingBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+              itemValue="#{_eventType}" />
+          </p:selectOneMenu>
+          <p:commandButton value="Search" action="#{movementEventEditingBean.search}" update="eventDataTable" icon="ui-icon-search" />
+          <p:commandButton value="Delete" onclick="deleteConfirmDialog.show()" icon="ui-icon-trash" />
         </h:panelGroup>
-        <p:commandButton value="Delete Selected Event" onclick="if (!confirm('你确认要删除所选记录么?')) return false;" icon="ui-icon-search"  action="#{movementEventEditingBean.delete}" update="messages eventDataTable" >
-        
-        </p:commandButton>
         <ui:include src="/composition/movementResultTable.xhtml" />
+        <ui:include src="/composition/movementDetailDialog.xhtml" />
+        
+        <p:confirmDialog message="Are you sure to delete the event(s)?" header="Confirmation" severity="alert"
+          widgetVar="deleteConfirmDialog">
+          <p:commandButton value="Yes" action="#{movementEventEditingBean.delete}" oncomplete="deleteConfirmDialog.hide()"
+            update="messages eventDataTable" />
+          <p:commandButton value="No" onclick="deleteConfirmDialog.hide();" />
+        </p:confirmDialog>
       </h:panelGrid>
     </h:form>
   </ui:define>
