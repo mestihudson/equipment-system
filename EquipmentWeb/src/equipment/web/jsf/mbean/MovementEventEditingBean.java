@@ -75,15 +75,6 @@ public class MovementEventEditingBean implements Serializable {
   }
 
   public void search() {
-    // Map<String, Object> propertyNameValues = new HashMap<String, Object>();
-    // if(StringUtil.isNotNullAndNotEmptyWithTrim(containerNumber)) {
-    // propertyNameValues.put("containerNumber", containerNumber);
-    // }
-    // if(eventType != null) {
-    // propertyNameValues.put("eventType", eventType);
-    // }
-    // movementEvents = movementEventDao.findBy(propertyNameValues);
-    // mediumEventsModel = new MovementEventDataModel(movementEvents);
     movementEvents=new ArrayList(movementEventService.findByContainerNumber(containerNumber));
     mediumEventsModel = new MovementEventDataModel(movementEvents);
   }
