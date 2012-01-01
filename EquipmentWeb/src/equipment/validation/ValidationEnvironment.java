@@ -1,6 +1,5 @@
 package equipment.validation;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
@@ -8,11 +7,9 @@ import java.util.UUID;
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import equipment.domain.bo.ContainerNumberResolver;
 import equipment.domain.entity.Container;
 import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.entity.EquipmentLatestInfo;
@@ -22,11 +19,8 @@ import equipment.domain.entity.RejectionDetail;
 import equipment.domain.enums.ContraAction;
 import equipment.domain.enums.ErrorMessage;
 import equipment.domain.enums.ValidationType;
-import equipment.exceptions.ContainerConvertException;
 import equipment.service.ContainerService;
-import equipment.service.EquipmentEventService;
 import equipment.service.EquipmentLatestInfoService;
-import equipment.service.MovementEventService;
 import equipment.utils.TimestampUtil;
 import equipment.validation.checks.AbstractValidationCheck;
 
@@ -45,12 +39,6 @@ public class ValidationEnvironment {
 
   @Resource(name = "equipmentLatestInfoService")
   private EquipmentLatestInfoService equipmentLatestInfoService;
-
-  @Resource(name = "movementEventService")
-  private MovementEventService movementEventService;
-
-  @Resource(name = "equipmentEventService")
-  private EquipmentEventService equipmentEventService;
 
   @Resource(name = "containerService")
   private ContainerService containerService;
