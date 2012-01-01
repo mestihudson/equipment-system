@@ -69,11 +69,11 @@
 
         <h:outputLabel value="Document Type:" />
         <h:panelGroup>
-          <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.documentType}">
+          <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.documentType}">
             <f:selectItem itemLabel="-" noSelectionOption="true" />
             <f:selectItems value="#{movementCaptureBean.documentTypes}" var="_documentType" itemLabel="#{_documentType.description}"
               itemValue="#{_documentType}" />
-          </h:selectOneMenu>
+          </p:selectOneMenu>
         </h:panelGroup>
 
         <h:outputLabel value="Seal Number:" />
@@ -91,11 +91,11 @@
           <h:panelGrid columns="3">
             <p:inputText value="#{movementCaptureBean.incomingEvent.vesselCode}" size="2" />
             <p:inputText value="#{movementCaptureBean.incomingEvent.voyageNumber}" size="2" />
-            <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.directionBound}">
+            <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.directionBound}">
               <f:selectItem itemLabel="-" noSelectionOption="true" />
               <f:selectItems value="#{movementCaptureBean.directions}" var="_direction" itemLabel="#{_direction.label}"
                 itemValue="#{_direction}" />
-            </h:selectOneMenu>
+            </p:selectOneMenu>
           </h:panelGrid>
         </h:panelGroup>
 
@@ -103,9 +103,9 @@
         <h:panelGroup>
           <h:panelGrid columns="2">
             <p:spinner id="spinnerBasic" size="8" value="#{movementCaptureBean.incomingEvent.grossWeight}" stepFactor="0.25" />
-            <h:selectOneMenu value="#{movementCaptureBean.incomingEvent.grossWeightUnit}">
+            <p:selectOneMenu value="#{movementCaptureBean.incomingEvent.grossWeightUnit}">
               <f:selectItems value="#{movementCaptureBean.weightUnits}" />
-            </h:selectOneMenu>
+            </p:selectOneMenu>
           </h:panelGrid>
         </h:panelGroup>
 

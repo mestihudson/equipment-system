@@ -139,6 +139,7 @@ public class ValidationEnvironment {
     if (validationType == ValidationType.NEW) {
       IncomingMovementEvent incomingMovementEvent = (IncomingMovementEvent) incomingEvent;
       MovementEvent movementEvent = new MovementEvent();
+      movementEvent.setContraAction(ContraAction.NEW);
       movementEvent.setEventTimestamp(getEventTimestamp());
       movementEvent.setEventCreationDateTime(TimestampUtil.now());
       movementEvent.setRecordUpdateDateTime(TimestampUtil.now());

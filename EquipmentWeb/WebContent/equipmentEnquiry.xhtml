@@ -10,7 +10,7 @@
           <p:inputText id="containerNumber" value="#{equipmentEnquiryBean.containerNumber}">
           </p:inputText>
 
-          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" update="latestInfoPanel messages" />
+          <p:commandButton value="Search" action="#{equipmentEnquiryBean.search}" update="latestInfoPanel messages eventTableList" />
         </h:panelGroup>
         <h:panelGrid id="latestInfoPanel" columns="8">
           <h:outputLabel>Event Type:</h:outputLabel>
@@ -36,7 +36,7 @@
           <h:outputLabel>Discharge Port:</h:outputLabel>
           <p:inputText size="5" readonly="true" value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
         </h:panelGrid>
-        <p:dataTable value="#{equipmentEnquiryBean.tablelist}" var="event">
+        <p:dataTable id="eventTableList" value="#{equipmentEnquiryBean.tablelist}" var="event">
           <p:column>
             <f:facet name="header">Event Type</f:facet>
             <h:outputText value="#{event.eventType.description}" />

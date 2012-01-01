@@ -43,7 +43,7 @@ public class MovementCaptureBean extends AbstractManagedBean {
 
   public EnumSet<EventType> getEventTypes() {
     return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
-        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
+        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK);
   }
 
   public EnumSet<LoadEmptyIndicator> getLoadEmptyIndicators() {

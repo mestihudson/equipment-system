@@ -9,15 +9,13 @@
     </p:column>
     <p:column>
       <f:facet name="header">Container Number</f:facet>
-      <h:outputText value="#{event.containerNumber}" />
+      <p:commandLink value="#{event.containerNumber}" oncomplete="movementDetailDialog.show()" update=":form:movementDetailDialog">
+        <f:setPropertyActionListener value="#{event}" target="#{movementEventEditingBean.movementInDialog}" />
+      </p:commandLink>
     </p:column>
     <p:column>
       <f:facet name="header">Facility</f:facet>
       <h:outputText value="#{event.facilityCode}" />
-    </p:column>
-    <p:column>
-      <f:facet name="header">Next Location</f:facet>
-      <h:outputText value="#{event.nextLocation}" />
     </p:column>
     <p:column>
       <f:facet name="header">Activity Date</f:facet>
@@ -27,6 +25,10 @@
       <f:facet name="header">Document No./Type</f:facet>
       <h:outputText value="#{event.documentReference}" />
       <h:outputText value="#{event.documentType}" />
+    </p:column>
+    <p:column>
+      <f:facet name="header">Contra Action</f:facet>
+      <h:outputText value="#{event.contraAction.code}" />
     </p:column>
     <p:column>
       <f:facet name="header">Update Date</f:facet>

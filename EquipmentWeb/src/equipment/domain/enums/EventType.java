@@ -20,7 +20,6 @@ public enum EventType   {
   LINK("14","Link"),
   POOL_ON("15","Pool on"),
   POOL_OFF("16","Pool off"),
-  STATUS_CHANGE("17","Status change"),
   PHASE_IN("18","Phase in"),
   PHASE_OUT("19","Phase out"),
   TRANSFER("20","Transfer"),
@@ -43,7 +42,6 @@ public enum EventType   {
     externalSystemEventTypeCodes.add(REPACK.getCode());
     externalSystemEventTypeCodes.add(UNLINK.getCode());
     externalSystemEventTypeCodes.add(LINK.getCode());
-    externalSystemEventTypeCodes.add(STATUS_CHANGE.getCode());
   }
 
   private String code;
@@ -77,6 +75,6 @@ public enum EventType   {
 
   public static EnumSet<EventType> getEventTypes() {
     return EnumSet.of(EventType.ISSUE, EventType.RECEIVE, EventType.DISCHARGE, EventType.LOADING, EventType.DEVANNING,
-        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK, EventType.STATUS_CHANGE);
+        EventType.VANNING, EventType.REPACK, EventType.UNLINK, EventType.LINK);
   }
 }
