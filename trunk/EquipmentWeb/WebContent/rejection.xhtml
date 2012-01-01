@@ -1,0 +1,99 @@
+<ui:composition template="template.xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:p="http://primefaces.org/ui"
+  xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+  <ui:define name="title">Rejection</ui:define>
+  <ui:define name="content">
+    <h:form id="form">
+      <p:messages id="messages" showDetail="true" showSummary="false" />
+      <h:panelGrid columns="1">
+        <h:panelGroup>
+          <h:outputLabel>Container Number:</h:outputLabel>
+          <p:inputText id="containerNumber" value="#{rejectionBean.containerNumber}" />
+          <h:outputLabel>Event Type:</h:outputLabel>
+          <h:selectOneMenu value="#{rejectionBean.eventType}">
+            <f:selectItem itemLabel="-" noSelectionOption="true" />
+            <f:selectItems value="#{rejectionBean.eventTypes}" var="_eventType" itemLabel="#{_eventType.description}"
+              itemValue="#{_eventType}" />
+          </h:selectOneMenu>
+          <p:commandButton value="Search" action="#{rejectionBean.search}" icon="ui-icon-search" update="rejectionDataTable" />
+          <p:commandButton value="Delete" action="#{rejectionBean.delete}" icon="ui-icon-trash" update="messages rejectionDataTable" />
+        </h:panelGroup>
+        <p:dataTable id="rejectionDataTable" value="#{rejectionBean.mediumEventsModel}" var="rejection"
+          selection="#{rejectionBean.selectedRejections}">
+          <p:column selectionMode="multiple" />
+          <p:column>
+            <f:facet name="header">Container Number</f:facet>
+            <p:commandLink value="#{rejection.containerNumber}" oncomplete="rejectionDetailDialog.show()"
+              update=":form:rejectionDetailDialog">
+              <f:setPropertyActionListener value="#{rejection}" target="#{rejectionBean.rejectionInDialog}" />
+            </p:commandLink>
+          </p:column>
+          <p:column>
+            <f:facet name="header">Event Type</f:facet>
+            <h:outputText value="#{rejection.eventType.description}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Facility</f:facet>
+            <h:outputText value="#{rejection.facilityCode}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Activity Date</f:facet>
+            <h:outputText value="#{rejection.eventDateTime}" />
+          </p:column>
+          <p:column>
+            <f:facet name="header">Update Date</f:facet>
+            <h:outputText value="#{rejection.recordUpdateDateTime}" />
+          </p:column>
+        </p:dataTable>
+      </h:panelGrid>
+      <p:dialog widgetVar="rejectionDetailDialog" width="700" height="400" id="rejectionDetailDialog">
+        <h:panelGrid columns="4" cellpadding="10">
+          <h:outputLabel value="Container Number:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.containerNumber}-#{rejectionBean.rejectionInDialog.containerCheckDigit}" />
+
+          <h:outputLabel value="Event Date:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.eventDateTime}" />
+
+          <h:outputLabel value="Facility:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.facilityCode}" />
+
+          <h:outputLabel value="Seal Number:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.sealNumber}" />
+
+          <h:outputLabel value="Iso Code:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.isoCode}" />
+
+          <h:outputLabel value="Group Code:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.groupCode}" />
+
+          <h:outputLabel value="Load Empty:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.loadEmptyIndicator}" />
+
+          <h:outputLabel value="Load Port:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.loadPort}" />
+
+          <h:outputLabel value="Discharge Port:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.dischargePort}" />
+
+          <h:outputLabel value="Document Reference:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.documentReference}" />
+
+          <h:outputLabel value="Document Type:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.documentType}" />
+
+          <h:outputLabel value="Gross Weight:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.grossWeight} #{rejectionBean.rejectionInDialog.grossWeightUnit} " />
+
+          <h:outputLabel value="Remarks:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.remarks}" />
+
+          <h:outputLabel value="Update User:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.updateUser}" />
+
+          <h:outputLabel value="Update Date:" />
+          <h:outputLabel value="#{rejectionBean.rejectionInDialog.updateDateTime}" />
+
+        </h:panelGrid>
+      </p:dialog>
+    </h:form>
+  </ui:define>
+</ui:composition>

@@ -21,18 +21,18 @@ public class MovementEventDataModel extends ListDataModel<MovementEvent> impleme
   @SuppressWarnings("unchecked")
   @Override
   public MovementEvent getRowData(String eventTimestamp) {
-    List<MovementEvent> equipmentEvents = (List<MovementEvent>)getWrappedData();
-    for(MovementEvent equipmentEvent : equipmentEvents) {
-      if(equipmentEvent.getEventTimestamp().equals(eventTimestamp)) {
-        return equipmentEvent;
+    List<MovementEvent> movementEvents = (List<MovementEvent>)getWrappedData();
+    for(MovementEvent movementEvent : movementEvents) {
+      if(movementEvent.getEventTimestamp().equals(eventTimestamp)) {
+        return movementEvent;
       }
     }
     return null;
   }
 
   @Override
-  public Object getRowKey(MovementEvent equipmentEvent) {
-    return equipmentEvent.getEventTimestamp();
+  public Object getRowKey(MovementEvent movementEvent) {
+    return movementEvent.getEventTimestamp();
   }
 
 }

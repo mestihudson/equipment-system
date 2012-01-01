@@ -8,7 +8,7 @@
         <h:outputLabel value="Event Date:" />
         <h:panelGroup>
           <p:calendar id="eventDate" widget="eventDate" value="#{movementCaptureBean.incomingEvent.eventDateTime}"
-            pattern="MM/dd/yyyy HH:mm" required="true"/>
+            pattern="MM/dd/yyyy HH:mm" required="true" />
         </h:panelGroup>
         <h:outputLabel value="Event Type:" />
         <h:panelGroup>
@@ -22,7 +22,8 @@
         <h:panelGroup>
           <p:inputText id="containerNumber" value="#{movementCaptureBean.incomingEvent.containerNumber}" required="true">
             <f:validator validatorId="containerNumberValidator" />
-            <p:ajax event="blur" update="messages" />
+            <f:converter converterId="convertToUpper"/>
+            <p:ajax event="blur" update="messages containerNumber" />
           </p:inputText>
         </h:panelGroup>
         <h:outputLabel value="Container Condition:" />
@@ -52,7 +53,7 @@
         <h:outputLabel value="Current Location:" />
         <h:panelGroup>
           <p:autoComplete id="facilityCode" required="true" value="#{movementCaptureBean.incomingEvent.facilityCode}"
-            completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10"/>
+            completeMethod="#{hierarchyBean.completeFacility}" forceSelection="true" maxResults="10" />
         </h:panelGroup>
 
         <h:outputLabel for="nextLocation" value="Next Location:" />
