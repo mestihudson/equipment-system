@@ -71,6 +71,14 @@ public class EquipmentMovementAssociated implements Serializable, Comparable<Equ
       return movementEvent.getRecordUpdateDateTime();
     }
   }
+  
+  public String getEventType() {
+    if (eventCategory == 0) {
+      return equipmentEvent.getEventType().getDescription();
+    } else {
+      return movementEvent.getEventType().getDescription();
+    }
+  }
 
   @Override
   public int compareTo(EquipmentMovementAssociated o) {
