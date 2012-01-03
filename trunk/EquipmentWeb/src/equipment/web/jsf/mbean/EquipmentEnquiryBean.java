@@ -1,10 +1,9 @@
 package equipment.web.jsf.mbean;
 
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.annotation.Resource;
 
@@ -38,7 +37,7 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
 
   private EquipmentLatestInfo equipmentLatestInfo = new EquipmentLatestInfo();
 
-  private Map<Date, EquipmentMovementAssociated> eventLogs = new TreeMap<Date, EquipmentMovementAssociated>();
+  private Set<EquipmentMovementAssociated> eventLogs = new TreeSet<EquipmentMovementAssociated>();
 
   public String getContainerNumber() {
     return containerNumber;
@@ -56,17 +55,17 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
       setEquipmentLatestInfo(equipmentLatestInfo);
       List<MovementEvent> movementEvents = movementEventService.findByContainerNumber(containerNumber);
       for(MovementEvent movementEvent : movementEvents) {
-        eventLogs.put(movementEvent.getEventDateTime(), new EquipmentMovementAssociated(movementEvent));
+        eventLogs.add(new EquipmentMovementAssociated(movementEvent));
       }
       List<EquipmentEvent> equipmentEvents = equipmentEventService.findByEquipmentNumber(containerNumber);
       for(EquipmentEvent equipmentEvent : equipmentEvents) {
-        eventLogs.put(equipmentEvent.getEventDateTime(), new EquipmentMovementAssociated(equipmentEvent));
+        eventLogs.add(new EquipmentMovementAssociated(equipmentEvent));
       }
     }
   }
 
   public Collection<EquipmentMovementAssociated> getTablelist() {
-    return eventLogs.values();
+    return eventLogs;
   }
 
   public EquipmentLatestInfo getEquipmentLatestInfo() {
