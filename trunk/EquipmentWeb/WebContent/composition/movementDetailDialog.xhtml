@@ -10,13 +10,20 @@
       <h:outputLabel value="#{movementEventEditingBean.movementInDialog.eventDateTime}" />
 
       <h:outputLabel value="Facility:" />
-      <h:outputLabel value="#{movementEventEditingBean.movementInDialog.facilityCode}" />
-
-      <h:outputLabel value="Seal Number:" />
-      <p:inputText value="#{movementEventEditingBean.movementInDialog.sealNumber}" />
+      <p:autoComplete id="facilityCode" value="#{movementEventEditingBean.movementInDialog.facilityCode}"
+        completeMethod="#{hierarchyBean.completeFacility}" maxResults="10" />
 
       <h:outputLabel value="Load Empty:" />
-      <p:inputText value="#{movementEventEditingBean.movementInDialog.loadEmptyIndicator}" />
+      <p:selectOneRadio value="#{movementEventEditingBean.movementInDialog.loadEmptyIndicator}">
+        <f:selectItems value="#{dropDownListBean.loadEmptyIndicators}" var="_loadEmptyIndicator"
+          itemLabel="#{_loadEmptyIndicator.description}" itemValue="#{_loadEmptyIndicator}" />
+      </p:selectOneRadio>
+
+      <h:outputLabel value="Seal Type:" />
+      <p:inputText value="#{movementEventEditingBean.movementInDialog.sealType}" />
+      
+      <h:outputLabel value="Seal Number:" />
+      <p:inputText value="#{movementEventEditingBean.movementInDialog.sealNumber}" />
 
       <h:outputLabel value="Load Port:" />
       <p:inputText value="#{movementEventEditingBean.movementInDialog.loadPort}" />

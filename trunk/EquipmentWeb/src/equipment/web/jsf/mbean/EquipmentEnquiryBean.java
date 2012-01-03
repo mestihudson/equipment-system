@@ -1,14 +1,21 @@
 package equipment.web.jsf.mbean;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import equipment.domain.bo.EquipmentMovementAssociated;
+import equipment.domain.entity.EquipmentEvent;
 import equipment.domain.entity.EquipmentLatestInfo;
 import equipment.domain.entity.MovementEvent;
+import equipment.service.EquipmentEventService;
 import equipment.service.EquipmentLatestInfoService;
 import equipment.service.MovementEventService;
 
@@ -23,12 +30,15 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
 
   @Resource(name = "movementEventService")
   private MovementEventService movementEventService;
+  
+  @Resource(name = "equipmentEventService")
+  private EquipmentEventService equipmentEventService;
 
   private String containerNumber;
 
   private EquipmentLatestInfo equipmentLatestInfo = new EquipmentLatestInfo();
 
-  private Collection<MovementEvent> movementEvents;
+  private Map<Date, EquipmentMovementAssociated> eventLogs = new TreeMap<Date, EquipmentMovementAssociated>();
 
   public String getContainerNumber() {
     return containerNumber;
@@ -44,12 +54,19 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
       addErrorMessage("Equipment not exists");
     } else {
       setEquipmentLatestInfo(equipmentLatestInfo);
-      movementEvents = movementEventService.findByContainerNumber(containerNumber);
+      List<MovementEvent> movementEvents = movementEventService.findByContainerNumber(containerNumber);
+      for(MovementEvent movementEvent : movementEvents) {
+        eventLogs.put(movementEvent.getEventDateTime(), new EquipmentMovementAssociated(movementEvent));
+      }
+      List<EquipmentEvent> equipmentEvents = equipmentEventService.findByEquipmentNumber(containerNumber);
+      for(EquipmentEvent equipmentEvent : equipmentEvents) {
+        eventLogs.put(equipmentEvent.getEventDateTime(), new EquipmentMovementAssociated(equipmentEvent));
+      }
     }
   }
 
-  public Collection<MovementEvent> getTablelist() {
-    return movementEvents;
+  public Collection<EquipmentMovementAssociated> getTablelist() {
+    return eventLogs.values();
   }
 
   public EquipmentLatestInfo getEquipmentLatestInfo() {

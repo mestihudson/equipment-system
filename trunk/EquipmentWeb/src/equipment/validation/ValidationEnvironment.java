@@ -4,9 +4,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -16,11 +15,13 @@ import equipment.domain.entity.EquipmentLatestInfo;
 import equipment.domain.entity.MovementEvent;
 import equipment.domain.entity.Rejection;
 import equipment.domain.entity.RejectionDetail;
+import equipment.domain.entity.SupplyHierarchy;
 import equipment.domain.enums.ContraAction;
 import equipment.domain.enums.ErrorMessage;
 import equipment.domain.enums.ValidationType;
 import equipment.service.ContainerService;
 import equipment.service.EquipmentLatestInfoService;
+import equipment.service.FacilityService;
 import equipment.utils.TimestampUtil;
 import equipment.validation.checks.AbstractValidationCheck;
 
@@ -37,11 +38,12 @@ public class ValidationEnvironment {
   private Container containerInfo;
   /* Lazy properties End */
 
-  @Resource(name = "equipmentLatestInfoService")
+  @Autowired
   private EquipmentLatestInfoService equipmentLatestInfoService;
-
-  @Resource(name = "containerService")
+  @Autowired
   private ContainerService containerService;
+  @Autowired
+  private FacilityService facilityService;
 
   public void initialize() {
     eventTimestamp = null;
@@ -173,8 +175,8 @@ public class ValidationEnvironment {
         containerInfo.setIsoCode(((IncomingEquipmentEvent) incomingEvent).getEquipmentTypeCode());
         containerInfo.setUpdateDateTime(TimestampUtil.now());
       }
-    } else {
-      containerInfo.setActive(validationType == ValidationType.CREATION);
+    } else if (validationType == ValidationType.CREATION) {
+      containerInfo.setActive(true);
       containerInfo.setUpdateDateTime(TimestampUtil.now());
     }
     return containerInfo;
@@ -201,4 +203,7 @@ public class ValidationEnvironment {
     }
   }
 
+  public SupplyHierarchy getSupplyHierarchy() {
+    return facilityService.getSupplyHierarchy(incomingEvent.getFacilityCode());
+  }
 }

@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import equipment.domain.entity.SupplyHierarchy;
 
-@Repository("equipmentSupplyHierarchyDao")
+@Repository
 public class SupplyHierarchyDao extends AbstractBaseDao {
 
   public static final String FACILITY = "facility";

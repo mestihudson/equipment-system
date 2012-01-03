@@ -20,17 +20,18 @@ public class EventValidationServiceImpl implements EventValidationService {
   private MovementEventValidation movementEventValidation;
   @Resource(name = "equipmentEventValidation")
   private EquipmentEventValidation equipmentEventValidation;
-  
+
   @Override
   public ValidationResult validateEvent(IncomingEvent event, ValidationType validationType) {
     switch (validationType) {
     case NEW:
     case REVALIDATE:
+      return movementEventValidation.validate(event, validationType, true);
     case EDIT:
-      return movementEventValidation.validate(event, validationType);
+      return movementEventValidation.validate(event, validationType, false);
     case CREATION:
     case TERMINATION:
-      return equipmentEventValidation.validate(event, validationType);
+      return equipmentEventValidation.validate(event, validationType, true);
     default:
       return null;
     }

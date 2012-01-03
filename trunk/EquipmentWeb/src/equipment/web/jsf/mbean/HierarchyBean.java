@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.faces.model.SelectItem;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -22,15 +23,15 @@ public class HierarchyBean implements Serializable {
   private static final long serialVersionUID = -5650490585039961293L;
   private Collection<SupplyHierarchy> supplyHierarchies;
   
-  @Resource(name = "equipmentSupplyHierarchyDao")
-  private SupplyHierarchyDao equipmentSupplyHierarchyDao;
+  @Autowired
+  private SupplyHierarchyDao supplyHierarchyDao;
   
   @Resource(name = "facilityService")
   private FacilityService facilityService;
 
   public Collection<SupplyHierarchy> getSupplyHierarchies() {
     if(supplyHierarchies == null) {
-      supplyHierarchies = equipmentSupplyHierarchyDao.findAll();
+      supplyHierarchies = supplyHierarchyDao.findAll();
     }
     return supplyHierarchies;
   }
