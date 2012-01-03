@@ -5,19 +5,25 @@ import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
+
 public abstract class AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = -7229329429527458258L;
 
-  public void addFatalMessage(String message) {
+  protected void addFatalMessage(String message) {
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, message, null));
   }
-  public void addErrorMessage(String message) {
+  protected void addErrorMessage(String message) {
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
   }
-  public void addWarnMessage(String message) {
+  protected void addWarnMessage(String message) {
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
   }
-  public void addInfoMessage(String message) {
+  protected void addInfoMessage(String message) {
     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+  }
+  
+  protected void addCallBackParam(String name, Object value) {
+    RequestContext.getCurrentInstance().addCallbackParam(name, value);
   }
 }
