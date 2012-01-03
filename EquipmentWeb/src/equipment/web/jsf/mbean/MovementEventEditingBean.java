@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,6 @@ import equipment.domain.enums.ValidationType;
 import equipment.service.EventValidationService;
 import equipment.service.MovementEventService;
 import equipment.utils.StringUtil;
-import equipment.utils.TimestampUtil;
 import equipment.validation.IncomingMovementEvent;
 import equipment.validation.ValidationError;
 import equipment.validation.ValidationResult;
@@ -116,16 +116,16 @@ public class MovementEventEditingBean extends AbstractManagedBean {
     }
   }
 
-  public void save() {
+  public void save(ActionEvent actionEvent) {
+    boolean saveSuccess = false;
     try {
       ValidationResult result = eventValidationService.validateEvent(createIncomingMovementEvent(movementInDialog),
           ValidationType.EDIT);
-      if(result.hasRejection()) {
+      if (result.hasRejection()) {
         addWarnMessage("Cannot Update because the rejection as below");
-        for(ValidationError error : result.getValidationErrors()) {
+        for (ValidationError error : result.getValidationErrors()) {
           addWarnMessage(error.getErrorMessage().getDescription());
         }
-        FacesContext.getCurrentInstance().validationFailed();
         return;
       } else {
         movementInDialog.setContraAction(ContraAction.EDIT);
@@ -133,9 +133,12 @@ public class MovementEventEditingBean extends AbstractManagedBean {
       }
       MovementEvent movementEvent = mediumEventsModel.getRowData(movementInDialog.getEventTimestamp());
       BeanUtils.copyProperties(movementInDialog, movementEvent);
+      saveSuccess = true;
       addInfoMessage("Event updated");
     } catch (Exception e) {
       addErrorMessage("Update failed");
+    } finally {
+      addCallBackParam("saveSuccess", saveSuccess);
     }
   }
 

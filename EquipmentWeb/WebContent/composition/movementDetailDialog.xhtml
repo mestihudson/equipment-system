@@ -21,7 +21,7 @@
 
       <h:outputLabel value="Seal Type:" />
       <p:inputText value="#{movementEventEditingBean.movementInDialog.sealType}" />
-      
+
       <h:outputLabel value="Seal Number:" />
       <p:inputText value="#{movementEventEditingBean.movementInDialog.sealNumber}" />
 
@@ -61,8 +61,10 @@
       <h:outputLabel value="#{movementEventEditingBean.movementInDialog.recordUpdateDateTime}" />
     </h:panelGrid>
 
-    <p:commandButton value="Save" action="#{movementEventEditingBean.save}" oncomplete="movementDetailDialog.hide()"
-      update="messages eventDataTable" />
-    <p:commandButton value="Cancel" onclick="movementDetailDialog.hide();" />
+    <f:facet name="footer">
+      <p:commandButton value="Save" actionListener="#{movementEventEditingBean.save}" oncomplete="if(args.saveSuccess)movementDetailDialog.hide();"
+        update="messages eventDataTable" />
+      <p:commandButton value="Cancel" onclick="movementDetailDialog.hide();" />
+    </f:facet>
   </p:dialog>
 </ui:composition>

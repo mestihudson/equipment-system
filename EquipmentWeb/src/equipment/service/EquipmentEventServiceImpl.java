@@ -9,11 +9,13 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import equipment.dao.EquipmentEventDao;
 import equipment.domain.entity.EquipmentEvent;
 
 @Service("equipmentEventService")
+@Transactional
 public class EquipmentEventServiceImpl implements EquipmentEventService {
   @Resource(name = "equipmentEventDao")
   private EquipmentEventDao equipmentEventDao;
