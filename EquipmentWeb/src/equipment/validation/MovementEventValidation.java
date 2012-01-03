@@ -11,6 +11,7 @@ import equipment.domain.entity.MovementEvent;
 import equipment.validation.checks.AbstractValidationCheck;
 import equipment.validation.checks.ContainerCheck;
 import equipment.validation.checks.EventDateCheck;
+import equipment.validation.checks.FacilityCheck;
 
 @Service
 @Scope("prototype")
@@ -23,6 +24,7 @@ public class MovementEventValidation extends EventValidationTemplate {
   protected void initializeRules(List<AbstractValidationCheck> rules) {
     rules.add(new ContainerCheck());
     rules.add(new EventDateCheck());
+    rules.add(new FacilityCheck());
   }
 
   @Override
@@ -33,7 +35,6 @@ public class MovementEventValidation extends EventValidationTemplate {
 
   @Override
   protected void updateOrCreateEquipment() {
-    //do nothing
+    // do nothing
   }
-
 }

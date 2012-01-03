@@ -17,8 +17,14 @@ import equipment.dao.MovementEventDao;
 import equipment.domain.entity.MovementEvent;
 import equipment.domain.enums.ContraAction;
 import equipment.domain.enums.EventType;
+import equipment.domain.enums.ValidationType;
+import equipment.service.EventValidationService;
 import equipment.service.MovementEventService;
 import equipment.utils.StringUtil;
+import equipment.utils.TimestampUtil;
+import equipment.validation.IncomingMovementEvent;
+import equipment.validation.ValidationError;
+import equipment.validation.ValidationResult;
 
 @Component("movementEventEditingBean")
 @Scope("view")
@@ -28,6 +34,8 @@ public class MovementEventEditingBean extends AbstractManagedBean {
   private MovementEventService movementEventService;
   @Autowired
   private MovementEventDao movementEventDao;
+  @Autowired
+  private EventValidationService eventValidationService;
 
   private String containerNumber;
   private EventType eventType;
@@ -81,10 +89,10 @@ public class MovementEventEditingBean extends AbstractManagedBean {
   public void search() {
     Map<String, Object> propertyNameValues = new HashMap<String, Object>();
     if (StringUtil.isNotNullAndNotEmptyWithTrim(containerNumber)) {
-      propertyNameValues.put("containerNumber", containerNumber);
+      propertyNameValues.put(MovementEventDao.CNTR_NUM, containerNumber);
     }
     if (eventType != null) {
-      propertyNameValues.put("eventType", eventType);
+      propertyNameValues.put(MovementEventDao.EVENT_TYPE, eventType);
     }
     List<MovementEvent> movementEvent = movementEventDao.findBy(propertyNameValues);
     mediumEventsModel = new MovementEventDataModel(movementEvent);
@@ -110,14 +118,47 @@ public class MovementEventEditingBean extends AbstractManagedBean {
 
   public void save() {
     try {
-      movementInDialog.setContraAction(ContraAction.EDIT);
-      movementEventDao.update(movementInDialog);
+      ValidationResult result = eventValidationService.validateEvent(createIncomingMovementEvent(movementInDialog),
+          ValidationType.EDIT);
+      if(result.hasRejection()) {
+        addWarnMessage("Cannot Update because the rejection as below");
+        for(ValidationError error : result.getValidationErrors()) {
+          addWarnMessage(error.getErrorMessage().getDescription());
+        }
+        FacesContext.getCurrentInstance().validationFailed();
+        return;
+      } else {
+        movementInDialog.setContraAction(ContraAction.EDIT);
+        movementEventDao.saveOrUpdate(movementInDialog);
+      }
       MovementEvent movementEvent = mediumEventsModel.getRowData(movementInDialog.getEventTimestamp());
       BeanUtils.copyProperties(movementInDialog, movementEvent);
       addInfoMessage("Event updated");
     } catch (Exception e) {
       addErrorMessage("Update failed");
     }
+  }
+
+  public IncomingMovementEvent createIncomingMovementEvent(MovementEvent movementEvent) {
+    IncomingMovementEvent event = new IncomingMovementEvent();
+    event.setEquipmentNumber(movementEvent.getContainerNumber());
+    event.setFacilityCode(movementEvent.getFacilityCode());
+    event.setEventType(movementEvent.getEventType());
+    event.setEventDateTime(movementEvent.getEventDateTime());
+    event.setServiceLoop(movementEvent.getServiceLoop());
+    event.setVesselCode(movementEvent.getVesselCode());
+    event.setVoyageNumber(movementEvent.getVoyageNumber());
+    event.setDirectionBound(movementEvent.getDirectionBound());
+    event.setLoadEmptyIndicator(movementEvent.getLoadEmptyIndicator());
+    event.setSealType(movementEvent.getSealType());
+    event.setSealNumber(movementEvent.getSealNumber());
+    event.setLoadPort(movementEvent.getLoadPort());
+    event.setDischargePort(movementEvent.getDischargePort());
+    event.setDocumentReference(movementEvent.getDocumentReference());
+    event.setDocumentType(movementEvent.getDocumentType());
+    event.setGrossWeight(movementEvent.getGrossWeight());
+    event.setGrossWeightUnit(movementEvent.getGrossWeightUnit());
+    return event;
   }
 
   public MovementEvent getMovementInDialog() {

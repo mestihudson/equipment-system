@@ -32,4 +32,13 @@ public class EquipmentEventServiceImpl implements EquipmentEventService {
       return result.get(0);
     }
   }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<EquipmentEvent> findByEquipmentNumber(String equipmentNumber) {
+    Criteria criteria = equipmentEventDao.createCriteria();
+    criteria.add(Restrictions.eq(EquipmentEventDao.EQMT_NUM, equipmentNumber)).addOrder(
+        Order.desc(EquipmentEventDao.EVENT_DT_LOC));
+    return criteria.list();
+  }
 }

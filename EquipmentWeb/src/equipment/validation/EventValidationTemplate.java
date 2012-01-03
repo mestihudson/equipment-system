@@ -24,20 +24,22 @@ public abstract class EventValidationTemplate implements InitializingBean {
 
   private List<AbstractValidationCheck> rules;
 
-  public ValidationResult validate(IncomingEvent event, ValidationType validationType) {
+  public ValidationResult validate(IncomingEvent event, ValidationType validationType, boolean needRepository) {
     validationEnvironment.initialize();
     validationEnvironment.setIncomingEvent(event);
     validationEnvironment.setValidationType(validationType);
     applyRules();
-    processResults();
+    if (needRepository) {
+      processResults();
+    }
     return validationEnvironment.getValidationResult();
   }
 
   protected abstract void initializeRules(List<AbstractValidationCheck> rules);
 
   private void applyRules() {
-    for(AbstractValidationCheck check : rules) {
-      if(check.applyTo(validationEnvironment.getIncomingEvent(), validationEnvironment.getValidationType())) {
+    for (AbstractValidationCheck check : rules) {
+      if (check.applyTo(validationEnvironment.getIncomingEvent(), validationEnvironment.getValidationType())) {
         check.validate(validationEnvironment);
       }
     }

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.PreUpdate;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
@@ -19,114 +21,121 @@ import equipment.domain.enums.EquipmentCondition;
 import equipment.domain.enums.EventType;
 import equipment.domain.enums.LoadEmptyIndicator;
 import equipment.domain.enums.WeightUnit;
+import equipment.utils.TimestampUtil;
 
 @Entity(name = "EQP_EVENT_LOG")
-public class MovementEvent implements Serializable{
+public class MovementEvent implements Serializable {
 
   private static final long serialVersionUID = -321023715030025820L;
 
   @Id
-	@Column(name = "EVENT_TIMESTAMP")
-	private String eventTimestamp;
+  @Column(name = "EVENT_TIMESTAMP")
+  private String eventTimestamp;
 
-	@Column(name = "CNTR_NUM")
-	private String containerNumber;
+  @Column(name = "CNTR_NUM")
+  private String containerNumber;
 
-	@Column(name = "EVENT_CRE_DT")
-	private Date eventCreationDateTime;
+  @Column(name = "EVENT_CRE_DT")
+  private Date eventCreationDateTime;
 
-	@Column(name = "FCIL_CDE")
-	private String facilityCode;
+  @Column(name = "FCIL_CDE")
+  private String facilityCode;
 
-	@Column(name = "EVENT_TYPE")
-	@Type(type = "equipment.utils.GenericEnumUserType", parameters = {
-			@Parameter(name = "enumClass", value = "equipment.domain.enums.EventType"),
-			@Parameter(name = "identifierMethod", value = "getCode"),
-			@Parameter(name = "valueOfMethod", value = "getEventTypeForCode") })
-	private EventType eventType;
+  @Column(name = "EVENT_TYPE")
+  @Type(type = "equipment.utils.GenericEnumUserType", parameters = {
+      @Parameter(name = "enumClass", value = "equipment.domain.enums.EventType"),
+      @Parameter(name = "identifierMethod", value = "getCode"),
+      @Parameter(name = "valueOfMethod", value = "getEventTypeForCode") })
+  private EventType eventType;
 
-	@Column(name = "EVENT_DT_LOC")
-	private Date eventDateTime;
+  @Column(name = "EVENT_DT_LOC")
+  private Date eventDateTime;
 
-	@Column(name = "SEAL_NUM")
-	private String sealNumber;
+  @Column(name = "SEAL_NUM")
+  private String sealNumber;
 
-	@Column(name = "SEAL_TYPE")
-	private String sealType;
+  @Column(name = "SEAL_TYPE")
+  private String sealType;
 
-	@Column(name = "CNTR_GRP_CDE")
-	private String containerGroupCode;
+  @Column(name = "CNTR_GRP_CDE")
+  private String containerGroupCode;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "LOAD_EMPTY_IND")
-	private LoadEmptyIndicator loadEmptyIndicator;
+  @Enumerated(value = EnumType.STRING)
+  @Column(name = "LOAD_EMPTY_IND")
+  private LoadEmptyIndicator loadEmptyIndicator;
 
-	@Column(name = "SVC_LOOP")
-	private String serviceLoop;
+  @Column(name = "SVC_LOOP")
+  private String serviceLoop;
 
-	@Column(name = "VSL_CDE")
-	private String vesselCode;
+  @Column(name = "VSL_CDE")
+  private String vesselCode;
 
-	@Column(name = "VOY_NUM")
-	private String voyageNumber;
+  @Column(name = "VOY_NUM")
+  private String voyageNumber;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "DIR_BOUND")
-	private Direction directionBound;
+  @Enumerated(value = EnumType.STRING)
+  @Column(name = "DIR_BOUND")
+  private Direction directionBound;
 
-	@Column(name = "LOAD_PORT")
-	private String loadPort;
+  @Column(name = "LOAD_PORT")
+  private String loadPort;
 
-	@Column(name = "DSGH_PORT")
-	private String dischargePort;
+  @Column(name = "DSGH_PORT")
+  private String dischargePort;
 
-	@Column(name = "NEXT_LOCA")
-	private String nextLocation;
+  @Column(name = "NEXT_LOCA")
+  private String nextLocation;
 
-	@Column(name = "DOC_REF")
-	private String documentReference;
+  @Column(name = "DOC_REF")
+  private String documentReference;
 
-	@Column(name = "DOC_TYPE")
-	private String documentType;
+  @Column(name = "DOC_TYPE")
+  private String documentType;
 
-	@Column(name = "GROSS_WT")
-	private Double grossWeight;
+  @Column(name = "GROSS_WT")
+  private Double grossWeight;
 
-	@Enumerated(value = EnumType.STRING)
-	@Column(name = "GROSS_WT_UNIT")
-	private WeightUnit grossWeightUnit;
+  @Enumerated(value = EnumType.STRING)
+  @Column(name = "GROSS_WT_UNIT")
+  private WeightUnit grossWeightUnit;
 
   @Enumerated(value = EnumType.ORDINAL)
-	@Column(name = "CNTR_COND")
-	private EquipmentCondition containerCondition;
+  @Column(name = "CNTR_COND")
+  private EquipmentCondition containerCondition;
 
-	@Column(name = "HZ_IND")
-	private Boolean hazardIndicator;
+  @Column(name = "HZ_IND")
+  private Boolean hazardIndicator;
 
-	@Column(name = "REMARKS")
-	private String remarks;
+  @Column(name = "REMARKS")
+  private String remarks;
 
-	@Column(name = "CONTRA_ACTION")
+  @Column(name = "CONTRA_ACTION")
   @Type(type = "equipment.utils.GenericEnumUserType", parameters = {
       @Parameter(name = "enumClass", value = "equipment.domain.enums.ContraAction"),
       @Parameter(name = "identifierMethod", value = "getCode"),
       @Parameter(name = "valueOfMethod", value = "getContraActionForCode") })
-	private ContraAction contraAction;
+  private ContraAction contraAction;
 
-	@Column(name = "POS_AT_ROUTE")
-	private String positionAtRoute;
+  @Column(name = "POS_AT_ROUTE")
+  private String positionAtRoute;
 
-	@Column(name = "NATURE")
-	private String nature;
+  @Column(name = "NATURE")
+  private String nature;
 
-	@Column(name = "CNTR_CHK_DIGIT")
-	private String containerCheckDigit;
+  @Column(name = "CNTR_CHK_DIGIT")
+  private String containerCheckDigit;
 
-	@Column(name = "UPD_USER")
-	private String updateUser;
+  @Column(name = "UPD_USER")
+  private String updateUser;
 
-	@Column(name = "REC_UPD_DT")
-	private Timestamp recordUpdateDateTime;
+  @Column(name = "REC_UPD_DT")
+  @Version
+  private Timestamp recordUpdateDateTime;
+
+  @PreUpdate
+  protected void onUpdate() {
+    recordUpdateDateTime = TimestampUtil.now();
+  }
 
   public String getEventTimestamp() {
     return eventTimestamp;
