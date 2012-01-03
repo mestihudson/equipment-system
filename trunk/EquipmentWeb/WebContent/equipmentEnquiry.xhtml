@@ -51,33 +51,33 @@
             value="#{equipmentEnquiryBean.equipmentLatestInfo.dischargePort}"></p:inputText>
         </h:panelGrid>
         <p:dataTable id="eventTableList" value="#{equipmentEnquiryBean.tablelist}" var="event">
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Event Type</f:facet>
-            <h:outputText value="#{event.eventType}" />
+            <h:outputText value="#{event[colIndex].eventType}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Container Number</f:facet>
-            <h:outputText value="#{event.containerNumber}" />
+            <h:outputText value="#{event[colIndex].containerNumber}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Facility</f:facet>
-            <h:outputText value="#{event.facilityCode}" />
+            <h:outputText value="#{event[colIndex].facilityCode}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Next Location</f:facet>
-            <h:outputText value="#{event.nextLocation}" />
+            <h:outputText value="#{event[colIndex].nextLocation}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Activity Date</f:facet>
-            <h:outputText value="#{event.eventDateTime}" />
+            <h:outputText value="#{event[colIndex].eventDateTime}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Update User</f:facet>
-            <h:outputText value="#{event.updateUser}" />
+            <h:outputText value="#{event[colIndex].updateUser}" />
           </p:column>
-          <p:column>
+          <p:column columnIndexVar="colIndex">
             <f:facet name="header">Update Date</f:facet>
-            <h:outputText value="#{event.recordUpdateDateTime}" />
+            <h:outputText value="#{event[colIndex].recordUpdateDateTime}" />
           </p:column>
         </p:dataTable>
       </h:panelGrid>
