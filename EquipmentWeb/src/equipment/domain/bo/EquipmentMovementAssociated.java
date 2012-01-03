@@ -16,10 +16,12 @@ public class EquipmentMovementAssociated implements Serializable, Comparable<Equ
 
   public EquipmentMovementAssociated(MovementEvent movementEvent) {
     this.movementEvent = movementEvent;
+    this.eventCategory = 1;
   }
 
   public EquipmentMovementAssociated(EquipmentEvent equipmentEvent) {
     this.equipmentEvent = equipmentEvent;
+    this.eventCategory = 0;
   }
 
   public String getFacilityCode() {
