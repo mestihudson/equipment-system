@@ -1,6 +1,6 @@
 package equipment.web.jsf.mbean;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -64,8 +64,8 @@ public class EquipmentEnquiryBean extends AbstractManagedBean {
     }
   }
 
-  public Collection<EquipmentMovementAssociated> getTablelist() {
-    return eventLogs;
+  public List<EquipmentMovementAssociated> getTablelist() {
+    return new ArrayList<EquipmentMovementAssociated>(eventLogs);
   }
 
   public EquipmentLatestInfo getEquipmentLatestInfo() {
