@@ -32,7 +32,7 @@ public class LoginBean {
 
   public String login() {
     if (username != null && username.equals("admin") && password != null && password.equals("admin")) {
-      return "success";
+      return "index";
     } else {
       FacesContext.getCurrentInstance().addMessage(null,
           new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials"));

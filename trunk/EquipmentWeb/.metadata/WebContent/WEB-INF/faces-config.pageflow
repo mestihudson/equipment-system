@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13212823595970" configfile="/EquipmentWeb/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login" id="pf13255981480296" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13255981480297" path="*/login.jsp"/>
-  <nodes xsi:type="pageflow:PFPage" name="index" id="pf13255981480298" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13255981480297" path="/index.jsp"/>
-  <links id="pf13255981480297" target="pf13255981480298" source="pf13255981480296" outcome="LOGIN"/>
+  <nodes xsi:type="pageflow:PFPage" name="login" x="122" y="178" id="pf13255981480296" referenceLink="//@navigationRule.0/@fromViewId|" path="*/login.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="login" id="pf13259403313794" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13259403796229 pf132594037962210" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="redirect" id="pf132594037962211" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13259403796229" path="/redirect.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="login" id="pf132594037962212" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf132594037962210" path="/login.jsp"/>
+  <links id="pf13259403796229" target="pf132594037962211" source="pf13259403313794" outcome="redirect"/>
+  <links id="pf132594037962210" target="pf132594037962212" source="pf13259403313794" outcome="failure"/>
 </pageflow:Pageflow>
