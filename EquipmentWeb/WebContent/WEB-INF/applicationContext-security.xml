@@ -5,23 +5,24 @@
             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
             http://www.springframework.org/schema/security
             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+  <global-method-security pre-post-annotations="enabled" />
+  <debug />
 
-  <http>
-    <intercept-url pattern="/login.jsp" filters="none" />
-    <form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?error=true" default-target-url="/index.jsp" />
-    <logout logout-success-url="/login.jsp" />
+  <http pattern="/login.html" security="none" />
+  <http pattern="/error.html" security="none" />
+  <http use-expressions="true">
+    <intercept-url pattern="/*.xhtml" access="isAuthenticated()" />
+    <intercept-url pattern="/*.jsf" access="isAuthenticated()" />
+    <intercept-url pattern="/**" access="permitAll" />
+    <form-login login-page="/login.html" authentication-failure-url="/error.html" default-target-url="/index.jsf" />
+    <logout logout-success-url="/login.html" />
     <http-basic />
-    <custom-filter before="FILTER_SECURITY_INTERCEPTOR" ref="myFilter" />
   </http>
-
-  <beans:bean id="myFilter" class="com.robin.erp.fwk.security.MyFilterSecurityInterceptor">
-    <beans:property name="authenticationManager" ref="authenticationManager" />
-  </beans:bean>
 
   <authentication-manager>
     <authentication-provider>
       <user-service id="inMemoryDao">
-        <user name="dongzhuming" password="19821210" authorities="ROLE SUPERVISOR"></user>
+        <user name="dongzhuming" password="19821210" authorities="user"></user>
       </user-service>
     </authentication-provider>
   </authentication-manager>
