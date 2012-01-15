@@ -11,16 +11,28 @@ public abstract class AbstractManagedBean implements Serializable {
   private static final long serialVersionUID = -7229329429527458258L;
 
   protected void addFatalMessage(String message) {
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, message, null));
+    addFatalMessage(message, null);
   }
   protected void addErrorMessage(String message) {
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null));
+    addErrorMessage(message, null);
   }
   protected void addWarnMessage(String message) {
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, message, null));
+    addWarnMessage(message, null);
   }
   protected void addInfoMessage(String message) {
-    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+    addInfoMessage(message, null);
+  }
+  protected void addFatalMessage(String summary, String detail) {
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, summary, detail));
+  }
+  protected void addErrorMessage(String summary, String detail) {
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, summary, detail));
+  }
+  protected void addWarnMessage(String summary, String detail) {
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, summary, detail));
+  }
+  protected void addInfoMessage(String summary, String detail) {
+    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail));
   }
   
   protected void addCallBackParam(String name, Object value) {
