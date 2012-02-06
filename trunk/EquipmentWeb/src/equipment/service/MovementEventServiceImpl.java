@@ -61,7 +61,7 @@ public class MovementEventServiceImpl implements MovementEventService {
 public int removeEvents(MovementEvent[] selectedEvents) {
 	int count=0;
 	for(MovementEvent event : selectedEvents){
-		Object obj =movementEventDao.get(event.getEventTimestamp());
+		Object obj =movementEventDao.findById(event.getEventTimestamp());
 		if(obj!=null){
 		movementEventDao.delete(obj);
 		count++;

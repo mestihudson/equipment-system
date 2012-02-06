@@ -27,7 +27,7 @@ public class ContainerServiceImpl implements ContainerService {
 
   @Override
   public Container findByNumber(String containerNumber) {
-    return containerDao.get(containerNumber);
+    return containerDao.findById(containerNumber);
   }
 
   @Override
