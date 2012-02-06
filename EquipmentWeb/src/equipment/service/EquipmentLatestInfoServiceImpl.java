@@ -15,7 +15,7 @@ public class EquipmentLatestInfoServiceImpl implements EquipmentLatestInfoServic
 
   @Override
   public EquipmentLatestInfo findByEquipmentNumber(String containerNumber) {
-    return equipmentLatestInfoDao.get(containerNumber);
+    return equipmentLatestInfoDao.findById(containerNumber);
   }
 
 }

@@ -32,6 +32,6 @@ public class FacilityServiceImpl implements FacilityService {
 
   @Override
   public SupplyHierarchy getSupplyHierarchy(String facilityCode) {
-    return supplyHierarchyDao.get(facilityCode);
+    return supplyHierarchyDao.findById(facilityCode);
   }
 }

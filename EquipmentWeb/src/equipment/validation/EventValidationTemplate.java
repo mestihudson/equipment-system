@@ -67,7 +67,7 @@ public abstract class EventValidationTemplate implements InitializingBean {
 
   private void updateLatestInfo() {
     if (validationEnvironment.isCurrent()) {
-      EquipmentLatestInfo latestInfo = equipmentLatestInfoDao.get(validationEnvironment.getIncomingEvent()
+      EquipmentLatestInfo latestInfo = equipmentLatestInfoDao.findById(validationEnvironment.getIncomingEvent()
           .getEquipmentNumber());
       if (latestInfo == null) {
         latestInfo = new EquipmentLatestInfo();
