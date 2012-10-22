@@ -1,0 +1,10 @@
+2012-06-09 15:45:45 [ main:0 ] - [ WARN ] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2012-06-09 15:45:46 [ main:755 ] - [ WARN ] Could not find configuration [equipment.domain.entity.SupplyHierarchy]; using defaults.

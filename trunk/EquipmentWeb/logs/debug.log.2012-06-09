@@ -1,0 +1,11 @@
+2012-06-09 15:45:45 [ main:0 ] - [ WARN ] 
+
+********************************************************************
+**********        Security debugging is enabled.       *************
+**********    This may include sensitive information.  *************
+**********      Do not use in a production system!     *************
+********************************************************************
+
+
+2012-06-09 15:45:46 [ main:755 ] - [ WARN ] Could not find configuration [equipment.domain.entity.SupplyHierarchy]; using defaults.
+2012-06-09 15:45:46 [ main:960 ] - [ DEBUG ] select this_.ISO_CDE as ISO1_1_0_, this_.DESCRIPTION as DESCRIPT2_1_0_, this_.GROUP_CDE as GROUP3_1_0_ from CNTR_ISO_TYPE this_
