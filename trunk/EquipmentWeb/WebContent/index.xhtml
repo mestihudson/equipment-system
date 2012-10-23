@@ -11,7 +11,10 @@
   <h:body>
     <p:layout id="layout" fullPage="true">
       <p:layoutUnit position="north" resizable="true" size="60" minSize="40" maxSize="80">
-        <h:outputText value="Welcome to Equipment Movement Tracing System"></h:outputText>
+        <h:outputText value="Demo JSF + Spring + Hibernate "></h:outputText>
+        <br />
+        <h:outputText value="Welcome #{request.userPrincipal.name}" />
+        <a href="j_spring_security_logout">Logout</a>
       </p:layoutUnit>
 
       <p:layoutUnit position="west" resizable="true" minSize="120" maxSize="165">
