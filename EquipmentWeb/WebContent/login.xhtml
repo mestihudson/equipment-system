@@ -5,24 +5,24 @@
   xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
 <f:view>
   <h:head>
-    <title>Test System</title>
+    <title>Login</title>
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/defaultStyle.css" />
   </h:head>
   <h:body>
-    <h:form>
-      <p:growl id="growl" showDetail="true" life="3000" />
-      <p:dialog visible="true" header="Please login" resizable="false">
-        <h:panelGrid columns="2" cellpadding="5">
-          <h:outputLabel for="username" value="Username:" />
-          <p:inputText value="#{loginBean.username}" id="username" required="true" label="username" />
-          <h:outputLabel for="password" value="Password:" />
-          <p:password feedback="false" value="#{loginBean.password}" id="password" label="password" />
+    <p:dialog visible="true" header="Login" resizable="false">
+      <form action="j_spring_security_check" method="post">
+        <h:panelGrid columns="2">
+          <h:outputLabel value="User Name:" />
+          <input type="text" name="j_username" value="" />
+          <h:outputLabel value="Password:" />
+          <input type="password" name="j_password" value="" />
           <f:facet name="footer">
-            <p:commandButton value="Login" update="growl" action="#{loginBean.login}" ajax="false" />
+            <input type="submit" value="Login" />
           </f:facet>
         </h:panelGrid>
-      </p:dialog>
-    </h:form>
+        <h:outputLabel value="Authenticate Failed" style="color:red" rendered="#{param['error'] eq 1}" />
+      </form>
+    </p:dialog>
   </h:body>
 </f:view>
 </html>
