@@ -13,7 +13,7 @@
       <p:layoutUnit position="north" resizable="true" size="60" minSize="40" maxSize="80">
         <h:outputText value="Demo JSF + Spring + Hibernate "></h:outputText>
         <br />
-        <h:outputText value="Welcome #{request.userPrincipal.name}" />
+        Welcome <h:outputText style="font-weight:bold" value="#{request.userPrincipal.name}" />
         <a href="j_spring_security_logout">Logout</a>
       </p:layoutUnit>
 
